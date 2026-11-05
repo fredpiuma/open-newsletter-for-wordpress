@@ -1,6 +1,4 @@
 # Open Newsletter - Portuguese (Brazil).
-# Based on the translations of the "Newsletter" plugin (translate.wordpress.org, GPL-2.0-or-later).
-# See CREDITS.md.
 msgid ""
 msgstr ""
 "Project-Id-Version: Open Newsletter 9.0.0\n"
@@ -2044,9 +2042,6 @@ msgstr "Links clicados"
 msgid "Clicked"
 msgstr "Clicaram"
 
-msgid "Credits"
-msgstr "Créditos"
-
 msgid "Delivered"
 msgstr "Entregue"
 
@@ -2118,9 +2113,6 @@ msgstr "Não abriram"
 
 msgid "Open Newsletter already includes every feature of the core plugin, with no license required and no external connection."
 msgstr "O Open Newsletter já inclui todos os recursos do plugin, sem exigir licença e sem conexões externas."
-
-msgid "Open Newsletter is a free fork (GPL-2.0-or-later) of the Newsletter plugin by Stefano Lissa & The Newsletter Team. See CREDITS.md in the plugin folder."
-msgstr "O Open Newsletter é um fork livre (GPL-2.0-ou-posterior) do plugin Newsletter, de Stefano Lissa e The Newsletter Team. Veja o CREDITS.md na pasta do plugin."
 
 msgid "Open issues"
 msgstr "Abrir issues"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Builds dist/open-newsletter-<version>.zip with the plugin inside a "newsletter/" folder
-# (the slug used by the code, the same of the original plugin, so data and assets keep working).
+# (the slug used by the code, kept so data and assets keep working).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 version=$(sed -n "s/^define('NEWSLETTER_VERSION', '\(.*\)');/\1/p" plugin.php)

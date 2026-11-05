@@ -1,10 +1,8 @@
 # Changelog
 
-O histórico do plugin original (até a 8.9.2) está em [changelog-original.txt](changelog-original.txt).
-
 ## 9.0.0 — 2026-11-05
 
-Primeira versão do **Open Newsletter**, fork do Newsletter 8.9.2.
+Primeira versão do **Open Newsletter**.
 
 ### Adicionado
 - Relatórios locais: assinantes por newsletter com filtros (abriram, não abriram, clicaram, não clicaram, erros), paginação e exportação CSV; URLs clicadas com contagem e quem clicou; histórico de aberturas e cliques por assinante; adicionar à lista os assinantes de um filtro ou de um link clicado.

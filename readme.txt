@@ -11,7 +11,7 @@ Free and open-source newsletter plugin. No license keys, no locked features, no 
 
 == Description ==
 
-Open Newsletter is a free fork of the "Newsletter" plugin 8.9.2 by Stefano Lissa & The Newsletter Team (GPLv2 or later).
+Open Newsletter is a free, open-source newsletter plugin (GPLv2 or later).
 
 * Unlimited subscribers, lists, custom fields and subscription forms (popup, widget, shortcodes, raw HTML)
 * Double opt-in, privacy checkbox, anti-spam and anti-flood
@@ -33,4 +33,4 @@ Source code, documentation and issues: https://github.com/fredpiuma/open-newslet
 == Changelog ==
 
 = 9.0.0 =
-First release of Open Newsletter. See CHANGELOG.md in the plugin folder. The history of the original plugin is in changelog-original.txt.
+First release of Open Newsletter. See CHANGELOG.md in the plugin folder.

@@ -16,10 +16,7 @@
   Requires at least: 5.6
   Requires PHP: 7.0
 
-  Open Newsletter is a free fork of "Newsletter" 8.9.2 by Stefano Lissa & The Newsletter Team
-  (https://www.thenewsletterplugin.com), released under the GPL-2.0-or-later. See CREDITS.md.
-
-  Copyright 2009-2025 The Newsletter Team (original work, "Newsletter" up to version 8.9.2)
+  Copyright 2009-2025 The Newsletter Team
   Copyright 2026 Frederico de Castro (modifications, "Open Newsletter")
 
   Open Newsletter is free software: you can redistribute it and/or modify

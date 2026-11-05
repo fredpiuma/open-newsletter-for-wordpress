@@ -53,14 +53,6 @@ defined('ABSPATH') || exit;
                         <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/fredericodecastro/" target="_blank">LinkedIn</a></p>
                         <p><i class="fab fa-telegram"></i> <a href="https://t.me/fredericomdecastro" target="_blank">Telegram</a></p>
                     </div>
-
-                    <div class="tnp-card">
-                        <div class="tnp-card-title"><?php esc_html_e('Credits', 'newsletter') ?></div>
-                        <p>
-                            <?php esc_html_e('Open Newsletter is a free fork (GPL-2.0-or-later) of the Newsletter plugin by Stefano Lissa & The Newsletter Team. See CREDITS.md in the plugin folder.', 'newsletter') ?>
-                        </p>
-                    </div>
-
                 </div>
             </div>
         </form>

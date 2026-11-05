@@ -1,22 +1,6 @@
 # Créditos e licenças
 
-## Obra original
-
-**Open Newsletter** é um fork do plugin **Newsletter** versão 8.9.2.
-
-- Autores originais: **Stefano Lissa** e **The Newsletter Team** (https://www.thenewsletterplugin.com)
-- Copyright 2009-2025 The Newsletter Team
-- Licença: GPL-2.0-ou-posterior
-
-Os avisos de copyright originais foram mantidos no cabeçalho de `plugin.php` e nos arquivos de terceiros. O histórico do plugin original está em `changelog-original.txt`.
-
-Este fork não é afiliado nem endossado pelos autores do plugin original. "Newsletter" é o nome do plugin original; o nome técnico `newsletter` (slug, text domain e prefixos) é mantido apenas por compatibilidade de dados e migração.
-
-## Este fork
-
-- Copyright 2026 **Frederico de Castro** (https://www.fredericodecastro.com.br/links/)
-- Licença: **GPL-2.0-ou-posterior** (veja `LICENSE`)
-- Repositório: https://github.com/fredpiuma/open-newsletter-for-wordpress
+**Open Newsletter** — Copyright 2026 Frederico de Castro (https://www.fredericodecastro.com.br/links/), licença **GPL-2.0-ou-posterior** (veja `LICENSE`). Repositório: https://github.com/fredpiuma/open-newsletter-for-wordpress
 
 ## Bibliotecas de terceiros (pasta `vendor/` e outros)
 
@@ -38,7 +22,7 @@ Este fork não é afiliado nem endossado pelos autores do plugin original. "News
 
 ## Imagens de procedência não documentada
 
-O plugin original não documenta a origem de parte das imagens. Elas foram mantidas porque fazem parte dos modelos e temas, mas **a licença delas não pôde ser confirmada**:
+A origem de parte das imagens não está documentada. Elas foram mantidas porque fazem parte dos modelos e temas, mas **a licença delas não pôde ser confirmada**:
 
 - `images/social-1` … `images/social-4` (ícones de redes sociais)
 - `emails/themes/*/images`, `emails/templates/*`, `emails/presets/*`, `emails/blocks/*/images`, `emails/tnp-composer/_assets`
@@ -51,10 +35,6 @@ Se a procedência de alguma delas for um problema para você, substitua-as ou re
 
 Logo, ícone de menu e `images/placeholder.png` foram criados para este fork (GPL-2.0-ou-posterior).
 
-## Traduções
-
-`languages/newsletter-pt_BR.po/.mo`: baseado nas traduções da comunidade do plugin original no translate.wordpress.org (GPL-2.0-ou-posterior), com as strings novas deste fork adicionadas.
-
 ## Nomes de terceiros mantidos no código
 
-O código mantém nomes de classes, hooks e plugins de terceiros apenas para detecção de integrações: WooCommerce, WPML (`SitePress`), Polylang, TranslatePress, Akismet, Elementor, Ultimate Member, Paid Memberships Pro, Easy Digital Downloads e add-ons do plugin original (`NewsletterWoocommerce`, `NewsletterReports`, `NewsletterAutomated`, `NewsletterAutoresponder`, `NewsletterImport`, `NewsletterApi`, `NewsletterExtensions` etc.). Nenhum deles é distribuído aqui.
+O código mantém nomes de classes, hooks e plugins de terceiros apenas para detecção de integrações: WooCommerce, WPML (`SitePress`), Polylang, TranslatePress, Akismet, Elementor, Ultimate Member, Paid Memberships Pro, Easy Digital Downloads e add-ons compatíveis (`NewsletterWoocommerce`, `NewsletterReports`, `NewsletterAutomated`, `NewsletterAutoresponder`, `NewsletterImport`, `NewsletterApi`, `NewsletterExtensions` etc.). Nenhum deles é distribuído aqui.
