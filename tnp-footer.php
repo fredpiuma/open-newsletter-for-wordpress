@@ -5,12 +5,10 @@ defined('ABSPATH') || exit;
     <div>
         <ul>
             <li><a href="https://www.thenewsletterplugin.com" target="_blank">The Newsletter Plugin</a></li>
-            <li><a href="https://www.thenewsletterplugin.com/premium" target="_blank"><?php _e('Get Premium', 'newsletter') ?></a></li>
         </ul>
     </div>
     <div>
         <ul>
-            <li><a href="https://www.thenewsletterplugin.com/account"><?php _e('Your Account', 'newsletter') ?></a></li>
             <li><a href="https://www.thenewsletterplugin.com/forums"><?php _e('Forum', 'newsletter') ?></a></li>
             <!--<li><a href="https://www.thenewsletterplugin.com/blog"><?php _e('Blog', 'newsletter') ?></a></li>-->
         </ul>

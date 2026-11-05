@@ -106,6 +106,9 @@ class NewsletterStatistics extends NewsletterModule {
             $ip = $this->process_ip($ip);
 
             if ($verified) {
+                // List changes requested by a "call to action" button. Honored only for signed links.
+                $url = $this->apply_lists_change($url, $user);
+
                 if (!$is_action) {
                     $url = apply_filters('newsletter_pre_save_url', $url, $email, $user);
                     $this->add_click($url, $user_id, $email_id, $ip);
@@ -260,6 +263,62 @@ class NewsletterStatistics extends NewsletterModule {
         $email_id = $this->to_int_id($email);
         $this->query("delete from " . NEWSLETTER_SENT_TABLE . " where email_id=" . $email_id);
         $this->query("delete from " . NEWSLETTER_STATS_TABLE . " where email_id=" . $email_id);
+    }
+
+    const LISTS_CHANGE_PARAM = 'tnp_lists';
+
+    /**
+     * Adds to a URL the request to change the lists of the subscriber who clicks it.
+     * The change is applied by the tracking only if the (signed) tracking link is verified.
+     *
+     * @param string $url
+     * @param array $lists List number => 1 (add) or 0 (remove)
+     * @return string
+     */
+    static function build_lists_change_url($url, $lists) {
+        $changes = [];
+        foreach ($lists as $list => $value) {
+            $list = (int) $list;
+            if ($list < 1 || $list > NEWSLETTER_LIST_MAX) {
+                continue;
+            }
+            $changes[] = $list . '-' . ($value ? 1 : 0);
+        }
+        if (!$changes) {
+            return $url;
+        }
+        return NewsletterModule::add_qs($url, self::LISTS_CHANGE_PARAM . '=' . implode('_', $changes));
+    }
+
+    /**
+     * Applies the list changes encoded in a verified URL and returns the URL without them.
+     *
+     * @param string $url
+     * @param TNP_User $user
+     * @return string
+     */
+    function apply_lists_change($url, $user) {
+        if (!$user || strpos($url, self::LISTS_CHANGE_PARAM . '=') === false) {
+            return $url;
+        }
+        $query = parse_url($url, PHP_URL_QUERY);
+        if (!$query) {
+            return $url;
+        }
+        parse_str($query, $args);
+        if (!empty($args[self::LISTS_CHANGE_PARAM]) && is_string($args[self::LISTS_CHANGE_PARAM])) {
+            foreach (explode('_', $args[self::LISTS_CHANGE_PARAM]) as $change) {
+                if (!preg_match('/^(\d+)-([01])$/', $change, $m)) {
+                    continue;
+                }
+                $list = (int) $m[1];
+                if ($list < 1 || $list > NEWSLETTER_LIST_MAX) {
+                    continue;
+                }
+                $this->set_user_list($user, $list, (int) $m[2]);
+            }
+        }
+        return remove_query_arg(self::LISTS_CHANGE_PARAM, $url);
     }
 
     function add_click($url, $user_id, $email_id, $ip = null) {

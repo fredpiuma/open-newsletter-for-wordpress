@@ -25,8 +25,7 @@ defined('ABSPATH') || exit;
         <?php if (!class_exists('NewsletterAutomated')) { ?>
 
             <p>
-                To create recurring newsletters (daily, weekly, monthly, and so on) the
-                <a href="?page=newsletter_main_automated">Automated Addon</a> is required.
+                <?php esc_html_e('Recurring newsletters are not available in this installation.', 'newsletter') ?>
             </p>
 
 

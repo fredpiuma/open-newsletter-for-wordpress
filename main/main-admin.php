@@ -63,41 +63,14 @@ class NewsletterMainAdmin extends NewsletterModuleAdmin {
             // Pages not on menu
             $this->add_admin_page('cover', 'Cover');
             //$this->add_admin_page('setup', 'Setup');
-            $this->add_admin_page('flow', 'Flow');
         }
     }
 
     /**
-     * Special entry for the addons management.
-     *
+     * Hidden pages (no menu entry).
      */
     function admin_after_menu() {
-        if (!class_exists('NewsletterExtensions')) {
-            $this->add_menu_page('extensions', '<span style="color:#27AE60; font-weight: bold;">' . __('Addons', 'newsletter') . '</span>');
-        } else {
-            // Grants access to the original page
-            $this->add_admin_page('extensions', __('Addons', 'newsletter'));
-        }
-
-//        if (!class_exists('NewsletterAutomated') && !class_exists('NewsletterAutoresponder')) {
-//            $this->add_menu_page('automation', 'Automation <span class="tnp-sidemenu-badge">Pro</span>');
-//        }
-
-        if (NEWSLETTER_DEBUG || !class_exists('NewsletterAutomated') && Newsletter\License::is_free()) {
-            $this->add_menu_page('automated', 'Automated <span class="tnp-sidemenu-badge">Pro</span>');
-            $this->add_admin_page('automatedindex', 'Automated');
-            $this->add_admin_page('automatededit', 'Automated edit');
-            $this->add_admin_page('automatednewsletters', 'Automated newsletters');
-            $this->add_admin_page('automatedtemplate', 'Automated template');
-        }
-
-        if (NEWSLETTER_DEBUG || !class_exists('NewsletterAutoresponder') && Newsletter\License::is_free()) {
-            $this->add_menu_page('autoresponder', 'Autoresponder <span class="tnp-sidemenu-badge">Pro</span>');
-            $this->add_admin_page('autoresponderindex', 'Autoresponder');
-            $this->add_admin_page('autoresponderedit', 'Automated edit');
-            $this->add_admin_page('autorespondermessages', 'Automated newsletters');
-            $this->add_admin_page('autoresponderstatistics', 'Automated template');
-        }
+        $this->add_admin_page('extensions', __('Integrations', 'newsletter'));
     }
 
     function hook_display_post_states($post_states, $post) {
@@ -129,18 +102,6 @@ class NewsletterMainAdmin extends NewsletterModuleAdmin {
     }
 
     /* Wrappers */
-
-    function get_license_key() {
-        Newsletter::instance()->get_license_key();
-    }
-
-    function get_license_data($refresh = false) {
-        return Newsletter::instance()->get_license_data($refresh);
-    }
-
-    function getTnpExtensions() {
-        return Newsletter::instance()->getTnpExtensions();
-    }
 
     function set_completed_step($step) {
         $steps = $this->get_option_array('newsletter_main_steps');

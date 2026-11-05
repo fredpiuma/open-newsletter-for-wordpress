@@ -1224,7 +1224,7 @@ class Newsletter extends NewsletterModule {
     }
 
     function has_license() {
-        return !empty($this->get_main_option('contract_key'));
+        return true;
     }
 
     function get_sender_name() {
@@ -1282,116 +1282,33 @@ class Newsletter extends NewsletterModule {
         return $url;
     }
 
+    /**
+     * Compatibility accessor only. Open Newsletter has no license: nothing is validated, nothing is
+     * sent anywhere. Add-ons written for the original plugin may still ask for it.
+     */
     function get_license_key() {
         if (defined('NEWSLETTER_LICENSE_KEY')) {
             return NEWSLETTER_LICENSE_KEY;
-        } else {
-            if (!empty($this->options['contract_key'])) {
-                return trim($this->options['contract_key']);
-            }
+        }
+        if (!empty($this->options['contract_key'])) {
+            return trim($this->options['contract_key']);
         }
         return false;
     }
 
     /**
-     * Get the data connected to the specified license code on man settings.
+     * Compatibility stub for add-ons written for the original plugin: every feature is always
+     * unlocked, so the returned data describes a license that never expires. No network access.
      *
-     * - false if no license is present
-     * - WP_Error if something went wrong if getting the license data
-     * - object with expiration and addons list
-     *
-     * @param boolean $refresh
-     * @return \WP_Error|boolean|object
+     * @param boolean $refresh Ignored
+     * @return object
      */
     function get_license_data($refresh = false) {
-
-        $license_key = $this->get_license_key();
-        if (empty($license_key)) {
-            delete_transient('newsletter_license_data');
-            return false;
-        }
-
-        if (!$refresh) {
-            $license_data = get_transient('newsletter_license_data');
-            if ($license_data !== false && is_object($license_data)) {
-                return $license_data;
-            }
-        }
-
-        $license_data_url = 'https://www.thenewsletterplugin.com/wp-content/plugins/file-commerce-pro/get-license-data.php';
-
-        $response = wp_remote_post($license_data_url, [
-            'body' => ['k' => $license_key]
-        ]);
-
-        // Fall back to http...
-        if (is_wp_error($response)) {
-            $license_data_url = str_replace('https', 'http', $license_data_url);
-            $response = wp_remote_post($license_data_url, array(
-                'body' => array('k' => $license_key)
-            ));
-            if (is_wp_error($response)) {
-                set_transient('newsletter_license_data', $response, DAY_IN_SECONDS);
-                return $response;
-            }
-        }
-
-        $download_message = 'You can download all addons from www.thenewsletterplugin.com if your license is valid.';
-
-        if (wp_remote_retrieve_response_code($response) != '200') {
-            $data = new WP_Error(wp_remote_retrieve_response_code($response),
-                    '[' . esc_html(wp_remote_retrieve_response_code($response)) . '] '
-                    . esc_html(wp_remote_retrieve_response_message($response))
-                    . '<br>' . $download_message);
-
-            set_transient('newsletter_license_data', $data, DAY_IN_SECONDS);
-            return $data;
-        }
-
-        $json = wp_remote_retrieve_body($response);
-        $data = json_decode($json);
-
-        if (!is_object($data)) {
-            $data = new WP_Error(1, 'License validation service error. <br>' . $download_message);
-            set_transient('newsletter_license_data', $data, DAY_IN_SECONDS);
-            return $data;
-        }
-
-        if (isset($data->message)) {
-            $data = new WP_Error(1, 'License check: ' . $data->message);
-            set_transient('newsletter_license_data', $data, DAY_IN_SECONDS);
-            return $data;
-        }
-
-        $expiration = WEEK_IN_SECONDS;
-        // If the license expires in few days, make the transient live only few days, so it will be refreshed
-        if ($data->expire > time() && $data->expire - time() < WEEK_IN_SECONDS) {
-            $expiration = $data->expire - time();
-        }
-        set_transient('newsletter_license_data', $data, $expiration);
-
-        return $data;
-    }
-
-    /**
-     * @deprecated
-     * @param type $license_key
-     * @return \WP_Error
-     */
-    public static function check_license($license_key) {
-        $response = wp_remote_get('http://www.thenewsletterplugin.com/wp-content/plugins/file-commerce-pro/check.php?k=' . urlencode($license_key), array('sslverify' => false));
-        if (is_wp_error($response)) {
-            /* @var $response WP_Error */
-            return new WP_Error(-1, 'It seems that your blog cannot contact the license validator. Ask your provider to unlock the HTTP/HTTPS connections to www.thenewsletterplugin.com<br>'
-                    . esc_html($response->get_error_code()) . ' - ' . esc_html($response->get_error_message()));
-        } else if ($response['response']['code'] != 200) {
-            return new WP_Error(-1, '[' . $response['response']['code'] . '] The license seems expired or not valid, please check your <a href="https://www.thenewsletterplugin.com/account">license code and status</a>, thank you.'
-                    . '<br>You can anyway download the professional extension from https://www.thenewsletterplugin.com.');
-        } elseif ($expires = json_decode(wp_remote_retrieve_body($response))) {
-            return array('expires' => $expires->expire, 'message' => 'Your license is valid and expires on ' . esc_html(date('Y-m-d', $expires->expire)));
-        } else {
-            return new WP_Error(-1, 'Unable to detect the license expiration. Debug data to report to the support: <code>' . esc_html(wp_remote_retrieve_body($response)) . '</code>');
-        }
+        return (object) [
+            'expire' => 4102444800, // 2100-01-01
+            'type' => 'personal',
+            'addons' => []
+        ];
     }
 }
 

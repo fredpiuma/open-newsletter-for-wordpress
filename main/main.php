@@ -2,8 +2,6 @@
 /* @var $this NewsletterMainAdmin */
 /* @var $controls NewsletterControls */
 
-use Newsletter\License;
-
 defined('ABSPATH') || exit;
 
 if (!$controls->is_action()) {
@@ -56,8 +54,13 @@ if (!$controls->is_action()) {
                 $controls->data['reply_to'] = $this->normalize_email($controls->data['reply_to']);
             }
 
-            if (!empty($controls->data['contract_key'])) {
-                $controls->data['contract_key'] = trim($controls->data['contract_key']);
+            // The license key is no longer used nor shown, but a value saved by a previous
+            // version is kept untouched so it is not lost if the user goes back to the original plugin.
+            if (!$language) {
+                $previous_options = $this->get_options('', '');
+                if (!empty($previous_options['contract_key'])) {
+                    $controls->data['contract_key'] = $previous_options['contract_key'];
+                }
             }
 
             update_option('newsletter_log_level', $controls->data['log_level']);
@@ -75,11 +78,7 @@ if (!$controls->is_action()) {
             }
         }
 
-        Newsletter\Addons::clear();
-        Newsletter\News::clear();
         update_option('newsletter_public_page_check', 0, false);
-
-        License::update();
     }
 
     if ($controls->is_action('create')) {
@@ -120,11 +119,6 @@ if (!$language) {
     }
 }
 
-$license_data = License::get_data();
-
-if (is_wp_error($license_data)) {
-    $controls->errors .= esc_html($license_data->get_error_message());
-}
 ?>
 
 <?php include NEWSLETTER_INCLUDES_DIR . '/codemirror.php'; ?>
@@ -159,11 +153,6 @@ if (is_wp_error($license_data)) {
 
         <?php $controls->show() ?>
 
-        <?php if (!empty($controls->data['contract_key']) && !class_exists('NewsletterExtensions')) { ?>
-            <div class="tnp-notice">
-                Please, install the <a href="?page=newsletter_main_extensions">Addons Manager</a> to access all professional addons and features.
-            </div>
-        <?php } ?>
 
 
         <form method="post" action="">
@@ -205,20 +194,6 @@ if (is_wp_error($license_data)) {
                                 </td>
                             </tr>
 
-                            <tr>
-                                <th><?php esc_html_e('License key', 'newsletter') ?></th>
-                                <td>
-
-                                    <?php if (defined('NEWSLETTER_LICENSE_KEY')) { ?>
-                                        <?php esc_html_e('A license key is set', 'newsletter') ?>
-                                    <?php } else { ?>
-                                        <?php $controls->text('contract_key', 40); ?>
-                                        <span class="description">
-                                            <?php printf(__('Find it in <a href="%s" target="_blank">your account</a> page', 'newsletter'), "https://www.thenewsletterplugin.com/account") ?>
-                                        </span>
-                                    <?php } ?>
-                                </td>
-                            </tr>
 
 
                             <tr>

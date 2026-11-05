@@ -77,17 +77,15 @@ $options = array_merge($defaults, $options);
 
 $button_options = $options;
 
-if (method_exists('NewsletterReports', 'build_lists_change_url')) {
-    $lists = [];
-    if (!empty($options['list'])) {
-        $lists[$options['list']] = 1;
-    }
-    if (!empty($options['unlist'])) {
-        $lists[$options['unlist']] = 0;
-    }
-    if ($lists) {
-        $button_options["button_url"] = NewsletterReports::build_lists_change_url($options["button_url"], $lists);
-    }
+$lists = [];
+if (!empty($options['list'])) {
+    $lists[$options['list']] = 1;
+}
+if (!empty($options['unlist'])) {
+    $lists[$options['unlist']] = 0;
+}
+if ($lists) {
+    $button_options["button_url"] = NewsletterStatistics::build_lists_change_url($options["button_url"], $lists);
 }
 ?>
 

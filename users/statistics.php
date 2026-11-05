@@ -38,7 +38,9 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
                 <li><a href="#tabs-overview"><?php esc_html_e('By Status', 'newsletter'); ?></a></li>
                 <li><a href="#tabs-lists"><?php esc_html_e('By Lists', 'newsletter'); ?></a></li>
                 <li><a href="#tabs-language"><?php esc_html_e('By Language', 'newsletter'); ?></a></li>
-                <li><a href="#tabs-countries"><?php esc_html_e('By location', 'newsletter'); ?></a></li>
+                <?php if (has_action('newsletter_users_statistics_countries')) { ?>
+                    <li><a href="#tabs-countries"><?php esc_html_e('By location', 'newsletter'); ?></a></li>
+                <?php } ?>
                 <li><a href="#tabs-referrers"><?php esc_html_e('By Referrer', 'newsletter'); ?></a></li>
                 <li><a href="#tabs-sources"><?php esc_html_e('By URL', 'newsletter'); ?></a></li>
                 <li><a href="#tabs-gender"><?php esc_html_e('By Gender', 'newsletter'); ?></a></li>
@@ -232,15 +234,11 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
 
             </div>
 
-            <div id="tabs-countries">
-                <?php
-                if (!has_action('newsletter_users_statistics_countries')) {
-                    include __DIR__ . '/statistics-countries.php';
-                } else {
-                    do_action('newsletter_users_statistics_countries', $controls);
-                }
-                ?>
-            </div>
+            <?php if (has_action('newsletter_users_statistics_countries')) { ?>
+                <div id="tabs-countries">
+                    <?php do_action('newsletter_users_statistics_countries', $controls); ?>
+                </div>
+            <?php } ?>
 
 
             <div id="tabs-referrers">

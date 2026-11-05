@@ -59,22 +59,6 @@
                     </p>
                 </div>
             </div>
-
-
-
-            <div class="tnp-step addons-manager <?php echo!empty($steps['addons-manager']) ? 'ok' : ''; ?>">
-                <div>
-                    <i class="fas fa-check"></i>
-                </div>
-                <div>
-                    <h3>Get a free license</h3>
-                    <p>
-                        And install free addons to get more power.
-
-                        <a href="?page=newsletter_main_extensions">Get it</a>.
-                    </p>
-                </div>
-            </div>
         </div>
 
 
@@ -133,20 +117,6 @@
                         Set how many emails per hour you want to send.
 
                         <a href="?page=newsletter_main_main">Review</a>
-                    </p>
-                </div>
-            </div>
-
-            <div class="tnp-step <?php echo!empty($steps['automated']) ? 'ok' : ''; ?>">
-                <div>
-                    <i class="fas fa-check"></i>
-                </div>
-                <div>
-                    <h3>Explore the Automated Newsletters</h3>
-                    <p>
-                        Everything on autopilot: set the direction and relax
-
-                        <a href="?page=newsletter_main_automated">Check it out.</a>
                     </p>
                 </div>
             </div>

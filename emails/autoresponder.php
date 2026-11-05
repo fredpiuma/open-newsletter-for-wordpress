@@ -25,7 +25,7 @@ defined('ABSPATH') || exit;
         <?php if (!class_exists('NewsletterAutoresponder')) { ?>
 
             <p>
-                To create one or more email series the <a href="?page=newsletter_main_autoresponder">Autoresponder Addon</a> is required.
+                <?php esc_html_e('Email series are not available in this installation.', 'newsletter') ?>
             </p>
 
 

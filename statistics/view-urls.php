@@ -1,49 +1,38 @@
 <?php
+// phpcs:disable WordPress.Security.NonceVerification.Recommended
+
 /* @var $this NewsletterStatisticsAdmin */
 /* @var $controls NewsletterControls */
 
 defined('ABSPATH') || exit;
-$email = $this->get_email((int) $_GET['id'] ?? 0);
+
+$email = $this->get_email((int) ($_GET['id'] ?? 0));
 if (empty($email)) {
     echo 'Newsletter not found';
     return;
 }
-$items = [];
 
-$item = new stdClass();
-$item->url = 'https://www.example.org/page-1';
-$item->number = 130;
+if ($controls->is_action('set')) {
+    $list = (int) ($controls->data['list'] ?? 0);
+    $url = isset($controls->data['url']) && is_string($controls->data['url']) ? $controls->data['url'] : '';
+    if ($list < 1 || $url === '') {
+        $controls->errors .= esc_html__('Select a list', 'newsletter');
+    } else {
+        $changed = $this->add_subscribers_to_list($list, $email->id, 'all', $url);
+        /* translators: %d: number of subscribers */
+        $controls->messages .= esc_html(sprintf(_n('%d confirmed subscriber added to the list.', '%d confirmed subscribers added to the list.', $changed, 'newsletter'), $changed));
+    }
+}
 
-$items[] = $item;
-
-$item = new stdClass();
-$item->url = 'https://www.example.org/page-2';
-$item->number = 40;
-
-$items[] = $item;
-
-$item = new stdClass();
-$item->url = 'https://www.example.org/page-3';
-$item->number = 20;
-
-$items[] = $item;
-
-$item = new stdClass();
-$item->url = 'https://www.example.org/page-4';
-$item->number = 1;
-
-$items[] = $item;
-
-$item = new stdClass();
-$item->url = 'https://www.example.org/page-5';
-$item->number = 0;
-
-$items[] = $item;
+$items = $this->get_clicked_urls($email->id);
 
 $total = array_reduce($items, function ($carry, $item) {
-    $carry += $item->number;
-    return $carry;
-});
+    return $carry + (int) $item->number;
+}, 0);
+
+if (empty($email->track)) {
+    $controls->warnings[] = __('This newsletter has the tracking disabled. No statistics will be available.', 'newsletter');
+}
 ?>
 <style>
 <?php include __DIR__ . '/style.css'; ?>
@@ -54,50 +43,54 @@ $total = array_reduce($items, function ($carry, $item) {
     <?php include __DIR__ . '/view-heading.php' ?>
 
     <div id="tnp-body">
-        <p style="font-size: 1.1em;">
-            Details by single clicked link for this newsletter are available with the
-            <a href="https://www.thenewsletterplugin.com/reports?utm_source=statistics&utm_campaign=plugin" target="_blank">Reports Addon</a>.
-            Data below is a sample view.
-        </p>
 
-        <table class="widefat" style="opacity: 50%">
+        <?php $controls->show(); ?>
+
+        <table class="widefat">
             <colgroup>
-                <col class="w-80">
+                <col class="w-60">
+                <col class="w-10">
                 <col class="w-10">
                 <col class="w-10">
             </colgroup>
             <thead>
                 <tr class="text-left">
-                    <th>Clicked URLs</th>
-                    <th>Clicks</th>
+                    <th><?php esc_html_e('Clicked URLs', 'newsletter') ?></th>
+                    <th><?php esc_html_e('Clicks', 'newsletter') ?></th>
                     <th>%</th>
-                    <th>Who clicked...</th>
+                    <th><?php esc_html_e('Subscribers', 'newsletter') ?></th>
+                    <th><?php esc_html_e('Who clicked...', 'newsletter') ?></th>
                 </tr>
             </thead>
             <tbody>
 
-                <?php for ($i = 0; $i < count($items); $i++) : ?>
+                <?php if (!$items) { ?>
+                    <tr><td colspan="5"><?php esc_html_e('No clicks recorded for this newsletter', 'newsletter') ?></td></tr>
+                <?php } ?>
+
+                <?php foreach ($items as $item) { ?>
                     <tr>
                         <td>
-                            <a href="<?php echo esc_attr($items[$i]->url); ?>" target="_blank">
-                                <?php echo esc_html($items[$i]->url); ?>
+                            <a href="<?php echo esc_url($item->url) ?>" target="_blank" rel="noopener noreferrer">
+                                <?php echo esc_html($item->url); ?>
                             </a>
                         </td>
-                        <td><?php echo esc_html($items[$i]->number); ?></td>
+                        <td><?php echo (int) $item->number ?></td>
+                        <td><?php echo esc_html(NewsletterModule::percent($item->number, $total)); ?></td>
                         <td>
-                            <?php echo esc_html(NewsletterModule::percent($items[$i]->number, $total)); ?>
+                            <a href="<?php echo esc_attr(add_query_arg(['page' => 'newsletter_statistics_view-users', 'id' => (int) $email->id, 'url' => $item->url], admin_url('admin.php'))) ?>"><?php echo (int) $item->people ?></a>
                         </td>
                         <td>
                             <form action="" method="post">
                                 <?php $controls->init() ?>
-                                <?php $controls->data['url'] = $items[$i]->url; ?>
+                                <?php $controls->data['url'] = $item->url; ?>
                                 <?php $controls->hidden('url') ?>
                                 <?php $controls->lists_select() ?>
-                                <?php $controls->btn('set', 'Add to this list', ['secondary' => true]) ?>
+                                <?php $controls->btn('set', __('Add to this list', 'newsletter'), ['secondary' => true]) ?>
                             </form>
                         </td>
                     </tr>
-                <?php endfor; ?>
+                <?php } ?>
 
             </tbody>
         </table>

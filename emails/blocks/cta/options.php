@@ -49,9 +49,6 @@
                 <?php $fields->lists_public('unlist', 'Remove from', ['empty_label' => 'None']) ?>
             </div>
             <div style="clear: both"></div>
-            <?php if (!method_exists('NewsletterReports', 'build_lists_change_url')) { ?>
-                <label class="tnpf-row-label">Requires the Reports Addon last version</label>
-            <?php } ?>
         </div>
     </div>
 

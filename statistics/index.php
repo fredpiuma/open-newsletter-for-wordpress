@@ -36,7 +36,7 @@ foreach ($emails as $email) {
     $report->open_count += $data->open_count;
     $report->click_count += $data->click_count;
 
-    $overview_labels[] = strftime('%a, %e %b %y', $email->send_on);
+    $overview_labels[] = date_i18n('D, j M y', $email->send_on);
     //$overview_labels[] = mb_substr($email->subject, 0, 10) . '...';
 
     $overview_open_rate[] = $data->open_rate;
@@ -73,10 +73,6 @@ if (empty($emails)) {
 
         <?php $controls->show() ?>
         <p><?php esc_html_e('Overall basic statistics (last 20 newsletters)', 'newsletter') ?></p>
-        <p>
-            Full details, including Automated and Autoresponder newsletter statistics are available with the
-            <a href="https://www.thenewsletterplugin.com/reports?utm_source=statistics&utm_campaign=plugin" target="_blank">Reports Addon</a>.
-        </p>
 
         <div class="tnp-cards-container">
 

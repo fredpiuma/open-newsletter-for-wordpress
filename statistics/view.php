@@ -16,6 +16,7 @@ if (empty($email)) {
 }
 
 $report = $this->get_statistics($email);
+$unsubscribed_count = (int) $wpdb->get_var($wpdb->prepare('select count(*) from ' . NEWSLETTER_USERS_TABLE . ' where unsub_email_id=%d', $email->id));
 
 if ($email->status == 'new') {
     $controls->warnings[] = __('Draft newsletter, no data available', 'newsletter');
@@ -41,11 +42,6 @@ if (empty($email->track)) {
     <div id="tnp-body" style="min-width: 500px">
 
         <?php $controls->show() ?>
-
-        <p>
-            The full report for this newsletter can be generated with the
-            <a href="https://www.thenewsletterplugin.com/reports" target="_blank">Reports Addon</a>.
-        </p>
 
         <div class="tnp-cards-container">
 
@@ -104,22 +100,25 @@ if (empty($email->track)) {
                     <canvas id="tnp-clicks-opens-chart" class="mini-chart"></canvas>
                 </div>
             </div>
-            <div class="tnp-card" style="opacity: 50%">
-                <div class="tnp-card-title">Unsubscribed</div>
+            <div class="tnp-card">
+                <div class="tnp-card-title"><?php esc_html_e('Unsubscribed', 'newsletter') ?></div>
                 <div class="tnp-card-value">
-                    <span class="">-</span>
+                    <span class=""><?php echo (int) $unsubscribed_count ?></span>
                     <div class="tnp-card-description">
-                        Cancellations started from this newsletter (cannot always be tracked)
+                        <?php esc_html_e('Cancellations started from this newsletter (cannot always be tracked)', 'newsletter') ?>
                     </div>
                 </div>
                 <div class="tnp-card-icon"><div class="tnp-card-icon-filter-remove"></div></div>
             </div>
-            <div class="tnp-card" style="opacity: 50%">
-                <div class="tnp-card-title">Errors</div>
+            <div class="tnp-card">
+                <div class="tnp-card-title"><?php esc_html_e('Errors', 'newsletter') ?></div>
                 <div class="tnp-card-value">
-                    <span class="">-</span>
+                    <span class=""><?php echo (int) $report->error_count ?></span>
                     <div class="tnp-card-description">
-                        Errors encountered while delivery, usually due to a faulty mailing service.
+                        <?php esc_html_e('Errors encountered while delivery, usually due to a faulty mailing service.', 'newsletter') ?>
+                        <?php if ($report->error_count) { ?>
+                            <a href="?page=newsletter_statistics_view-users&amp;id=<?php echo (int) $email->id ?>&amp;filter=errors"><?php esc_html_e('See', 'newsletter') ?></a>
+                        <?php } ?>
                     </div>
 
                 </div>

@@ -42,24 +42,6 @@ defined('ABSPATH') || exit;
                     </div>
 
 
-                    <div class="tnp-card">
-                        <div class="tnp-card-title">Premium support (with an active license)</div>
-                        <p style="font-weight: bold">
-                            With an active license, please install our
-                            <a href="https://www.thenewsletterplugin.com/documentation/installation/how-to-install-the-addons-manager/" target=_blank">Addons Manager</a>
-                            to send debug data and test emails to our staff.
-                        </p>
-
-                        <p>
-                            You can open a ticket from your account page to have the fastest support.
-                        </p>
-                        <p>
-                            <?php $controls->btn_link('https://www.thenewsletterplugin.com/account', __('Open a ticket', 'newsletter'), ['target' => '_blank']); ?>
-                        </p>
-
-                    </div>
-
-
                 </div>
             </div>
         </form>

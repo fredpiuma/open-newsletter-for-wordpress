@@ -129,14 +129,7 @@ $system_warnings = NewsletterSystemAdmin::instance()->get_warnings_count();
                 </li>
 
 
-                <?php if (class_exists('NewsletterReports')) { ?>
-                    <li><a href="?page=newsletter_reports_index"><?php esc_html_e('Statistics', 'newsletter') ?></a></li>
-                    <?php if (NEWSLETTER_DEBUG) { ?>
-                        <li><a href="?page=newsletter_statistics_index">Statistics (base)</a></li>
-                    <?php } ?>
-                <?php } else { ?>
-                    <li><a href="?page=newsletter_statistics_index"><?php esc_html_e('Statistics', 'newsletter') ?></a></li>
-                <?php } ?>
+                <li><a href="?page=newsletter_statistics_index"><?php esc_html_e('Statistics', 'newsletter') ?></a></li>
 
 
 
@@ -207,66 +200,6 @@ $system_warnings = NewsletterSystemAdmin::instance()->get_warnings_count();
                     </li>
                 </ul>
             </li>
-        <?php } ?>
-
-        <?php
-        $license_data = Newsletter::instance()->get_license_data();
-        $premium_url = 'https://www.thenewsletterplugin.com/premium?utm_source=header&utm_medium=link&utm_campaign=plugin&utm_content=' . urlencode($_GET['page']);
-        if (NEWSLETTER_DEBUG) {
-            //$license_data->expire = 0; //time() + MONTH_IN_SECONDS + DAY_IN_SECONDS;
-            //$license_data->type = 'personal';
-            //$license_data = false;
-        }
-        ?>
-
-        <?php if (empty($license_data)) { ?>
-
-            <li class="tnp-licence-button"><a href="<?php echo esc_attr($premium_url); ?>" target="_blank">
-                    <i class="fas fa-trophy"></i> <?php esc_html_e('Get Professional Addons', 'newsletter'); ?></a>
-            </li>
-
-        <?php } elseif (is_wp_error($license_data)) { ?>
-
-            <li class="tnp-licence-button tnp-licence-button-red">
-                <a href="?page=newsletter_main_main"><i class="fas fa-hand-paper" style="color: white"></i> <?php esc_html_e('License check failed', 'newsletter') ?></a>
-            </li>
-
-        <?php } elseif ($license_data->expire == 0) { ?>
-
-            <li class="tnp-licence-button">
-                <a href="<?php echo esc_attr($premium_url) ?>" target="_blank"><i class="fas fa-trophy"></i> <?php _e('Get Professional Addons', 'newsletter') ?></a>
-            </li>
-
-        <?php } elseif ($license_data->expire < time()) { ?>
-
-            <?php if ($license_data->type === 'personal') { ?>
-                <li class="tnp-licence-button tnp-licence-button-red">
-                    <a href="https://www.thenewsletterplugin.com/account" target="_blank"><i class="fas fa-hand-paper" style="color: white"></i> <?php esc_html_e('License expired', 'newsletter') ?></a>
-                </li>
-            <?php } else { ?>
-                <li class="tnp-licence-button tnp-licence-button-red">
-                    <a href="javascript:alert('You have a reselled license, please ask your web agency to renew it or get a personal one.')"><i class="fas fa-check-square"></i> <?php esc_html_e('License expired', 'newsletter') ?></a>
-                </li>
-            <?php } ?>
-
-        <?php } elseif ($license_data->expire < time() + MONTH_IN_SECONDS) { ?>
-
-            <?php if ($license_data->type === 'personal') { ?>
-                <li class="tnp-licence-button tnp-licence-button-red">
-                    <a href="https://www.thenewsletterplugin.com/account" target="_blank"><i class="fas fa-check-square"></i> <?php esc_html_e('License expiring', 'newsletter') ?> (<?php echo esc_html(date('Y-m-d', $license_data->expire)); ?>)</a>
-                </li>
-            <?php } else { ?>
-                <li class="tnp-licence-button tnp-licence-button-red">
-                    <a href="javascript:alert('You have a reselled license, please ask your web agency to renew it or get a personal one.')"><i class="fas fa-check-square"></i> <?php esc_html_e('License expiring', 'newsletter') ?> (<?php echo esc_html(date('Y-m-d', $license_data->expire)); ?>)</a>
-                </li>
-            <?php } ?>
-
-        <?php } elseif ($license_data->expire >= time()) { ?>
-
-            <li class="tnp-licence-button">
-                <a href="https://www.thenewsletterplugin.com/account" target="_blank"><i class="fas fa-check-square"></i> <?php esc_html_e('License active', 'newsletter') ?> (<?php echo esc_html(date('Y-m-d', $license_data->expire)); ?>)</a>
-            </li>
-
         <?php } ?>
     </ul>
 </div>

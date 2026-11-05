@@ -50,17 +50,13 @@ foreach (array_reverse($months) as $month) {
 $steps = $this->get_option_array('newsletter_main_steps');
 $steps['sender'] = 1;
 
-if (class_exists('NewsletterExtensions')) {
-    $steps['addons-manager'] = 1;
-}
-
 global $wpdb;
 $c = $wpdb->get_results("select id from " . NEWSLETTER_EMAILS_TABLE . " where status in ('sending', 'sent') limit 1");
 if ($c) {
     $steps['first-newsletter'] = 1;
 }
 
-$steps_completed = count($steps) >= 10;
+$steps_completed = count($steps) >= 8;
 ?>
 
 <style>

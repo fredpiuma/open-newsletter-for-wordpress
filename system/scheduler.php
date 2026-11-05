@@ -3,7 +3,6 @@
 /* @var $this NewsletterSystemAdmin */
 /* @var $controls NewsletterControls */
 
-use Newsletter\License;
 
 defined('ABSPATH') || exit;
 
@@ -85,8 +84,7 @@ if (isset($_GET['debug']) || !defined('Crontrol\WP_CRONTROL_VERSION')) {
                         <ul>
                             <li>Check the <a href="<?php echo admin_url('/site-health.php') ?>">site health panel</a> and try to solve the issues identified by WordPress in your site</li>
                             <li>Install the <a href="https://wordpress.org/plugins/wp-crontrol/" target="_blank">WP Crontrol</a> plugin which shows all the scheduled jobs and delays</li>
-                            <li>Configure an <a href="https://www.thenewsletterplugin.com/documentation/delivery-and-spam/newsletter-delivery-engine/" target="_blank">external cron service</a>
-                                (if you have a license you can use our <a href="https://www.thenewsletterplugin.com/account/cron/" target="_blank">cron service</a>)</li>
+                            <li>Configure an <a href="https://www.thenewsletterplugin.com/documentation/delivery-and-spam/newsletter-delivery-engine/" target="_blank">external cron service</a></li>
                         </ul>
                     </div>
 
