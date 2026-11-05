@@ -182,9 +182,6 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             );
             wp_localize_script('tnp-admin', 'tnp_translations', $translations_array);
 
-            wp_enqueue_script('tnp-jquery-vmap', $url . '/vendor/jqvmap/jquery.vmap.min.js', ['jquery'], NEWSLETTER_VERSION);
-            wp_enqueue_script('tnp-jquery-vmap-world', $url . '/vendor/jqvmap/jquery.vmap.world.js', ['tnp-jquery-vmap'], NEWSLETTER_VERSION);
-            wp_enqueue_style('tnp-jquery-vmap', $url . '/vendor/jqvmap/jqvmap.min.css', [], NEWSLETTER_VERSION);
 
             wp_register_script('tnp-chart', $url . '/vendor/chartjs/Chart.min.js', ['jquery'], NEWSLETTER_VERSION);
 

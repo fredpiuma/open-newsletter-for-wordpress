@@ -175,21 +175,6 @@
     overflow: hidden;
 }
 
-.tnp-map-chart .jqvmap-zoomin,
-.tnp-map-chart .jqvmap-zoomout {
-    color: #fff;
-    padding: 0;
-    text-align: center;
-    font-size: 14px !important;
-    height: 26px;
-    line-height: 26px;
-    width: 26px;
-    background-color: #2980B9;
-}
-
-.tnp-map-chart .jqvmap-zoomout {
-    top: 40px;
-}
 
 /* Full charts */
 .tnp-chart {

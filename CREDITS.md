@@ -9,15 +9,13 @@
 | TinyMCE | 4.9.11 | LGPL-2.1 | `vendor/tinymce/license.txt` |
 | Chart.js | 2.9.4 | MIT | `vendor/chartjs/LICENSE.md` |
 | Select2 | 4.0.13 | MIT | `vendor/select2/LICENSE.md` |
-| Spectrum (color picker) | — | MIT | `vendor/spectrum/LICENSE` |
+| Spectrum (color picker) | — | MIT | `vendor/spectrum-prefixed/` |
 | CodeMirror | — | MIT | cabeçalho do próprio arquivo |
 | jQuery UI (CSS) | 1.12.1 | MIT | |
 | jquery-modal | 0.9.2 | MIT | |
-| JQVMap | 1.5.1 | MIT | |
 | Toastify | 1.12.0 | MIT | |
 | Font Awesome Free | — | CSS: MIT; fontes: SIL OFL 1.1; ícones SVG: CC BY 4.0 | `vendor/fa/LICENSE.txt` |
 | Inter (fonte) | variável | SIL OFL 1.1 | `admin/fonts/LICENSE-Inter-OFL.txt`; baixada de fonts.gstatic.com/rsms/inter e empacotada localmente |
-| driver.js | sem versão no arquivo | **a confirmar** (provavelmente MIT) | `vendor/driver/`; o arquivo não traz cabeçalho de licença |
 | `main/js/welcome.js` | — | Apache-2.0 | Cabeçalho próprio; compatível com GPL-2.0-ou-posterior (via GPL-3.0). Avaliar substituição. |
 
 ## Imagens de procedência não documentada
