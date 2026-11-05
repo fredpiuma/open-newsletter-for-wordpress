@@ -117,7 +117,7 @@ if (empty($email->track)) {
                     <div class="tnp-card-description">
                         <?php esc_html_e('Errors encountered while delivery, usually due to a faulty mailing service.', 'newsletter') ?>
                         <?php if ($report->error_count) { ?>
-                            <a href="?page=newsletter_statistics_view-users&amp;id=<?php echo (int) $email->id ?>&amp;filter=errors"><?php esc_html_e('See', 'newsletter') ?></a>
+                            <a href="?page=newsletter_statistics_view-users&amp;id=<?php echo (int) $email->id ?>&amp;delivery=no"><?php esc_html_e('See', 'newsletter') ?></a>
                         <?php } ?>
                     </div>
 

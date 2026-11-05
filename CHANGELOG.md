@@ -5,7 +5,7 @@
 Primeira versão do **Open Newsletter**.
 
 ### Adicionado
-- Relatórios locais: assinantes por newsletter com filtros (abriram, não abriram, clicaram, não clicaram, erros), paginação e exportação CSV; URLs clicadas com contagem e quem clicou; histórico de aberturas e cliques por assinante; adicionar à lista os assinantes de um filtro ou de um link clicado.
+- Relatórios locais: assinantes por newsletter com filtros combináveis (enviados sem erro, com erro, abriram, clicaram, abriram e não clicaram, não abriram) e por lista (qualquer uma ou todas as marcadas), atalhos rápidos, paginação e exportação CSV do filtro aplicado (com coluna de listas); URLs clicadas com contagem e quem clicou; histórico de aberturas e cliques por assinante; adicionar à lista os assinantes de um filtro ou de um link clicado.
 - Botão CTA do compositor adiciona/remove listas ao clique (parâmetro assinado `tnp_lists`).
 - Importação e exportação de assinantes em CSV.
 - Fonte Inter empacotada localmente (`admin/fonts`).

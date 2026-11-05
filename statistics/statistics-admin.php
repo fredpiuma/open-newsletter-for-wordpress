@@ -201,70 +201,235 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
     }
 
     /**
-     * Filters available in the per-subscriber report of a newsletter.
+     * Three-state criteria of the per-subscriber report: any, yes or no.
      *
-     * @return array
+     * @return array key => label
      */
-    function get_subscriber_filters() {
+    function get_subscriber_criteria() {
         return [
-            'all' => __('All', 'newsletter'),
+            'delivery' => __('Sent without errors', 'newsletter'),
             'opened' => __('Opened', 'newsletter'),
-            'not-opened' => __('Not opened', 'newsletter'),
             'clicked' => __('Clicked', 'newsletter'),
-            'not-clicked' => __('Not clicked', 'newsletter'),
-            'errors' => __('Errors', 'newsletter'),
         ];
     }
 
     /**
-     * Builds the where clause (prepared) on the sent table (alias "s") for a filter and an optional clicked URL.
+     * Quick filters (presets) of the per-subscriber report, each one a set of filter parameters.
+     *
+     * @return array key => [label, params]
      */
-    private function get_subscribers_where($email_id, $filter, $url = '') {
+    function get_subscriber_presets() {
+        return [
+            'all' => [__('All', 'newsletter'), []],
+            'sent' => [__('Sent', 'newsletter'), ['delivery' => 'yes']],
+            'errors' => [__('Errors', 'newsletter'), ['delivery' => 'no']],
+            'opened' => [__('Opened', 'newsletter'), ['opened' => 'yes']],
+            'clicked' => [__('Clicked', 'newsletter'), ['clicked' => 'yes']],
+            'opened-not-clicked' => [__('Opened but not clicked', 'newsletter'), ['opened' => 'yes', 'clicked' => 'no']],
+            'not-opened' => [__('Not opened', 'newsletter'), ['opened' => 'no']],
+        ];
+    }
+
+    /**
+     * Normalizes the filters of the per-subscriber report from a request (usually $_GET). Single source of
+     * truth for the screen, the CSV export and the "add to list" action.
+     *
+     * Legacy parameter "filter" (all, opened, not-opened, clicked, not-clicked, errors) is still accepted.
+     *
+     * @param array $src
+     * @return array ['delivery', 'opened', 'clicked' (any|yes|no), 'lists' (int[]), 'lists_mode' (any|all), 'url' (string)]
+     */
+    function parse_subscriber_filters($src) {
+        $f = ['delivery' => 'any', 'opened' => 'any', 'clicked' => 'any', 'lists' => [], 'lists_mode' => 'any', 'url' => ''];
+
+        $legacy = [
+            'opened' => ['opened' => 'yes'],
+            'not-opened' => ['opened' => 'no'],
+            'clicked' => ['clicked' => 'yes'],
+            'not-clicked' => ['clicked' => 'no'],
+            'errors' => ['delivery' => 'no'],
+        ];
+        $filter = isset($src['filter']) && is_string($src['filter']) ? sanitize_key(wp_unslash($src['filter'])) : '';
+        if (isset($legacy[$filter])) {
+            $f = array_merge($f, $legacy[$filter]);
+        }
+
+        foreach (array_keys($this->get_subscriber_criteria()) as $key) {
+            $value = isset($src[$key]) && is_string($src[$key]) ? sanitize_key(wp_unslash($src[$key])) : '';
+            if (in_array($value, ['any', 'yes', 'no'], true)) {
+                $f[$key] = $value;
+            }
+        }
+
+        if (isset($src['lists'])) {
+            $raw = $src['lists'];
+            if (is_string($raw)) {
+                $raw = explode(',', $raw);
+            }
+            if (is_array($raw)) {
+                $valid = [];
+                foreach (NewsletterAdmin::instance()->get_lists() as $list) {
+                    $valid[(int) $list->id] = true;
+                }
+                foreach ($raw as $id) {
+                    $id = (int) $id;
+                    if (isset($valid[$id])) {
+                        $f['lists'][$id] = $id;
+                    }
+                }
+                $f['lists'] = array_values($f['lists']);
+                sort($f['lists']);
+            }
+        }
+        if (isset($src['lists_mode']) && $src['lists_mode'] === 'all') {
+            $f['lists_mode'] = 'all';
+        }
+
+        if (isset($src['url']) && is_string($src['url'])) {
+            $f['url'] = wp_unslash($src['url']);
+        }
+        return $f;
+    }
+
+    /**
+     * Filter parameters as a query string array (only the non default ones).
+     */
+    function get_subscriber_filter_args($f) {
+        $args = [];
+        foreach (array_keys($this->get_subscriber_criteria()) as $key) {
+            if ($f[$key] !== 'any') {
+                $args[$key] = $f[$key];
+            }
+        }
+        if ($f['lists']) {
+            $args['lists'] = implode(',', $f['lists']);
+            if ($f['lists_mode'] === 'all') {
+                $args['lists_mode'] = 'all';
+            }
+        }
+        if ($f['url'] !== '') {
+            $args['url'] = $f['url'];
+        }
+        return $args;
+    }
+
+    /**
+     * Short slug that describes the active filters, used in the CSV file name.
+     */
+    function get_subscriber_filter_slug($f) {
+        $parts = [];
+        $names = ['delivery' => 'sent', 'opened' => 'opened', 'clicked' => 'clicked'];
+        foreach ($names as $key => $name) {
+            if ($f[$key] === 'yes') {
+                $parts[] = $name;
+            } elseif ($f[$key] === 'no') {
+                $parts[] = $key === 'delivery' ? 'errors' : 'not-' . $name;
+            }
+        }
+        if ($f['lists']) {
+            $parts[] = 'lists-' . implode('-', $f['lists']);
+        }
+        if ($f['url'] !== '') {
+            $parts[] = 'url';
+        }
+        return $parts ? implode('_', $parts) : 'all';
+    }
+
+    /**
+     * Builds the where clause (prepared) on the sent table (alias "s") joined with the subscribers (alias "u").
+     */
+    private function get_subscribers_where($email_id, $f) {
         global $wpdb;
         $where = $wpdb->prepare('s.email_id=%d', (int) $email_id);
-        switch ($filter) {
-            case 'opened':
-                $where .= ' and s.open>=1';
-                break;
-            case 'not-opened':
-                $where .= ' and s.open=0 and s.status=0';
-                break;
-            case 'clicked':
-                $where .= ' and s.open>=2';
-                break;
-            case 'not-clicked':
-                $where .= ' and s.open<2 and s.status=0';
-                break;
-            case 'errors':
-                $where .= ' and s.status>0';
-                break;
+
+        if ($f['delivery'] === 'yes') {
+            $where .= ' and s.status=0';
+        } elseif ($f['delivery'] === 'no') {
+            $where .= ' and s.status>0';
+        } elseif ($f['opened'] === 'no' || $f['clicked'] === 'no') {
+            // Who had an error did not really have the chance to open or click
+            $where .= ' and s.status=0';
         }
-        if ($url !== '' && $url !== null) {
-            $where .= $wpdb->prepare(' and s.user_id in (select c.user_id from ' . NEWSLETTER_STATS_TABLE . ' c where c.email_id=%s and c.url=%s)', (string) (int) $email_id, $url);
+
+        if ($f['opened'] === 'yes') {
+            $where .= ' and s.open>=1';
+        } elseif ($f['opened'] === 'no') {
+            $where .= ' and s.open=0';
+        }
+
+        if ($f['clicked'] === 'yes') {
+            $where .= ' and s.open>=2';
+        } elseif ($f['clicked'] === 'no') {
+            $where .= ' and s.open<2';
+        }
+
+        if ($f['lists']) {
+            $conditions = [];
+            foreach ($f['lists'] as $id) {
+                $conditions[] = 'u.list_' . (int) $id . '=1'; // Validated integers only
+            }
+            $where .= ' and (' . implode($f['lists_mode'] === 'all' ? ' and ' : ' or ', $conditions) . ')';
+        }
+
+        if ($f['url'] !== '') {
+            $where .= $wpdb->prepare(' and s.user_id in (select c.user_id from ' . NEWSLETTER_STATS_TABLE . ' c where c.email_id=%s and c.url=%s)', (string) (int) $email_id, $f['url']);
         }
         return $where;
     }
 
-    function count_subscribers($email_id, $filter = 'all', $url = '') {
+    function count_subscribers($email_id, $f) {
         global $wpdb;
-        $where = $this->get_subscribers_where($email_id, $filter, $url);
-        return (int) $wpdb->get_var('select count(*) from ' . NEWSLETTER_SENT_TABLE . ' s where ' . $where);
+        $where = $this->get_subscribers_where($email_id, $f);
+        return (int) $wpdb->get_var('select count(*) from ' . NEWSLETTER_SENT_TABLE . ' s left join ' . NEWSLETTER_USERS_TABLE . ' u on u.id=s.user_id where ' . $where);
     }
 
     /**
-     * @return array Rows with the sent data and the subscriber data (null if the subscriber was removed).
+     * @return array Rows with the sent data and the subscriber data (null if the subscriber was removed). The
+     * "lists" property is the array of list IDs the subscriber is in now.
      */
-    function get_subscribers($email_id, $filter = 'all', $url = '', $limit = 50, $offset = 0) {
+    function get_subscribers($email_id, $f, $limit = 50, $offset = 0) {
         global $wpdb;
-        $where = $this->get_subscribers_where($email_id, $filter, $url);
-        $sql = 'select s.user_id, u.email, u.name, u.surname, u.status, s.time as sent_time, s.status as sent_status, s.open as sent_open, s.ip, s.error'
+        $where = $this->get_subscribers_where($email_id, $f);
+        $list_ids = [];
+        $columns = '';
+        foreach (NewsletterAdmin::instance()->get_lists() as $list) {
+            $list_ids[] = (int) $list->id;
+            $columns .= ', u.list_' . (int) $list->id;
+        }
+        $sql = 'select s.user_id, u.email, u.name, u.surname, u.status, s.time as sent_time, s.status as sent_status, s.open as sent_open, s.ip, s.error' . $columns
                 . ' from ' . NEWSLETTER_SENT_TABLE . ' s left join ' . NEWSLETTER_USERS_TABLE . ' u on u.id=s.user_id'
                 . ' where ' . $where . ' order by s.time asc, s.user_id asc';
         if ($limit > 0) {
             $sql .= $wpdb->prepare(' limit %d offset %d', (int) $limit, (int) $offset);
         }
         $rows = $wpdb->get_results($sql);
-        return is_array($rows) ? $rows : [];
+        if (!is_array($rows)) {
+            return [];
+        }
+        foreach ($rows as $row) {
+            $row->lists = [];
+            foreach ($list_ids as $id) {
+                $key = 'list_' . $id;
+                if (!empty($row->$key)) {
+                    $row->lists[] = $id;
+                }
+            }
+        }
+        return $rows;
+    }
+
+    /**
+     * Names of the lists (from a list of IDs) separated by the given string.
+     */
+    function get_list_names($ids, $separator = ', ') {
+        $names = [];
+        $lists = NewsletterAdmin::instance()->get_lists();
+        foreach ($ids as $id) {
+            if (isset($lists['' . $id])) {
+                $names[] = $lists['' . $id]->name;
+            }
+        }
+        return implode($separator, $names);
     }
 
     /**
@@ -277,16 +442,16 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
     }
 
     /**
-     * Adds to a list the confirmed subscribers selected by a filter. Returns the number of subscribers changed.
+     * Adds to a list the confirmed subscribers selected by the filters. Returns the number of subscribers changed.
      */
-    function add_subscribers_to_list($list, $email_id, $filter = 'all', $url = '') {
+    function add_subscribers_to_list($list, $email_id, $f) {
         global $wpdb;
         $list = (int) $list;
         if ($list < 1 || $list > NEWSLETTER_LIST_MAX) {
             return 0;
         }
         $column = 'list_' . $list;
-        $where = $this->get_subscribers_where($email_id, $filter, $url);
+        $where = $this->get_subscribers_where($email_id, $f);
         $wpdb->query("update " . NEWSLETTER_USERS_TABLE . " u join " . NEWSLETTER_SENT_TABLE . " s on s.user_id=u.id set u." . $column . "=1 where u.status='C' and u." . $column . "=0 and " . $where);
         return (int) $wpdb->rows_affected;
     }
@@ -324,21 +489,17 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
     private function export_subscribers() {
         // phpcs:disable WordPress.Security.NonceVerification.Recommended
         $email_id = (int) ($_GET['id'] ?? 0);
-        $filter = sanitize_key($_GET['filter'] ?? 'all');
-        if (!isset($this->get_subscriber_filters()[$filter])) {
-            $filter = 'all';
-        }
-        $url = isset($_GET['url']) && is_string($_GET['url']) ? wp_unslash($_GET['url']) : '';
+        $f = $this->parse_subscriber_filters($_GET);
 
         nocache_headers();
         header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename="newsletter-' . $email_id . '-' . $filter . '.csv"');
+        header('Content-Disposition: attachment; filename="newsletter-' . $email_id . '-' . $this->get_subscriber_filter_slug($f) . '.csv"');
         $out = fopen('php://output', 'w');
         fwrite($out, "\xEF\xBB\xBF");
-        fputcsv($out, ['email', 'name', 'surname', 'status', 'sent_on', 'delivered', 'opened', 'clicked', 'ip', 'error']);
+        fputcsv($out, ['email', 'name', 'surname', 'status', 'sent_on', 'delivered', 'opened', 'clicked', 'ip', 'error', 'lists']);
         $offset = 0;
         do {
-            $rows = $this->get_subscribers($email_id, $filter, $url, 1000, $offset);
+            $rows = $this->get_subscribers($email_id, $f, 1000, $offset);
             foreach ($rows as $row) {
                 fputcsv($out, [
                     $this->csv_cell($row->email),
@@ -351,6 +512,7 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
                     $row->sent_open >= 2 ? 1 : 0,
                     $row->ip,
                     $this->csv_cell($row->error),
+                    $this->csv_cell($this->get_list_names($row->lists, ' | ')),
                 ]);
             }
             $offset += 1000;

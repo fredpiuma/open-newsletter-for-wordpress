@@ -9,7 +9,7 @@ Plugin de newsletter para WordPress, **livre e de código aberto** (GPL-2.0-ou-p
 | Tema | Open Newsletter |
 |---|---|
 | Licença / premium | Nenhuma chave, nenhuma trava, nenhum aviso de upgrade ou compra. |
-| Relatórios | Aberturas e cliques registrados ficam visíveis: lista por assinante (filtros, paginação, exportação CSV), URLs clicadas com contagem e quem clicou, histórico por assinante e "adicionar à lista" a partir de um filtro. |
+| Relatórios | Aberturas e cliques registrados ficam visíveis: lista por assinante (filtros combináveis de envio, erro, abertura e clique, também por lista; paginação; exportação CSV do filtro aplicado), URLs clicadas com contagem e quem clicou, histórico por assinante e "adicionar à lista" a partir de um filtro. |
 | Botão CTA | O botão do compositor pode adicionar/remover o assinante de listas ao ser clicado (parâmetro assinado no link de rastreamento). |
 | Importar/Exportar | Importação e exportação de assinantes em CSV embutidas (no original dependiam de um add-on separado). |
 | Telemetria | Removida: sem feed de novidades, sem formulários de opt-in para terceiros, sem pedidos de avaliação, sem crons de coleta. |

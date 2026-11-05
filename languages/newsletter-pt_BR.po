@@ -2175,3 +2175,36 @@ msgid "%d confirmed subscriber added to the list."
 msgid_plural "%d confirmed subscribers added to the list."
 msgstr[0] "%d assinante confirmado adicionado à lista."
 msgstr[1] "%d assinantes confirmados adicionados à lista."
+
+msgid "Sent without errors"
+msgstr "Enviados sem erros"
+
+msgid "Opened but not clicked"
+msgstr "Abriram e não clicaram"
+
+msgid "Any state"
+msgstr "Qualquer"
+
+msgid "Filter"
+msgstr "Filtrar"
+
+msgid "Clear"
+msgstr "Limpar"
+
+msgid "Match"
+msgstr "Combinar"
+
+msgid "Any of the selected lists"
+msgstr "Qualquer uma das listas marcadas"
+
+msgid "All the selected lists"
+msgstr "Todas as listas marcadas"
+
+msgid "none selected = all subscribers; it uses the lists the subscriber is in now"
+msgstr "nenhuma marcada = todos os assinantes; vale a participação atual do assinante nas listas"
+
+msgid "all of them"
+msgstr "todas"
+
+msgid "any of them"
+msgstr "qualquer uma"

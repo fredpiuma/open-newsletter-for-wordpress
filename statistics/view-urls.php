@@ -18,7 +18,7 @@ if ($controls->is_action('set')) {
     if ($list < 1 || $url === '') {
         $controls->errors .= esc_html__('Select a list', 'newsletter');
     } else {
-        $changed = $this->add_subscribers_to_list($list, $email->id, 'all', $url);
+        $changed = $this->add_subscribers_to_list($list, $email->id, $this->parse_subscriber_filters(['url' => $url]));
         /* translators: %d: number of subscribers */
         $controls->messages .= esc_html(sprintf(_n('%d confirmed subscriber added to the list.', '%d confirmed subscribers added to the list.', $changed, 'newsletter'), $changed));
     }
