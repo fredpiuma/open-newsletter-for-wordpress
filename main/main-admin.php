@@ -32,13 +32,6 @@ class NewsletterMainAdmin extends NewsletterModuleAdmin {
                 wp_safe_redirect(remove_query_arg(['dismiss', 'noheader', 'debug']));
                 exit();
             }
-
-            // Dismiss news
-            if (isset($_GET['news'])) {
-                Newsletter\News::dismiss($_GET['news']);
-                wp_safe_redirect(remove_query_arg('news'));
-                exit();
-            }
         }
     }
 

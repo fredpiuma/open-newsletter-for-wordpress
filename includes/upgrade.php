@@ -532,8 +532,22 @@ class NewsletterUpgrade {
             delete_option('newsletter_wp');
         }
 
+        // Data that only existed to talk with the original vendor's servers (license check,
+        // news feed, remote add-ons catalog, marketing opt-ins). The license key saved in the
+        // main options is intentionally left untouched.
         delete_transient('newsletter_license_data');
         delete_transient('tnp_extensions_json');
+        delete_option('newsletter_news');
+        delete_option('newsletter_news_updated');
+        delete_option('newsletter_news_dismissed');
+        delete_option('newsletter_addons');
+        delete_option('newsletter_addons_updated');
+        wp_clear_scheduled_hook('newsletter_update');
+        $dismissed = get_option('newsletter_dismissed', []);
+        if (is_array($dismissed)) {
+            unset($dismissed['rate'], $dismissed['newsletter-subscribe']);
+            update_option('newsletter_dismissed', $dismissed, false);
+        }
         touch(NEWSLETTER_LOG_DIR . '/index.html');
 
         $this->logger->info('End');

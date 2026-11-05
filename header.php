@@ -205,21 +205,6 @@ $system_warnings = NewsletterSystemAdmin::instance()->get_warnings_count();
 </div>
 
 <?php
-$news = Newsletter\News::get_news();
-?>
-
-<?php foreach ($news as $n) { ?>
-    <div class="tnp-news">
-        <a href="<?php echo esc_attr(($_SERVER['REQUEST_URI'] . '&news=' . urlencode($n['id']))) ?>" class="tnp-news-dismiss">&times;</a>
-        <div class="tnp-news-message"><?php echo esc_html($n['message']) ?></div>
-        <div class="tnp-news-cta">
-            <a class="tnp-news-link" href="<?php echo esc_attr($n['url']) ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html($n['label']) ?></a>
-        </div>
-    </div>
-    <?php break; ?>
-<?php } ?>
-
-<?php
 if (NEWSLETTER_DEBUG || NEWSLETTER_PAGE_WARNING) {
     $last_check = (int) get_option('newsletter_public_page_check', 0);
     if (NEWSLETTER_DEBUG || $last_check < time() - DAY_IN_SECONDS) {
@@ -313,39 +298,6 @@ if (NEWSLETTER_DEBUG || NEWSLETTER_PAGE_WARNING) {
     }
 }
 ?>
-
-<?php if (isset($_GET['debug']) || isset($dismissed['newsletter-subscribe']) && !isset($dismissed['rate']) && $user_count > 300) { ?>
-    <div class="tnp-notice">
-        <a href="<?php echo esc_attr($_SERVER['REQUEST_URI']) . '&noheader=1&dismiss=rate' ?>" class="tnp-dismiss">&times;</a>
-
-        ☆☆☆☆☆ Would you rate the Newsletter plugin</a> to help us improve even more?
-    <br><br>
-    <a href="https://wordpress.org/support/plugin/newsletter/reviews/?rate=5#new-post" target="_blank" class="button-primary" style="color: #fff"><?php esc_html_e('Yes, you deserve it!', 'newsletter') ?></a>
-    &nbsp;&nbsp;&nbsp;
-    <a href="<?php echo esc_attr($_SERVER['REQUEST_URI']) . '&noheader=1&dismiss=rate' ?>" style="color: #666; font-weight: normal; font-size: .9em"><?php esc_html_e('Maybe later', 'newsletter') ?></a>
-
-    <br><br>
-    <strong>Really appreciated, The Newsletter Team</strong>.
-
-    </div>
-<?php } ?>
-
-<?php if (isset($_GET['debug']) || !isset($dismissed['newsletter-subscribe']) && get_option('newsletter_install_time') && get_option('newsletter_install_time') < time() - 86400 * 15) { ?>
-    <div class="tnp-notice">
-        <a href="<?php echo esc_attr($_SERVER['REQUEST_URI']) . '&noheader=1&dismiss=newsletter-subscribe' ?>" class="tnp-dismiss">&times;</a>
-        Subscribe to our news, promotions and getting started lessons!
-        Proceeding you agree to the <a href="https://www.thenewsletterplugin.com/privacy" target="_blank">privacy policy</a>.
-        <br><br>
-        <form action="https://www.thenewsletterplugin.com/?na=s" target="_blank" method="post">
-            <input type="hidden" value="plugin-header" name="nr">
-            <input type="hidden" value="3" name="nl[]">
-            <input type="hidden" value="1" name="nl[]">
-            <input type="hidden" value="double" name="optin">
-            <input type="email" name="ne" value="">
-            <input type="submit" class="button-primary" value="<?php esc_attr_e('Subscribe', 'newsletter') ?>">
-        </form>
-    </div>
-<?php } ?>
 
 <?php
 if (isset($_GET['debug']) || !defined('NEWSLETTER_CRON_WARNINGS') || NEWSLETTER_CRON_WARNINGS) {

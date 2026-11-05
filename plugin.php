@@ -250,9 +250,6 @@ class Newsletter extends NewsletterModule {
             if (!wp_next_scheduled('newsletter_clean')) {
                 wp_schedule_event(time() + HOUR_IN_SECONDS, 'weekly', 'newsletter_clean');
             }
-            if (!wp_next_scheduled('newsletter_update')) {
-                wp_schedule_event(time() + HOUR_IN_SECONDS * 2, 'daily', 'newsletter_update');
-            }
         }
         add_action('newsletter_clean', [$this, 'newsletter_clean']);
     }

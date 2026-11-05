@@ -46,13 +46,6 @@ if ($controls->is_action('reset_warnings')) {
     $controls->add_message_done();
 }
 
-if ($controls->is_action('reset_news')) {
-    update_option('newsletter_news_dismissed', []);
-    update_option('newsletter_news', []);
-    update_option('newsletter_news_updated', 0);
-    $controls->add_message_done();
-}
-
 if ($controls->is_action('stats_email_column_upgrade')) {
     $this->query("alter table " . NEWSLETTER_STATS_TABLE . " drop index email_id");
     $this->query("alter table " . NEWSLETTER_STATS_TABLE . " drop index user_id");
@@ -131,9 +124,6 @@ function tnp_describe_table($table) {
 
             <p>
                 <?php $controls->btn('reset_warnings', __('Reset warnings', 'newsletter')) ?>
-                <?php if (NEWSLETTER_DEBUG) { ?>
-                    <?php $controls->btn('reset_news', __('Reset news', 'newsletter')) ?>
-                <?php } ?>
             </p>
 
             <div class="tnp-tabs">
