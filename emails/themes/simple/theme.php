@@ -126,7 +126,7 @@ if (isset($theme_options['theme_posts'])) {
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center" style="font-size: 14px; font-family: Arial;">
-<?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/social.php'; ?>
+<?php include NEWSLETTER_DIR . '/emails/themes/default/social.php'; ?>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>

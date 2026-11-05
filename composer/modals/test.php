@@ -24,7 +24,7 @@
 
             <?php endif; ?>
             <p style="float: right">
-                <a href="https://www.thenewsletterplugin.com/documentation/subscribers#test" target="_blank">
+                <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                     <?php esc_html_e('More on test subscribers', 'newsletter') ?></a>
             </p>
         </div>

@@ -32,7 +32,7 @@ if ($controls->is_action()) {
 
         $users = $this->get_test_users();
         if (count($users) == 0) {
-            $controls->errors = 'There are no test subscribers. Read more about test subscribers <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank">here</a>.';
+            $controls->errors = 'There are no test subscribers. Read more about test subscribers <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">here</a>.';
         } else {
             $addresses = array();
             foreach ($users as &$user) {
@@ -45,7 +45,7 @@ if ($controls->is_action()) {
                 }
             }
             $controls->messages .= 'Test emails sent to ' . count($users) . ' test subscribers: ' .
-                    implode(', ', $addresses) . '. Read more about test subscribers <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank">here</a>.';
+                    implode(', ', $addresses) . '. Read more about test subscribers <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">here</a>.';
             $controls->messages .= '<br>If the message is not received, try to change the message text it could trigger some antispam filters.';
         }
     }
@@ -54,7 +54,7 @@ if ($controls->is_action()) {
 
         $users = $this->get_test_users();
         if (count($users) == 0) {
-            $controls->errors = 'There are no test subscribers. Read more about test subscribers <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank">here</a>.';
+            $controls->errors = 'There are no test subscribers. Read more about test subscribers <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">here</a>.';
         } else {
             $addresses = array();
             foreach ($users as $user) {
@@ -68,7 +68,7 @@ if ($controls->is_action()) {
                 }
             }
             $controls->messages .= 'Test emails sent to ' . count($users) . ' test subscribers: ' .
-                    implode(', ', $addresses) . '. Read more about test subscribers <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank">here</a>.';
+                    implode(', ', $addresses) . '. Read more about test subscribers <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">here</a>.';
             $controls->messages .= '<br>If the message is not received, try to change the message text it could trigger some antispam filters.';
         }
     }
@@ -127,7 +127,7 @@ foreach (['subscription_text', 'error_text'] as $key) {
                                     <?php $controls->wp_editor('subscription_text', ['editor_height' => 150], ['default' => $this->get_default_text('subscription_text')]); ?>
                                     <p class="description">
                                         Remember to add at least the <code>[newsletter_form]</code> shortcode
-                                        (<a href="https://www.thenewsletterplugin.com/documentation/subscription/subscription-form-shortcodes/#attributes" target="_blank">see all the options</a>).
+                                        (<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">see all the options</a>).
                                         Remove the shortcode if you don't want to show the subscription form.
                                     </p>
                                 </div>

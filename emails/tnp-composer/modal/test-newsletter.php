@@ -38,7 +38,7 @@
                             onclick="tnpc_test()"><?php _e( "Send", 'newsletter' ) ?></button>
 				<?php endif; ?>
                 <p style="float: right">
-                    <a href="https://www.thenewsletterplugin.com/documentation/subscribers#test"
+                    <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme"
                        target="_blank">
 						<?php _e( 'Read more about test subscribers', 'newsletter' ) ?></a>
                 </p>

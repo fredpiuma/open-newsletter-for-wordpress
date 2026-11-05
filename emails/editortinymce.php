@@ -42,7 +42,7 @@ if (!$this->is_html_allowed()) {
         margin-bottom: 15px;
     }
 </style>
-<script src="<?php echo plugins_url('newsletter') ?>/vendor/tinymce/tinymce.min.js"></script>
+<script src="<?php echo NEWSLETTER_URL ?>/vendor/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
 
     // https://www.tinymce.com/docs/advanced/editor-control-identifiers/#toolbarcontrols
@@ -64,7 +64,7 @@ if (!$this->is_html_allowed()) {
         convert_urls: false,
         remove_script_host: false,
         document_base_url: "<?php echo esc_js(get_option('home')) ?>/",
-        content_css: ["<?php echo plugins_url('newsletter') ?>/emails/editor.css", "<?php echo home_url('/') . '?na=emails-css&id=' . $email_id . '&' . time(); ?>"]
+        content_css: ["<?php echo NEWSLETTER_URL ?>/emails/editor.css", "<?php echo home_url('/') . '?na=emails-css&id=' . $email_id . '&' . time(); ?>"]
     });
 
 </script>

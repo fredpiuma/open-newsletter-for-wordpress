@@ -89,7 +89,7 @@ $panels = (int) (NEWSLETTER_LIST_MAX / 10) + (NEWSLETTER_LIST_MAX % 10 > 0 ? 1 :
             on the Subscribers Maintenance page</a>.
         </p>
         <p>
-            Need more lists? <a href="https://www.thenewsletterplugin.com/documentation/subscription/newsletter-lists/#adding-more" target="_blank">Read here</a>.
+            Need more lists? <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">Read here</a>.
         </p>
 
         <form method="post" action="">

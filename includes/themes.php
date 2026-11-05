@@ -92,7 +92,7 @@ class NewsletterThemes {
             $relative_dir = substr($dir, strlen(WP_CONTENT_DIR));
             $data['screenshot'] = $data['url'] . '/screenshot.png';
         } else {
-            $data['screenshot'] = plugins_url('newsletter') . '/emails/images/theme-screenshot.png';
+            $data['screenshot'] = NEWSLETTER_URL . '/emails/images/theme-screenshot.png';
         }
         return $data;
     }

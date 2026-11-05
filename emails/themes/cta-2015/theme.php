@@ -31,7 +31,7 @@ $font_family = 'Verdana';
 //if (!empty($theme_options['theme_cta_bgcolor'])) {
 //    $cta_bgcolor = $theme_options['theme_cta_bgcolor'];
 //}
-$social_icon_url = plugins_url('newsletter') . '/emails/themes/cta-2015/images';
+$social_icon_url = NEWSLETTER_URL . '/emails/themes/cta-2015/images';
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -95,7 +95,7 @@ $social_icon_url = plugins_url('newsletter') . '/emails/themes/cta-2015/images';
                         </tr>
                     </table>
 
-                    <?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/footer.php'; ?>
+                    <?php include NEWSLETTER_DIR . '/emails/themes/default/footer.php'; ?>
 
                     <!-- spacer -->
                     <table cellpadding="0" cellspacing="0" align="center" bgcolor="#ffffff" border="0" width="100%">

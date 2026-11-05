@@ -34,7 +34,7 @@ $options = array_merge($default_options, $options);
     <h3><?php esc_html_e('Appearance', 'newsletter'); ?></h3>
     <div>
         <p>
-            <a href="https://www.thenewsletterplugin.com/documentation/newsletters/newsletter-tags/"
+            <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme"
                target="_blank">You can use tags to inject subscriber fields</a>.
         </p>
         <table class="form-table">

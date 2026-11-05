@@ -72,7 +72,7 @@ $posts = get_posts($filters);
                     
                             <?php 
                             if (!isset($theme_options['theme_social_disable'])) { 
-                                include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/social.php';                             
+                                include NEWSLETTER_DIR . '/emails/themes/default/social.php';                             
                             }
                             ?>
 

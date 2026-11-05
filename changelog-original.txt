@@ -1,3 +1,6 @@
+This is the changelog of the original "Newsletter" plugin by Stefano Lissa & The Newsletter Team (up to version 8.9.2), kept for reference.
+Open Newsletter's own history is in CHANGELOG.md.
+
 = 7.9.9 =
 
 * Removed use of the utf8_decode() function deprecated with PHP 8.2

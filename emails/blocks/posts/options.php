@@ -48,7 +48,7 @@ $fields->block_style('', [
         <div>
             <p>
                 While composing all posts are shown while on sending posts are extrated following the rules below.
-                <a href="https://www.thenewsletterplugin.com/documentation/addons/extended-features/automated-extension/#regeneration" target="_blank">Read more</a>.
+                <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">Read more</a>.
             </p>
             <?php $fields->select('automated_disabled', '', ['' => 'Use the last newsletter date and...', '1' => 'Do not consider the last newsletter']) ?>
 

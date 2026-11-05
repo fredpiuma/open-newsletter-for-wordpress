@@ -191,7 +191,7 @@ Newsletter::instance()->switch_language($current_language);
 
 remove_all_filters('excerpt_more');
 
-$image_placeholder_url = plugins_url('newsletter') . '/emails/blocks/posts/images/blank-240x160.png';
+$image_placeholder_url = NEWSLETTER_URL . '/emails/blocks/posts/images/blank-240x160.png';
 
 $excerpt_length = $options['excerpt_length'];
 $excerpt_length_in_chars = $options['excerpt_length_type'] == 'chars';

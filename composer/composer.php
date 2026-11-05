@@ -230,7 +230,7 @@ class NewsletterComposer extends NewsletterModule {
         $file = basename($dir);
 
         $data = get_file_data($full_file, ['name' => 'Name', 'section' => 'Section', 'description' => 'Description', 'type' => 'Type']);
-        $defaults = ['section' => 'content', 'name' => ucfirst($file), 'descritpion' => '', 'icon' => plugins_url('newsletter') . '/admin/images/block-icon.png'];
+        $defaults = ['section' => 'content', 'name' => ucfirst($file), 'descritpion' => '', 'icon' => NEWSLETTER_URL . '/admin/images/block-icon.png'];
         $data = array_merge($defaults, $data);
 
         if (is_file($dir . '/icon.png')) {
@@ -384,7 +384,7 @@ class NewsletterComposer extends NewsletterModule {
 //            $file = NEWSLETTER_DIR . '/emails/presets/' . $id . '/preset.json';
 //
 //            $json = file_get_contents($file);
-//            $json = str_replace("{placeholder_base_url}", plugins_url('newsletter') . '/emails/presets', $json);
+//            $json = str_replace("{placeholder_base_url}", NEWSLETTER_URL . '/emails/presets', $json);
 //            $data = json_decode($json);
 //            if (!$data) {
 //                continue;

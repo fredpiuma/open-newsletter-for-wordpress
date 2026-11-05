@@ -170,7 +170,7 @@ function percentValue($value, $total) {
                         </tr>
                         <tr>
                             <th><?php esc_html_e('Test subscriber', 'newsletter'); ?>
-                                <br><?php $controls->help('https://www.thenewsletterplugin.com/documentation/subscribers#test-subscribers') ?></th>
+                                <br><?php $controls->help('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?></th>
                             <td>
                                 <?php $controls->yesno('test'); ?>
                             </td>
@@ -191,7 +191,7 @@ function percentValue($value, $total) {
                             <th>
                                 <?php esc_html_e('Lists', 'newsletter') ?>
                                 <br>
-                                <?php $controls->help('https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-preferences') ?></th>
+                                <?php $controls->help('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?></th>
                             <td>
                                 <?php $controls->preferences('list'); ?>
                             </td>

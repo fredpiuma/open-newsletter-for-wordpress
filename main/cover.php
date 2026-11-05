@@ -12,7 +12,7 @@ defined('ABSPATH') || exit;
 
     <div id="tnp-body" class="tnp-main-index">
 
-        <img src="<?php echo esc_attr(plugins_url('newsletter')) ?>/main/images/logo.png" style="display: block; margin: 100px auto; width: 350px">
+        <img src="<?php echo esc_attr(NEWSLETTER_URL) ?>/main/images/logo.png" style="display: block; margin: 100px auto; width: 350px">
 
 
     </div>

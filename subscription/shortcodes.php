@@ -25,7 +25,7 @@ defined('ABSPATH') || exit;
             form. Use the "shortcode block" in your posts and pages and in your widgets.
         </p>
         <p>
-            <a href="https://www.thenewsletterplugin.com/documentation/subscription/subscription-form-shortcodes/" target="_blank">Read more</a>
+            <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">Read more</a>
             to know all the available features.
         </p>
 

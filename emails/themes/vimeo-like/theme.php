@@ -129,7 +129,7 @@ $posts = get_posts($filters);
             <?php if (!isset($theme_options['theme_social_disable'])) { ?>
             <tr>
                 <td style="font:normal 11px helvetica,sans-serif;">
-                     <?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/social.php'; ?>
+                     <?php include NEWSLETTER_DIR . '/emails/themes/default/social.php'; ?>
                 </td>
             </tr>
             <?php } ?>

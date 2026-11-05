@@ -27,20 +27,39 @@ defined('ABSPATH') || exit;
             <div class="tnp-dashboard">
                 <div class="tnp-cards-container">
                     <div class="tnp-card">
-                        <div class="tnp-card-title">How to get support</div>
+                        <div class="tnp-card-title"><?php esc_html_e('How to get support', 'newsletter') ?></div>
 
-                        <h3><i class="fas fa-book"></i> Documentation</h3>
+                        <h3><i class="fas fa-book"></i> <?php esc_html_e('Documentation', 'newsletter') ?></h3>
                         <p>
-                            We have <a href="https://www.thenewsletterplugin.com/documentation" target=_blank">extensive documentation</a>
-                            about the Newsletter plugin settigs and feature and the free and commercial addons.
+                            <?php esc_html_e('The documentation and the source code are in the project repository.', 'newsletter') ?>
+                            <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">github.com/fredpiuma/open-newsletter-for-wordpress</a>
                         </p>
 
-                        <h3><i class="fas fa-comment"></i> Forum</h3>
-                        <p>We run a <a href="https://www.thenewsletterplugin.com/forums" target=_blank">support forum</a>
-                            where you can send your requests for help, new features, ideas and so on.</p>
-
+                        <h3><i class="fas fa-bug"></i> <?php esc_html_e('Bugs and ideas', 'newsletter') ?></h3>
+                        <p>
+                            <?php esc_html_e('Found a problem or have an idea? Open an issue on the repository.', 'newsletter') ?>
+                            <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress/issues" target="_blank"><?php esc_html_e('Open issues', 'newsletter') ?></a>
+                        </p>
                     </div>
 
+                    <div class="tnp-card">
+                        <div class="tnp-card-title">Frederico de Castro</div>
+                        <p><strong>Senior Web Developer &amp; Software Architect</strong></p>
+                        <p><?php esc_html_e('Need a custom solution for your store or website? Get in touch.', 'newsletter') ?></p>
+
+                        <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5511914636944" target="_blank">WhatsApp</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:contato@fredericodecastro.com.br">contato@fredericodecastro.com.br</a></p>
+                        <p><i class="fas fa-globe"></i> <a href="https://www.fredericodecastro.com.br/links/" target="_blank">www.fredericodecastro.com.br</a></p>
+                        <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/fredericodecastro/" target="_blank">LinkedIn</a></p>
+                        <p><i class="fab fa-telegram"></i> <a href="https://t.me/fredericomdecastro" target="_blank">Telegram</a></p>
+                    </div>
+
+                    <div class="tnp-card">
+                        <div class="tnp-card-title"><?php esc_html_e('Credits', 'newsletter') ?></div>
+                        <p>
+                            <?php esc_html_e('Open Newsletter is a free fork (GPL-2.0-or-later) of the Newsletter plugin by Stefano Lissa & The Newsletter Team. See CREDITS.md in the plugin folder.', 'newsletter') ?>
+                        </p>
+                    </div>
 
                 </div>
             </div>

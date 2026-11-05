@@ -69,7 +69,7 @@ $steps_completed = count($steps) >= 8;
     <?php include NEWSLETTER_ADMIN_HEADER; ?>
 
     <div id="tnp-heading">
-        <?php $controls->title_help('https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-configuration') ?>
+        <?php $controls->title_help('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?>
 
 <!--        <h2><?php esc_html_e('Dashboard', 'newsletter'); ?></h2>-->
         <?php include __DIR__ . '/dashboard-nav.php' ?>
@@ -320,55 +320,49 @@ $steps_completed = count($steps) >= 8;
                         <div class="tnp-card-title"><?php _e('Documentation', 'newsletter') ?></div>
                     </div>
                     <div>
-                        <a href="https://www.thenewsletterplugin.com/documentation/installation/" target="_blank">
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                             <div class="tnp-card-documentation-index">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
                                 Installation
                             </div>
                         </a>
-                        <a href="https://www.thenewsletterplugin.com/documentation/subscription/" target="_blank">
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                             <div class="tnp-card-documentation-index">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
                                 Subscription
                             </div>
                         </a>
-                        <a href="https://www.thenewsletterplugin.com/category/tips" target="_blank">
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                             <div class="tnp-card-documentation-index">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
                                 Tips & Tricks
                             </div>
                         </a>
-                        <a href="https://www.thenewsletterplugin.com/documentation/subscribers-and-management/" target="_blank">
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                             <div class="tnp-card-documentation-index">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
                                 Subscribers and management
                             </div>
                         </a>
-                        <a href="https://www.thenewsletterplugin.com/documentation/newsletters/newsletters-module/" target="_blank">
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                             <div class="tnp-card-documentation-index">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
                                 Creating Newsletters
                             </div>
                         </a>
-                        <a href="https://www.thenewsletterplugin.com/documentation/addons/" target="_blank">
-                            <div class="tnp-card-documentation-index">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
-                                Premium Addons
-                            </div>
-                        </a>
-                        <a href="https://www.thenewsletterplugin.com/documentation/customization/" target="_blank">
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                             <div class="tnp-card-documentation-index">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
                                 Customization
                             </div>
                         </a>
-                        <a href="https://www.thenewsletterplugin.com/documentation/delivery-and-spam/" target="_blank">
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                             <div class="tnp-card-documentation-index">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
                                 Delivery and spam
                             </div>
                         </a>
-                        <a href="https://www.thenewsletterplugin.com/documentation/developers/" target="_blank">
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">
                             <div class="tnp-card-documentation-index">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><title>saved items</title><g class="nc-icon-wrapper" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"  ><path d="M37,4h3a4,4,0,0,1,4,4V40a4,4,0,0,1-4,4H8a4,4,0,0,1-4-4V8A4,4,0,0,1,8,4h3" fill="none"  stroke-miterlimit="10"/> <polygon points="32 24 24 18 16 24 16 4 32 4 32 24" fill="none" stroke-miterlimit="10" data-color="color-2"/></g></svg>
                                 Developers & Advanced Topics

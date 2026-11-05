@@ -457,7 +457,7 @@ table.clicks {
 }
 
 
-/*  CSS The Newsletter Team */
+/*  Open Newsletter admin CSS */
 
 /* CSS Tips */
 
@@ -701,33 +701,6 @@ iframe.tnp-editor-preview-desktop {
     margin-right: 20px;
     height: 500px;
     float: left;
-}
-
-
-/* Form inserimento licenza in Addons Manager */
-
-#tnp-license-control  {
-    border-left: 5px solid #27ae60;
-    display: inline-block;
-    padding: 15px 20px;
-    margin-left: -10px;
-    margin-top: 15px;
-    border-radius: 2px;
-    background-color: #fff;
-}
-
-#tnp-license-control form {
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
-#tnp-license-control form input {
-    padding-left: 10px;
-}
-
-#tnp-license-control a {
-    border-bottom: none;
-    color: #27AE60;
 }
 
 
@@ -1321,32 +1294,7 @@ span.tnp-user-status {
     display: inline;
 }
 
-/* License button */
-
-#tnp-menu .tnp-licence-button {
-    background-color: var(--tnp-green);
-    border: 0;
-    transition: all 1s ease-in-out;
-    border-radius: 3px;
-}
-
-#tnp-menu .tnp-licence-button a {
-    color: #fff;
-    font-size: .9rem;
-}
-
-#tnp-menu .tnp-licence-button:hover {
-    background-color: var(--tnp-green-dark) !important;
-}
-
-#tnp-menu .tnp-licence-button.tnp-licence-button-red {
-    background-color: var(--tnp-red);
-}
-
-
-#tnp-menu .tnp-licence-button.tnp-licence-button-red:hover {
-    background-color: var(--tnp-red-dark) !important;
-}/*
+/*
     The head section of each administration page with title and introduction
 */
 #tnp-heading {

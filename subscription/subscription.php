@@ -651,7 +651,6 @@ class NewsletterSubscription extends NewsletterModule {
      * Builds a subscription object starting from values in the $_REQUEST
      * global variable. It DOES NOT sanitize or formally check the values.
      * Usually data comes from a form submission.
-     * https://www.thenewsletterplugin.com/documentation/subscription/newsletter-forms/
      *
      * @return TNP_Subscription
      */

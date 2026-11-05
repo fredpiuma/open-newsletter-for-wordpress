@@ -85,7 +85,7 @@ div.tnp-profile {
     margin-right: .5em;
 }
 
-/* Antireset - http://www.satollo.net/css-and-select-space-between-the-options-and-the-arrow */
+/* Antireset: space between the options and the arrow of a select */
 .tnp-subscription select option,
 .tnp-profile select option
 {
@@ -151,7 +151,7 @@ div.tnp-profile {
     display: inline-block;
 }
 
-/* Antireset - http://www.satollo.net/css-and-select-space-between-the-options-and-the-arrow */
+/* Antireset: space between the options and the arrow of a select */
 .tnp-widget select option {
     margin-right: 10px;
 }

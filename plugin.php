@@ -1,36 +1,52 @@
 <?php
 
 /*
-  Plugin Name: Newsletter
-  Plugin URI: https://www.thenewsletterplugin.com
-  Description: Newsletter is a cool plugin to create your own subscriber list, to send newsletters, to build your business. <strong>Before update give a look to <a href="https://www.thenewsletterplugin.com/category/release">this page</a> to know what's changed.</strong>
-  Version: 8.9.2
-  Author: Stefano Lissa & The Newsletter Team
-  Author URI: https://www.thenewsletterplugin.com
+  Plugin Name: Open Newsletter
+  Plugin URI: https://github.com/fredpiuma/open-newsletter-for-wordpress
+  Description: Free and open-source newsletter plugin: subscriber lists, newsletter composer, delivery engine and complete open/click statistics. No license keys, no premium locks, no telemetry, no external connections.
+  Version: 9.0.0
+  Author: Frederico de Castro
+  Author URI: https://www.fredericodecastro.com.br/links/
+  Update URI: https://github.com/fredpiuma/open-newsletter-for-wordpress
   Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
   Text Domain: newsletter
-  License: GPLv2 or later
+  Domain Path: /languages
+  License: GPL-2.0-or-later
+  License URI: https://www.gnu.org/licenses/gpl-2.0.html
   Requires at least: 5.6
   Requires PHP: 7.0
 
-  Copyright 2009-2025 The Newsletter Team (email: info@thenewsletterplugin.com, web: https://www.thenewsletterplugin.com)
+  Open Newsletter is a free fork of "Newsletter" 8.9.2 by Stefano Lissa & The Newsletter Team
+  (https://www.thenewsletterplugin.com), released under the GPL-2.0-or-later. See CREDITS.md.
 
-  Newsletter is free software: you can redistribute it and/or modify
+  Copyright 2009-2025 The Newsletter Team (original work, "Newsletter" up to version 8.9.2)
+  Copyright 2026 Frederico de Castro (modifications, "Open Newsletter")
+
+  Open Newsletter is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 2 of the License, or
   any later version.
 
-  Newsletter is distributed in the hope that it will be useful,
+  Open Newsletter is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with Newsletter. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
+  along with Open Newsletter. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 
  */
 
-define('NEWSLETTER_VERSION', '8.9.2');
+// Guard: the original "Newsletter" plugin (same slug, same classes) is already loaded.
+if (defined('NEWSLETTER_VERSION') || class_exists('Newsletter', false)) {
+    add_action('admin_notices', function () {
+        echo '<div class="notice notice-error"><p><strong>Open Newsletter</strong> was not loaded because another copy of the Newsletter plugin (original or fork) is already active. ',
+        'Deactivate one of them (the data is shared, nothing is lost).</p></div>';
+    });
+    return;
+}
+
+define('NEWSLETTER_VERSION', '9.0.0');
 
 global $wpdb, $newsletter;
 
@@ -76,6 +92,8 @@ if (!defined('NEWSLETTER_ACTION_TYPE'))
 define('NEWSLETTER_SLUG', 'newsletter');
 
 define('NEWSLETTER_DIR', __DIR__);
+define('NEWSLETTER_URL', plugins_url('', __FILE__));
+define('NEWSLETTER_DOCS_URL', 'https://github.com/fredpiuma/open-newsletter-for-wordpress#readme');
 define('NEWSLETTER_INCLUDES_DIR', __DIR__ . '/includes');
 
 if (!defined('NEWSLETTER_LIST_MAX'))
@@ -258,7 +276,7 @@ class Newsletter extends NewsletterModule {
     function hook_wp_loaded() {
 
         // After everything has been loaded, since the plugin url could be changed (usually for multidomain installations)
-        self::$plugin_url = plugins_url('newsletter');
+        self::$plugin_url = NEWSLETTER_URL;
 
         $this->setup_language();
 

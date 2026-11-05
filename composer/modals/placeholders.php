@@ -8,6 +8,6 @@
         <li>{email_url} - <?php esc_html_e('Email online view', 'newsletter') ?></li>
     </ul>
     <p>
-        <a href="https://www.thenewsletterplugin.com/documentation/newsletters/newsletter-tags/" target="_blank">See the documentation</a>
+        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">See the documentation</a>
     </p>
 </div>

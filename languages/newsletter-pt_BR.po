@@ -1,0 +1,2194 @@
+# Open Newsletter - Portuguese (Brazil).
+# Based on the translations of the "Newsletter" plugin (translate.wordpress.org, GPL-2.0-or-later).
+# See CREDITS.md.
+msgid ""
+msgstr ""
+"Project-Id-Version: Open Newsletter 9.0.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"Language: pt_BR\n"
+
+msgid "Upgrade"
+msgstr ""
+
+msgid "Event"
+msgstr ""
+
+msgid "Subscriber blocked"
+msgstr ""
+
+msgid "Subscriber not found or link expired"
+msgstr ""
+
+msgid "Subscriber not confirmed."
+msgstr ""
+
+msgid "Subscriber not found or link expired."
+msgstr ""
+
+msgid "Temporary"
+msgstr ""
+
+msgid "Tracking consent"
+msgstr ""
+
+msgid "Consent to record email open and click"
+msgstr ""
+
+msgid "Newsletter is a cool plugin to create your own subscriber list, to send newsletters, to build your business."
+msgstr ""
+
+msgid "Draft newsletter. The tracking data from tests will be reset when the sending is started."
+msgstr ""
+
+msgid "Tracking links"
+msgstr ""
+
+msgid "Action links"
+msgstr ""
+
+msgid "The Newsletter Team"
+msgstr ""
+
+msgid "Post featured image"
+msgstr ""
+
+msgid "Delay between emails"
+msgstr ""
+
+msgid "Database error. Check the log files."
+msgstr ""
+
+msgid "Reset statistics"
+msgstr ""
+
+msgid "Resubscribe URL"
+msgstr ""
+
+msgid "Reactivate message"
+msgstr ""
+
+msgid "Please confirm you want to reactivate the subscription."
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "Parameter"
+msgstr ""
+
+msgid "General checks"
+msgstr ""
+
+msgid "emails per hour"
+msgstr ""
+
+msgid "Sending speed"
+msgstr ""
+
+msgid "Confirmed subscribers"
+msgstr ""
+
+msgid "Check it out."
+msgstr ""
+
+msgid "Everything on autopilot: set the direction and relax"
+msgstr ""
+
+msgid "Explore the Automated Newsletters"
+msgstr ""
+
+msgid "Set how many emails per hour you want to send."
+msgstr ""
+
+msgid "Change the delivery speed"
+msgstr ""
+
+msgid "Go create"
+msgstr ""
+
+msgid "Explore the composer and send it."
+msgstr ""
+
+msgid "Create your first newsletter"
+msgstr ""
+
+msgid "Review your company info and socials"
+msgstr ""
+
+msgid "Your company info and socials"
+msgstr ""
+
+msgid "Check if your blog can deliver emails."
+msgstr ""
+
+msgid "Test the email delivery"
+msgstr ""
+
+msgid "Get it"
+msgstr ""
+
+msgid "And install free addons to get more power."
+msgstr ""
+
+msgid "Get a free license"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Customize the welcome email to reflect your style."
+msgstr ""
+
+msgid "Welcome email: give it your style"
+msgstr ""
+
+msgid "Activate the notification when you get a new subscriber."
+msgstr ""
+
+msgid "Be notified when someone subscribes"
+msgstr ""
+
+msgid "Activate the subscription forms to grow your subscriber list."
+msgstr ""
+
+msgid "Subscription: popup and inline forms"
+msgstr ""
+
+msgid "From who your subscribers will see the emails coming from?"
+msgstr ""
+
+msgid "Your sender name and address"
+msgstr ""
+
+msgid "Rounded"
+msgstr ""
+
+msgid "Squared"
+msgstr ""
+
+msgid "Profile number N with N=1, 2, 3, ..."
+msgstr ""
+
+msgid "Newsletter should be saved before sending a test"
+msgstr ""
+
+msgid "This will stop the delivery. Proceed?"
+msgstr ""
+
+msgid "Blocks background"
+msgstr ""
+
+msgid "Unsubscribe URL"
+msgstr ""
+
+msgid "Add new (legacy themes)"
+msgstr ""
+
+msgid "Add new (raw HTML)"
+msgstr ""
+
+msgid "Do not choose the \"front page\" or \"post list page\""
+msgstr ""
+
+msgid "Sending time window"
+msgstr ""
+
+msgid "Mailer"
+msgstr ""
+
+msgid "Speed"
+msgstr ""
+
+msgid "Stopped by errors"
+msgstr ""
+
+msgid "Profile edit"
+msgstr ""
+
+msgid "Invalid CSS"
+msgstr ""
+
+msgid "Confirm subscription"
+msgstr ""
+
+msgid "Without list"
+msgstr ""
+
+msgid "Editor"
+msgstr ""
+
+msgid "Resend the confirmation email"
+msgstr ""
+
+msgid "Resend the welcome email"
+msgstr ""
+
+msgid "Welcome page"
+msgstr ""
+
+msgid "Composer"
+msgstr ""
+
+msgid "Customize"
+msgstr ""
+
+msgid "Confirmation page"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Newsletter public page"
+msgstr ""
+
+msgid "Inside posts"
+msgstr ""
+
+msgid "Standard"
+msgstr ""
+
+msgid "More on test subscribers"
+msgstr ""
+
+msgid "Deactivate"
+msgstr ""
+
+msgid "Ignore"
+msgstr ""
+
+msgid "Custom CSS"
+msgstr ""
+
+msgid "Parameters"
+msgstr ""
+
+msgid "Database"
+msgstr ""
+
+msgid "Export your data"
+msgstr ""
+
+msgid "Main"
+msgstr ""
+
+msgid "Mobile padding"
+msgstr ""
+
+msgid "Image crop"
+msgstr ""
+
+msgid "Author"
+msgstr ""
+
+msgid "Less email safe fonts"
+msgstr ""
+
+msgid "Email safe fonts"
+msgstr ""
+
+msgid "Link and appearance"
+msgstr ""
+
+msgid "Image URL"
+msgstr ""
+
+msgid "External URL"
+msgstr ""
+
+msgid "Media gallery"
+msgstr ""
+
+msgid "Fonts"
+msgstr ""
+
+msgid "Socials"
+msgstr ""
+
+msgid "Elements"
+msgstr ""
+
+msgid "Boxed"
+msgstr ""
+
+msgid "Inverted"
+msgstr ""
+
+msgid "Commons"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
+
+msgid "To be set for every language"
+msgstr ""
+
+msgid "Maybe later"
+msgstr ""
+
+msgid "Yes, you deserve it!"
+msgstr ""
+
+msgid "If you check a language, all your new subscribers with that language will be automatically added to the list"
+msgstr ""
+
+msgid "The welcome email is disabled."
+msgstr ""
+
+msgid "Allowed (double opt-in)"
+msgstr ""
+
+msgid "Allowed (single opt-in)"
+msgstr ""
+
+msgid "License expiring"
+msgstr ""
+
+msgid "License check failed"
+msgstr ""
+
+msgid "The first batch of emails will be delivered in 5 minutes."
+msgstr ""
+
+msgid "Time to finish"
+msgstr ""
+
+msgid "Newsletters sending (updated every 10 minutes)"
+msgstr ""
+
+msgid "Newsletter custom welcome page, keep public and published"
+msgstr ""
+
+msgid "Newsletter custom profile page, keep public and published"
+msgstr ""
+
+msgid "Import/Export"
+msgstr ""
+
+msgid "Add everyone"
+msgstr ""
+
+msgid "Opens"
+msgstr ""
+
+msgid "Reverse"
+msgstr ""
+
+msgid "Any list"
+msgstr ""
+
+msgid "Any status"
+msgstr ""
+
+msgid "clicks out of"
+msgstr ""
+
+msgid "Reactivity"
+msgstr ""
+
+msgid "total people that clicked a link in your email"
+msgstr ""
+
+msgid "total people that opened your email"
+msgstr ""
+
+msgid "Total people that got your email"
+msgstr ""
+
+msgid "Full report"
+msgstr ""
+
+msgid "You are configuring the language %s. Switch to \"all languages\" to see or edit all options."
+msgstr ""
+
+msgid "Series"
+msgstr ""
+
+msgid "Recurring"
+msgstr ""
+
+msgid "Autoresponders"
+msgstr ""
+
+msgid "By status"
+msgstr ""
+
+msgid "By email"
+msgstr ""
+
+msgid "Emails"
+msgstr ""
+
+msgid "Subscribers waiting"
+msgstr ""
+
+msgid "Google Analytics"
+msgstr ""
+
+msgid "Unconfirmed subscriptions"
+msgstr ""
+
+msgid "Full statistics"
+msgstr ""
+
+msgid "Confirmed subscriptions"
+msgstr ""
+
+msgid "Total sent emails"
+msgstr ""
+
+msgid "Queued emails"
+msgstr ""
+
+msgid "Last 30 days"
+msgstr ""
+
+msgid "Flow view"
+msgstr ""
+
+msgid "Get help"
+msgstr ""
+
+msgid "Alignment"
+msgstr ""
+
+msgid "Resubscribe"
+msgstr ""
+
+msgid "Shown after the form submission as a confirmation step"
+msgstr ""
+
+msgid "Your subscription has been deleted. If that was an error you can subscribe again."
+msgstr ""
+
+msgid "Please confirm you want to unsubscribe."
+msgstr ""
+
+msgid "Switch preview mode"
+msgstr ""
+
+msgid "Convert"
+msgstr ""
+
+msgid "Open a ticket"
+msgstr ""
+
+msgid "Settings backup"
+msgstr ""
+
+msgid "Support"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Registration failed."
+msgstr ""
+
+msgid "Privacy"
+msgstr ""
+
+msgid "Newsletter public page, keep public and published"
+msgstr ""
+
+msgid "By Time"
+msgstr ""
+
+msgid "By Gender"
+msgstr ""
+
+msgid "By URL"
+msgstr ""
+
+msgid "By Referrer"
+msgstr ""
+
+msgid "By location"
+msgstr ""
+
+msgid "By Language"
+msgstr ""
+
+msgid "By Lists"
+msgstr ""
+
+msgid "By Status"
+msgstr ""
+
+msgid "Popup"
+msgstr ""
+
+msgid "Injection"
+msgstr ""
+
+msgid "Shown before the form"
+msgstr ""
+
+msgid "Page content"
+msgstr ""
+
+msgid "Public page"
+msgstr ""
+
+msgid "Free"
+msgstr ""
+
+msgid "This email requires a modern e-mail reader.\nView online: {email_url}\nChange your subscription: {profile_url}\nUnsubscribe: {unsubscription_url}"
+msgstr ""
+
+msgid "Do not send"
+msgstr ""
+
+msgid "HTTP Referrer"
+msgstr ""
+
+msgid "Lists to deactivate"
+msgstr ""
+
+msgid "Lists to activate"
+msgstr ""
+
+msgid "Read more."
+msgstr ""
+
+msgid "Attachments are not supported."
+msgstr ""
+
+msgid "Email online view"
+msgstr ""
+
+msgid "Profile numner N with N=1, 2, 3, ..."
+msgstr ""
+
+msgid "Placeholders"
+msgstr ""
+
+msgid "The page content must be only the shortcode [newsletter]"
+msgstr ""
+
+msgid "Templates"
+msgstr ""
+
+msgid "Template created."
+msgstr ""
+
+msgid "Data"
+msgstr ""
+
+msgid "Full"
+msgstr ""
+
+msgid "Links"
+msgstr ""
+
+msgid "Setup Wizard"
+msgstr ""
+
+msgid "Company"
+msgstr ""
+
+msgid "Order"
+msgstr ""
+
+msgid "item(s) found"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Reset news"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Checked"
+msgstr ""
+
+msgid "Option labels"
+msgstr ""
+
+msgid "Main fields"
+msgstr ""
+
+msgid "Fields"
+msgstr ""
+
+msgid "Read our privacy policy"
+msgstr ""
+
+msgid "If you change your email address a confirmation email will be sent to activate it."
+msgstr ""
+
+msgid "Woman"
+msgstr ""
+
+msgid "Man"
+msgstr ""
+
+msgid "I accept the privacy policy"
+msgstr ""
+
+msgid "Single"
+msgstr ""
+
+msgid "Double"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Custom fields"
+msgstr ""
+
+msgid "Form"
+msgstr ""
+
+msgid "Test sent to:"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
+msgid "Change status"
+msgstr ""
+
+msgid "All newsletters"
+msgstr ""
+
+msgid "All subscribers"
+msgstr ""
+
+msgid "Reset warnings"
+msgstr ""
+
+msgid "Search by ID, email, name"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Opt-out message"
+msgstr ""
+
+msgid "WP Site Health"
+msgstr ""
+
+msgid "Antispam"
+msgstr ""
+
+msgid "Generic"
+msgstr ""
+
+msgid "Salutation"
+msgstr ""
+
+msgid "Shortcodes"
+msgstr ""
+
+msgid "Add new"
+msgstr ""
+
+msgid "Used by"
+msgstr ""
+
+msgid "Chars"
+msgstr ""
+
+msgid "Words"
+msgstr ""
+
+msgid "Excerpt length"
+msgstr ""
+
+msgid "Backup"
+msgstr ""
+
+msgid "Hand edited"
+msgstr ""
+
+msgid "Autogenerate"
+msgstr ""
+
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Get news and promotions"
+msgstr ""
+
+msgid "Subscriber Edit"
+msgstr ""
+
+msgid "New subscriber"
+msgstr ""
+
+msgid "Manage"
+msgstr ""
+
+msgid "Forms"
+msgstr ""
+
+msgid "Complained"
+msgstr ""
+
+msgid "Subscribers complained deleted: "
+msgstr ""
+
+msgid "Scheduler"
+msgstr ""
+
+msgid "Attachments"
+msgstr ""
+
+msgid "Send a test to test subscribers"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "Send a test to"
+msgstr ""
+
+msgid "Shown by some email clients as excerpt"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "Unsubscribe link"
+msgstr ""
+
+msgid "Subscriber profile link"
+msgstr ""
+
+msgid "View online link"
+msgstr ""
+
+msgid "Delivery Diagnostic"
+msgstr ""
+
+msgid "Standard styles"
+msgstr ""
+
+msgid "Align"
+msgstr ""
+
+msgid "Stopped by fatal error: %s"
+msgstr ""
+
+msgid "Design"
+msgstr ""
+
+msgid "Click Here"
+msgstr ""
+
+msgid "Company data can be globally set on <a href=\"%s\" target=\"_blank\">company info panel</a>."
+msgstr ""
+
+msgid "Link URL"
+msgstr ""
+
+msgid "Read more button"
+msgstr ""
+
+msgid "Post info"
+msgstr ""
+
+msgid "Full post"
+msgstr ""
+
+msgid "One column variant"
+msgstr ""
+
+msgid "Button style"
+msgstr ""
+
+msgid "Titles font"
+msgstr ""
+
+msgid "Main background"
+msgstr ""
+
+msgid "Successfully updated"
+msgstr ""
+
+msgid "Looking for legacy themes?"
+msgstr ""
+
+msgid "Legacy themes"
+msgstr ""
+
+msgid "Your subscription has been confirmed."
+msgstr ""
+
+msgid "To confirm your subscription follow the link below."
+msgstr ""
+
+msgid "Black Friday Sale: few hours left!"
+msgstr ""
+
+msgid "Black Friday Sale is Live"
+msgstr ""
+
+msgid "Your Final 24 Hours | Last Call for Black Friday Deals"
+msgstr ""
+
+msgid "Black Friday 65% off ending soon!"
+msgstr ""
+
+msgid "Black Friday Sale is almost over"
+msgstr ""
+
+msgid "Last day to save 30%"
+msgstr ""
+
+msgid "List values comma separated"
+msgstr ""
+
+msgid "Rule"
+msgstr ""
+
+msgid "Placeholder"
+msgstr ""
+
+msgid "Name/Label"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "The privacy acceptance checkbox (required in many European countries) forces the subscriber to check it before proceeding. If an URL is specified the label becomes a link."
+msgstr ""
+
+msgid "To use the WordPress privacy page, switch to \"all language\" and activate it."
+msgstr ""
+
+msgid "The \"all language\" setting is set to use the WordPress default privacy page. Please translate that page."
+msgstr ""
+
+msgid "Only the notice"
+msgstr ""
+
+msgid "Enabled?"
+msgstr ""
+
+msgid "Salutation titles are inserted in emails message when the tag {title} is used. For example \"Good morning {title} {surname} {name}\"."
+msgstr ""
+
+msgid "Tracking default"
+msgstr ""
+
+msgid "Snippet"
+msgstr ""
+
+msgid "This email address is already subscribed, please contact the site administrator."
+msgstr ""
+
+msgid "Allowed"
+msgstr ""
+
+msgid "Not allowed"
+msgstr ""
+
+msgid "Only the logo"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "Select language"
+msgstr ""
+
+msgid "One column, big image"
+msgstr ""
+
+msgid "Include specified max posts"
+msgstr ""
+
+msgid "Include only new posts"
+msgstr ""
+
+msgid "If there are new posts"
+msgstr ""
+
+msgid "Enforced by language"
+msgstr ""
+
+msgid "If you check this box, all your new subscribers will be automatically added to this list"
+msgstr ""
+
+msgid "Enforced"
+msgstr ""
+
+msgid "Public"
+msgstr ""
+
+msgid "This newsletter has the tracking disabled. No statistics will be available."
+msgstr ""
+
+msgid "Do not filter by this field"
+msgstr ""
+
+msgid "is one of:"
+msgstr ""
+
+msgid "Profile fields"
+msgstr ""
+
+msgid "Save the newsletter to update the counter!"
+msgstr ""
+
+msgid "Disable unsubscribe headers"
+msgstr ""
+
+msgid "Cancellation requests via email"
+msgstr ""
+
+msgid "Run a test"
+msgstr ""
+
+msgid "If there are not new posts"
+msgstr ""
+
+msgid "Schema"
+msgstr ""
+
+msgid "Posts offset"
+msgstr ""
+
+msgid "External background color"
+msgstr ""
+
+msgid "Overall basic statistics (last 20 newsletters)"
+msgstr ""
+
+msgid "No newsletters have been sent till now"
+msgstr ""
+
+msgid "Clicks"
+msgstr ""
+
+msgid "opens"
+msgstr ""
+
+msgid "Reach"
+msgstr ""
+
+msgid "Newsletter still sending"
+msgstr ""
+
+msgid "One per line"
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+msgid "Allowed roles"
+msgstr "Funções permitidas"
+
+msgid "Addons"
+msgstr "Complementos"
+
+msgid "Company info"
+msgstr "Informações da empresa"
+
+msgid "Terms"
+msgstr "Termos"
+
+msgid "Filters"
+msgstr "Filtros"
+
+msgid "Excerpt font"
+msgstr "Fonte resumo"
+
+msgid "Two columns"
+msgstr "Duas colunas"
+
+msgid "One column"
+msgstr "Uma coluna"
+
+msgid "Font"
+msgstr "Fonte"
+
+msgid "Preview"
+msgstr "Pré-visualizar"
+
+msgid "Advanced"
+msgstr "Avançado"
+
+msgid "Schedule delivery?"
+msgstr "Agendar entrega?"
+
+msgid "Send now"
+msgstr "Enviar agora"
+
+msgid "Scheduled."
+msgstr "Agendado."
+
+msgid "Now sending."
+msgstr "Enviando agora."
+
+msgid "Newsletter should be saved before send a test"
+msgstr "Newsletter deve ser salvo antes de enviar um teste"
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Send a test"
+msgstr "Enviar um teste"
+
+msgid "Test subscribers:"
+msgstr "Assinantes de teste:"
+
+msgid "Blocks"
+msgstr "Blocos"
+
+msgid "Back to last save"
+msgstr "Voltar para o último salvo"
+
+msgid "Delete selected"
+msgstr "Excluir selecionado"
+
+msgid "subscribers without a language"
+msgstr "assinantes sem uma lista"
+
+msgid "Set to"
+msgstr "Definir como"
+
+msgid "Without language"
+msgstr "Sem linguagem"
+
+msgid "Create newsletter"
+msgstr "Criar newsletter"
+
+msgid "Get Professional Addons"
+msgstr "Adquira complementos profissionais"
+
+msgid "Read more about delivery issues"
+msgstr "Leia mais sobre tarefas de envio"
+
+msgid "Install a multilanguage plugin."
+msgstr "Instalar um plugin de multilinguagem."
+
+msgid "Image"
+msgstr "Imagem"
+
+msgid "Width"
+msgstr "Largura"
+
+msgid "Title font"
+msgstr "Título da fonte"
+
+msgid "Text font"
+msgstr ""
+
+msgid "Your multilanguage plugin is not supported or there are no languages defined"
+msgstr "Seu plugin de multilinguagem não é suportado ou não há idiomas definidos."
+
+msgid "Install WPML or Polylang for multilanguage support"
+msgstr "Instale o WPML ou Polylang para suporte muli idioma."
+
+msgid "Welcome email sent."
+msgstr "E-mail de boas vindas enviado."
+
+msgid "Activation email sent."
+msgstr "E-mail de ativação enviado."
+
+msgid "On error"
+msgstr "Em erro"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Label"
+msgstr ""
+
+msgid "Button"
+msgstr "Botão"
+
+msgid "Padding"
+msgstr "Preenchimento"
+
+msgid "Do not store"
+msgstr "Não armazene"
+
+msgid "Anonymize"
+msgstr "Anonimizar"
+
+msgid "Store"
+msgstr "Armazenar"
+
+msgid "IP addresses"
+msgstr "Endereços de IP"
+
+msgid "Unlink everyone"
+msgstr "Desvincular todos"
+
+msgid "No subscriber found."
+msgstr "Nenhum assinante encontrado."
+
+msgid "Subscriber not found."
+msgstr "Assinante não encontrado."
+
+msgid "Labels"
+msgstr "Rótulos"
+
+msgid "Profile saved"
+msgstr "Perfil salvo"
+
+msgid "Use WordPress privacy URL"
+msgstr "URL de privacidade do WordPress do usuário"
+
+msgid "Logs"
+msgstr "Logs"
+
+msgid "Reactivated message"
+msgstr "Mensagem de reativação"
+
+msgid "Optional"
+msgstr "Opcional"
+
+msgid "Private"
+msgstr "Privado"
+
+msgid "Override Opt In"
+msgstr "Substituir Opt In"
+
+msgid "Your subscription has been reactivated."
+msgstr "Sua assinatura foi reativada."
+
+msgid "This message confirms that you have unsubscribed from our newsletter. Thank you."
+msgstr "Esta mensagem confirma que você cancelou sua assinatura da nossa newsletter. Obrigado."
+
+msgid "Goodbye"
+msgstr "Adeus"
+
+msgid "Subscriber not found, it probably has already been removed. No further actions are required."
+msgstr "Assinante não encontrado, provavelmente já foi removido. Nenhuma ação adicional é necessária."
+
+msgid "Change your profile"
+msgstr "Alterar seu perfil"
+
+msgid "This message confirms your subscription to our newsletter. Thank you!"
+msgstr "Esta mensagem confirma sua inscrição em nossa newsletter. Obrigado!"
+
+msgid "Your subscription has been confirmed"
+msgstr "Sua inscrição foi confirmada"
+
+msgid "Please confirm your subscription <a href=\"{subscription_confirm_url}\">clicking here</a>"
+msgstr "Por favor, confirme sua inscrição <a href=\"{subscription_confirm_url}\">clicando aqui</a>"
+
+msgid "Please confirm your subscription"
+msgstr "Por favor confirme sua inscrição"
+
+msgid "A confirmation email is on the way. Follow the instructions and check the spam folder. Thank you."
+msgstr "Um e-amail de confirmação está a caminho. Siga as instruções e verifique sua caixa de spam. Obrigado."
+
+msgid "Dear"
+msgstr "Caro"
+
+msgid "Mr."
+msgstr "Sr."
+
+msgid "Ms."
+msgstr "Sra."
+
+msgid "I'm"
+msgstr "Sou"
+
+msgid "Privacy link text"
+msgstr "Link do texto de privacidade"
+
+msgid "\"Save\" label"
+msgstr "Rótulo \"Salvar\"."
+
+msgid "General error"
+msgstr "Erro geral."
+
+msgid "Email changed alert"
+msgstr "Alerta de e-mail alterado."
+
+msgid "Your email is not valid or already in use."
+msgstr "Seu e-mail não é válido ou já está em uso."
+
+msgid "Your email has been changed, an activation email has been sent with instructions."
+msgstr "Seu e-mail foi alterado, um e-mail com instruções de ativação foi enviado."
+
+msgid "Options reset."
+msgstr "Redefinir opções"
+
+msgid "Deleted."
+msgstr "Excluído"
+
+msgid "Male"
+msgstr "Masculino"
+
+msgid "subscribers without a list"
+msgstr "assinantes sem uma lista"
+
+msgid "Add to list"
+msgstr "Adicionar à lista"
+
+msgid "years"
+msgstr "anos"
+
+msgid "year"
+msgstr "ano"
+
+msgid "months"
+msgstr "meses"
+
+msgid "Inactive since"
+msgstr "Inativo deste"
+
+msgid "deleted"
+msgstr "excluído"
+
+msgid "Last activity"
+msgstr "Última atividade"
+
+msgid "Blacklists"
+msgstr "Listas negras"
+
+msgid "Security"
+msgstr "Segurança"
+
+msgid "Address blacklist"
+msgstr ""
+
+msgid "Captcha"
+msgstr "Captcha"
+
+msgid "Block Background"
+msgstr "Fundo do bloco"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Read more..."
+msgstr "Leia mais..."
+
+msgid "Get/Become <em>[something]</em>. 10 Ideas That Work"
+msgstr "Seja/Torne-se <em>[algo]</em>. 10 idéias que funcionam."
+
+msgid "The 10 Rules for <em>[something]</em>"
+msgstr "As 10 regras para <em>[algo]</em>"
+
+msgid "The Top 10 <em>[something]</em>"
+msgstr "O top 10 <em>[algo]</em>"
+
+msgid "10 Ways to <em>[something]</em>"
+msgstr "10 caminhos para <em>[algo]</em>"
+
+msgid "Don't do These 10 Things When <em>[something]</em>"
+msgstr "Não faça essas 10 coisas quando <em>[algo]</em>"
+
+msgid "10 <em>[something]</em> Mistakes That Make You Look Dumb"
+msgstr "10 <em>[something]</em> Erros que fazem você parecer iniciante"
+
+msgid "Do You Make These 10 <em>[something]</em> Mistakes?"
+msgstr "Você cometeu esses 10 <em>[something]</em> erros?"
+
+msgid "Secrets of [famous people]"
+msgstr "Segredos de [pessoas famosas]"
+
+msgid "How to End [problem]"
+msgstr "Como terminar [problema]"
+
+msgid "Get Rid of <em>[problem]</em> Once and Forever"
+msgstr "Eliminar o <em> [problema] </em> uma vez e para sempre"
+
+msgid "10 Ways to Simplify Your <em>[something]</em>"
+msgstr "10 caminhos para simplicar seu <em>[something]</em>"
+
+msgid "10 Lies <em>[kind of people]</em> Likes to Tell"
+msgstr "10 mentiras <em>[kind of people]</em> gostam de contar"
+
+msgid "10 Warning Signs That <em>[something]</em>"
+msgstr "10 sinais de alerta que <em>[something]</em>"
+
+msgid "How safe is your <em>[something]</em> from <em>[danger]</em>?"
+msgstr "Como salvar seu  <em>[something]</em> de <em>[danger]</em>?"
+
+msgid "Get ideas"
+msgstr "Dê-me idéias"
+
+msgid "Next"
+msgstr "Próximo"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Go to your dashboard"
+msgstr "Vá para o painel de controle"
+
+msgid "If you are unsure on how to use some features of Newsletter, reach for our official documentation."
+msgstr "Se você não tem certeza sobre como usar alguns recursos do boletim informativo, procure nossa documentação oficial."
+
+msgid "You can also follow us through our social accounts"
+msgstr "Você também pode nos seguir através de nossas redes sociais"
+
+msgid "Your email"
+msgstr "Seu email"
+
+msgid "Be always updated with the latest releases and tips from our headquarters"
+msgstr "Esteja sempre atualizado com as últimas novidades e dicas dos nossos quartéis generais."
+
+msgid "You're now ready to begin using Newsletter!"
+msgstr "Agora você está pronto para começar a usar o boletim informativo!"
+
+msgid "Take me to my widget settings (opens in a new window)"
+msgstr "Leve-me às configurações do meu widget (abre em uma nova janela)"
+
+msgid "If you use sidebars in your blog, it may be a good idea to add a subscription form there. Remember to come back here when you're done"
+msgstr "Se você usa barras laterais em seu blog, pode ser uma boa idéia adicionar uma caixa de inscrição lá. Lembre-se de voltar quando você estiver pronto."
+
+msgid "Add Newsletter widget to sidebar"
+msgstr "Adicionar o widget de newsletter à barra lateral"
+
+msgid "Email address"
+msgstr "Endereço de email"
+
+msgid "Check if your website can send emails correctly."
+msgstr "Verifique se seu site pode enviar e-mails corretamente."
+
+msgid "Time for some tests!"
+msgstr "Hora de fazer alguns testes!"
+
+msgid "We've just created the page where your visitors will subscribe and where they will edit their preferences."
+msgstr "Acabamos de criar a página onde seus visitantes se inscreverão e onde irão editar suas preferências."
+
+msgid "Subscription and Edit page creation"
+msgstr ""
+
+msgid "Add a privacy checkbox"
+msgstr "Adicionar uma caixa de privacidade"
+
+msgid "Ask for their name"
+msgstr "Solicitar nome"
+
+msgid "Choose what to ask to your subscribers in your forms."
+msgstr "Escolha o que solicitar aos seus assinantes em seus formulários."
+
+msgid "Subscription Forms"
+msgstr "Formulários de inscrição"
+
+msgid "Sender email"
+msgstr "E-mail remetente"
+
+msgid "Choose which name and email address you'd like to appear as the sender of your newsletters."
+msgstr "Escolhe qual o nome e endereço de e-mail você gostaria que aparecesse como remetente das suas newsletters."
+
+msgid "Sender"
+msgstr "Remetente"
+
+msgid "In this short tutorial we will guide you through some of the basic settings to get the most out of our plugin. "
+msgstr "Neste tutorial curto nós iremos lhe guiar através de algumas configurações básicas para aproveitar melhor nosso plugin."
+
+msgid "Welcome to The Newsletter Plugin and thank you for choosing the best mail management system for Wordpress!"
+msgstr ""
+
+msgid "There was an error. Complete the setup and then use the System panels to test again."
+msgstr ""
+
+msgid "Check your mailbox for a test message. Check the spam folder as well."
+msgstr "Verifique sua caixa de e-mail por uma mensagem teste. Cheque sua caixa de spam também."
+
+msgid "Please check the email address, it seems wrong."
+msgstr "Verifique o endereço de e-mail, parece está  errado."
+
+msgid "A license key is set"
+msgstr "Uma chave de licença está configurada"
+
+msgid "removed from list"
+msgstr "remover da lista"
+
+msgid "added to list"
+msgstr "adicionado à lista"
+
+msgid "Not specified"
+msgstr "Não especificado"
+
+msgid "Female"
+msgstr "Feminino"
+
+msgid "Referrer"
+msgstr "Referência"
+
+msgid "Any"
+msgstr "Alguma"
+
+msgid "This subscriber already exists."
+msgstr "Usuário já cadastrado"
+
+msgid "Wrong email address."
+msgstr "Endereço de email incorreto"
+
+msgid "to"
+msgstr "para"
+
+msgid "all subscribers in"
+msgstr "Todos os inscritos em"
+
+msgid "Profile URL"
+msgstr "URL do perfil"
+
+msgid "Secret token"
+msgstr "Token secreto"
+
+msgid "IP address"
+msgstr "Endereço IP"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Test subscriber"
+msgstr "Inscrito teste"
+
+msgid "Last name"
+msgstr "Sobrenome"
+
+msgid "First name"
+msgstr "Primeiro Nome"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "The email address is already in use"
+msgstr "O endereço de email já está em uso"
+
+msgid "Wrong email address"
+msgstr "O email está  errado"
+
+msgid "Conversion tracking code"
+msgstr "Código de rastreamento de conversão"
+
+msgid "Antiflood"
+msgstr "Antiflood"
+
+msgid "Subscription page"
+msgstr "Página de inscrição"
+
+msgid "Notifications"
+msgstr "Notificações"
+
+msgid "Create the page"
+msgstr "Criar a página"
+
+msgid "Single Opt In"
+msgstr "Opt In Simples"
+
+msgid "Double Opt In"
+msgstr "Opt In duplo"
+
+msgid "Opt In"
+msgstr "Opt In"
+
+msgid "Welcome"
+msgstr "Bem vindo"
+
+msgid "Email encoding"
+msgstr "Codificação do email"
+
+msgid "Debug mode"
+msgstr "Modo Debug"
+
+msgid "Log level"
+msgstr "Nível de log"
+
+msgid "Find it in <a href=\"%s\" target=\"_blank\">your account</a> page"
+msgstr "Encontre isso na página <a href=\"%s\" target=\"_blank\">sua conta</a>"
+
+msgid "License key"
+msgstr "Chave de lincença"
+
+msgid "Your Return Path domain is different from your Sender domain. Providers may require them to match."
+msgstr "Seu domínio de retorno é  diferente do domínio do remetente. Os provedores podem exigir que eles correspondam."
+
+msgid "Copyright or legal text"
+msgstr "Copyright ou Texto legal"
+
+msgid "Address"
+msgstr "Endereço"
+
+msgid "Company name"
+msgstr "Nome da Empresa"
+
+msgid "Motto"
+msgstr "Lema"
+
+msgid "Logo"
+msgstr "Logo"
+
+msgid "Need help?"
+msgstr "Precisa de ajuda?"
+
+msgid "Read more"
+msgstr "Ler mais"
+
+msgid "Center"
+msgstr "Centralizar"
+
+msgid "Right"
+msgstr "Esquerda"
+
+msgid "Left"
+msgstr "Direita"
+
+msgid "Post types"
+msgstr "Tipos de post"
+
+msgid "Max posts"
+msgstr "Max posts"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Posts"
+msgstr "Posts"
+
+msgid "Primary color"
+msgstr "Cor primária"
+
+msgid "Disable social links"
+msgstr "Desabilitar links sociais"
+
+msgid "Only to subscribers linked to WP users"
+msgstr "Somente para assinantes listados em WP usuários"
+
+msgid "None"
+msgstr "Nenhum"
+
+msgid "must not be in one of"
+msgstr ""
+
+msgid "All"
+msgstr "Todos"
+
+msgid "Match all of"
+msgstr "Corresponder todos de"
+
+msgid "Match at least one of"
+msgstr "Corresponder ao menos um de"
+
+msgid "Leaving all multichoice options unselected is like to select all them"
+msgstr "Deixando todos os campos de múltipla escolha desselecionado é como selecionar todos eles"
+
+msgid "Test"
+msgstr "Teste"
+
+msgid "This newsletter will be sent to not confirmed subscribers."
+msgstr "Essa newsletter vai ser enviada para os inscritos não confirmados."
+
+msgid "Height"
+msgstr "Altura"
+
+msgid "Color"
+msgstr "Cor"
+
+msgid "View"
+msgstr "Visualizar"
+
+msgid "minutes"
+msgstr "Minutos"
+
+msgid "minute"
+msgstr "minuto"
+
+msgid "seconds"
+msgstr "Segundos"
+
+msgid "Disabled"
+msgstr "Desativar"
+
+msgid "View online"
+msgstr "Ver online"
+
+msgid "Manage your subscription"
+msgstr ""
+
+msgid "WP user ID"
+msgstr "ID do usuário WP"
+
+msgid "Created"
+msgstr "Criada"
+
+msgid "Read More"
+msgstr "Consulte mais informação"
+
+msgid "No"
+msgstr "Não"
+
+msgid "Subscribe"
+msgstr "Assinar"
+
+msgid "Duplicate"
+msgstr "Duplicar"
+
+msgid "Automatically subscribe to"
+msgstr "Inscrever-se automaticamente a"
+
+msgid "Template"
+msgstr "Modelo"
+
+msgid "Error while activating:"
+msgstr ""
+
+msgid "Activate"
+msgstr "Ativar"
+
+msgid "Update"
+msgstr "Atualizar"
+
+msgid "Versions"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Sources"
+msgstr ""
+
+msgid "Plugins"
+msgstr ""
+
+msgid "Send a test message"
+msgstr "Enviar uma mensagem de teste"
+
+msgid "Custom styles"
+msgstr "Estilos personalizados"
+
+msgid "No test subscribers found."
+msgstr "Não foram encontrados assinantes de teste."
+
+msgid "The tag {message} is missing in your template"
+msgstr "A tag {message} está faltando em seu template"
+
+msgid "Done."
+msgstr "Feito."
+
+msgid "System"
+msgstr ""
+
+msgid "Schedule"
+msgstr "Agendador"
+
+msgid "Categories"
+msgstr "Categorias"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Cancel"
+msgstr "LINK"
+
+msgid "https://www.thenewsletterplugin.com"
+msgstr "https://www.thenewsletterplugin.com"
+
+msgid "Newsletter"
+msgstr "Newsletter"
+
+msgid "New Subscriber"
+msgstr "Novo Cadastrado"
+
+msgid "Bounced"
+msgstr "Devolvidos"
+
+msgid "Unsubscribed"
+msgstr "Assinatura cancelada"
+
+msgid "Are you sure you want to mark ALL subscribers as confirmed?"
+msgstr "Tem certeza que deseja marcar TODOS os assinantes como confirmados?"
+
+msgid "Confirm all"
+msgstr "Confirmar todos"
+
+msgid "Unconfirm all"
+msgstr "Não confirmar tudo"
+
+msgid "Are you sure you want to remove ALL subscribers?"
+msgstr "Tem certeza que deseja excluir TODOS os assinantes?"
+
+msgid "Delete all"
+msgstr "Excluir tudo"
+
+msgid "Actions"
+msgstr "Ações"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Please backup before running maintenance actions."
+msgstr ""
+
+msgid "Subscribers Maintenance"
+msgstr "Manutenção de assinantes"
+
+msgid "Subscribers deleted: "
+msgstr "Assinantes excluídos:"
+
+msgid "Subscribers changed to confirmed: "
+msgstr "Assinantes alterados para confirmados:"
+
+msgid "Subscribers changed to not confirmed: "
+msgstr "Assinantes alterados para não confirmados:"
+
+msgid "Subscribers bounced deleted: "
+msgstr "Assinantes não encontrados excluídos:"
+
+msgid "Subscribers unsubscribed deleted: "
+msgstr "Assinante com inscrição cancelada excluído:"
+
+msgid "Subscribers not confirmed deleted: "
+msgstr "Assinante não confirmado excluído:"
+
+msgid "Profile page"
+msgstr "Página do perfil"
+
+msgid "subscriber(s) found"
+msgstr "assinante(s) encontrado"
+
+msgid "Go"
+msgstr "Ir"
+
+msgid "Reset Filters"
+msgstr "Reinicializar filtros"
+
+msgid "Search"
+msgstr "Procurar"
+
+msgid "License expired"
+msgstr ""
+
+msgid "License active"
+msgstr ""
+
+msgid "Diagnostic"
+msgstr ""
+
+msgid "Messages Template"
+msgstr "Modelo de mensagem"
+
+msgid "Unsubscription"
+msgstr "Cancelar assinatura"
+
+msgid "Subscription"
+msgstr "Inscrição"
+
+msgid "Maintenance"
+msgstr "Manutenção"
+
+msgid "Subscribers"
+msgstr "Assinantes"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Forum"
+msgstr "Fórum"
+
+msgid "Your Account"
+msgstr "Sua Conta"
+
+msgid "Get Premium"
+msgstr "Obter premium"
+
+msgid "Goodbye email"
+msgstr "Email de despedida"
+
+msgid "Goodbye message"
+msgstr "Mensagem de despedida"
+
+msgid "Messages template"
+msgstr "Modelos de mensagens"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Max emails per hour"
+msgstr "Número máximo de email por hora"
+
+msgid "Reply to"
+msgstr "Responder para"
+
+msgid "Return path"
+msgstr "Caminho de retorno"
+
+msgid "Sender name"
+msgstr "Nome do remetente"
+
+msgid "Sender email address"
+msgstr "Endereço do remetente"
+
+msgid "Reply to email is not correct."
+msgstr "Endereço de resposta incorreto."
+
+msgid "Return path email is not correct."
+msgstr "Caminho de retorno incorreto."
+
+msgid "The sender email address is not correct."
+msgstr "Endereço do remetente incorreto."
+
+msgid "Social"
+msgstr "Social"
+
+msgid "General"
+msgstr "Geral"
+
+msgid "Company Info"
+msgstr "Informações da empresa"
+
+msgid "Profile"
+msgstr "Perfil"
+
+msgid "Test subscribers"
+msgstr ""
+
+msgid "New"
+msgstr "Novo"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "Documentation"
+msgstr "Documentação"
+
+msgid "Dashboard"
+msgstr "Painel de controle"
+
+msgid "General Settings"
+msgstr "Configurações gerais"
+
+msgid "Comma separated"
+msgstr ""
+
+msgid "Enabled"
+msgstr "Habilitado"
+
+msgid "Draft"
+msgstr "Rascunho"
+
+msgid "Paused"
+msgstr "Pausado"
+
+msgid "Sent"
+msgstr "Enviado"
+
+msgid "Delete"
+msgstr "Excluir"
+
+msgid "Back"
+msgstr "Retornar"
+
+msgid "Reset"
+msgstr "Reiniciar"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Valid email address"
+msgstr "Endereço de email válido"
+
+msgid "Saved."
+msgstr "Salvo"
+
+msgid "Refresh the preview"
+msgstr "Atualizar a visualização"
+
+msgid "Create a newsletter"
+msgstr "Criar um boletim de notícias"
+
+msgid "Expected total at the end of the delivery may differ due to subscriptions/unsubscriptions occurred in the meantime."
+msgstr ""
+
+msgid "Statistics"
+msgstr "Estatísticas"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Yes"
+msgstr "Sim"
+
+msgid "of"
+msgstr "do"
+
+msgid "Sending"
+msgstr "Enviando"
+
+msgid "Scheduled"
+msgstr "Agenda"
+
+msgid "Tracking"
+msgstr "Rastreamento"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Progress"
+msgstr "Progresso"
+
+msgid "Subject"
+msgstr "Assunto"
+
+msgid "Proceed?"
+msgstr "Continuar?"
+
+msgid "Newsletters"
+msgstr "Boletins de notícias"
+
+msgid "Message duplicated."
+msgstr "Mensagem duplicada."
+
+msgid "Track clicks and message opening"
+msgstr "Cliques de localização e de abertura de mensagens"
+
+msgid "Required"
+msgstr "Requerido"
+
+msgid "Hide/show from public sent newsletter list."
+msgstr "Ocultar/mostrar a partir boletim de notícias público."
+
+msgid "Keep private"
+msgstr "Manter privado"
+
+msgid "Not confirmed"
+msgstr "Não confirmado"
+
+msgid "Confirmed"
+msgstr "Confirmado"
+
+msgid "Lists"
+msgstr "Listas"
+
+msgid "Gender"
+msgstr "Gênero"
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Other"
+msgstr "Outro"
+
+msgid "Targeting"
+msgstr ""
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "Continue"
+msgstr "Continue"
+
+msgid "Pause the delivery?"
+msgstr "Pausar o envio?"
+
+msgid "Pause"
+msgstr "Pausar"
+
+msgid "Start real delivery?"
+msgstr "Iniciar envio?"
+
+msgid "Send"
+msgstr "Enviar"
+
+msgid "Read more about test subscribers"
+msgstr "Leia mais sobre 'assinantes teste'"
+
+msgid "There are no test subscribers to send to"
+msgstr "Não há 'assinantes teste' para enviar"
+
+msgid "Delivery definitively canceled"
+msgstr ""
+
+msgid "A subject is required to send"
+msgstr "Para enviar é necessário um assunto"
+
+msgid "Here the email subject"
+msgstr "Aqui, o assunto do email"
+
+msgid "Active"
+msgstr "Ativo"
+
+msgid "Add the confirmed ones to the list..."
+msgstr "Adicionar os confirmados à lista..."
+
+msgid "Add to this list"
+msgstr "Adicionar a esta lista"
+
+msgid "Add"
+msgstr "Adicionar"
+
+msgid "Bugs and ideas"
+msgstr "Bugs e ideias"
+
+msgid "CSV file, one subscriber per row. Columns: email, name, surname (a header row is optional; comma or semicolon separated, UTF-8)."
+msgstr "Arquivo CSV, um assinante por linha. Colunas: email, nome, sobrenome (a linha de cabeçalho é opcional; separado por vírgula ou ponto e vírgula, UTF-8)."
+
+msgid "Cancellations started from this newsletter (cannot always be tracked)"
+msgstr "Cancelamentos iniciados a partir desta newsletter (nem sempre é possível rastrear)"
+
+msgid "Click"
+msgstr "Clique"
+
+msgid "Clicked URLs"
+msgstr "URLs clicadas"
+
+msgid "Clicked links"
+msgstr "Links clicados"
+
+msgid "Clicked"
+msgstr "Clicaram"
+
+msgid "Credits"
+msgstr "Créditos"
+
+msgid "Delivered"
+msgstr "Entregue"
+
+msgid "Email series are not available in this installation."
+msgstr "As séries de e-mails não estão disponíveis nesta instalação."
+
+msgid "Email/Name"
+msgstr "E-mail/Nome"
+
+msgid "Error"
+msgstr "Erro"
+
+msgid "Errors encountered while delivery, usually due to a faulty mailing service."
+msgstr "Erros ocorridos durante a entrega, geralmente causados por falha no serviço de envio."
+
+msgid "Errors"
+msgstr "Erros"
+
+msgid "Export CSV"
+msgstr "Exportar CSV"
+
+msgid "Export"
+msgstr "Exportar"
+
+msgid "File"
+msgstr "Arquivo"
+
+msgid "Found a problem or have an idea? Open an issue on the repository."
+msgstr "Encontrou um problema ou tem uma ideia? Abra uma issue no repositório."
+
+msgid "How to get support"
+msgstr "Como obter suporte"
+
+msgid "If you are unsure on how to use some features of Newsletter, read the documentation in the project repository."
+msgstr "Se tiver dúvidas sobre algum recurso do Open Newsletter, leia a documentação no repositório do projeto."
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Integrations"
+msgstr "Integrações"
+
+msgid "Issues"
+msgstr "Issues"
+
+msgid "Need a custom solution for your store or website? Get in touch."
+msgstr "Precisa de uma solução sob medida para a sua loja ou site? Fale comigo."
+
+msgid "Need help or a custom solution? Get in touch with the developer."
+msgstr "Precisa de ajuda ou de uma solução sob medida? Fale com o desenvolvedor."
+
+msgid "No clicks recorded for this newsletter"
+msgstr "Nenhum clique registrado para esta newsletter"
+
+msgid "No newsletters have been sent to this subscriber"
+msgstr "Nenhuma newsletter foi enviada para este assinante"
+
+msgid "No subscribers found"
+msgstr "Nenhum assinante encontrado"
+
+msgid "Not clicked"
+msgstr "Não clicaram"
+
+msgid "Not installed"
+msgstr "Não instalado"
+
+msgid "Not opened"
+msgstr "Não abriram"
+
+msgid "Open Newsletter already includes every feature of the core plugin, with no license required and no external connection."
+msgstr "O Open Newsletter já inclui todos os recursos do plugin, sem exigir licença e sem conexões externas."
+
+msgid "Open Newsletter is a free fork (GPL-2.0-or-later) of the Newsletter plugin by Stefano Lissa & The Newsletter Team. See CREDITS.md in the plugin folder."
+msgstr "O Open Newsletter é um fork livre (GPL-2.0-ou-posterior) do plugin Newsletter, de Stefano Lissa e The Newsletter Team. Veja o CREDITS.md na pasta do plugin."
+
+msgid "Open issues"
+msgstr "Abrir issues"
+
+msgid "Open"
+msgstr "Abertura"
+
+msgid "Opened"
+msgstr "Abriram"
+
+msgid "Recurring newsletters are not available in this installation."
+msgstr "As newsletters recorrentes não estão disponíveis nesta instalação."
+
+msgid "See"
+msgstr "Ver"
+
+msgid "Select a CSV file to import"
+msgstr "Selecione um arquivo CSV para importar"
+
+msgid "Select a list"
+msgstr "Selecione uma lista"
+
+msgid "Sent on"
+msgstr "Enviado em"
+
+msgid "Subscriber removed"
+msgstr "Assinante removido"
+
+msgid "Subscribers who clicked"
+msgstr "Assinantes que clicaram"
+
+msgid "The documentation and the source code are in the project repository."
+msgstr "A documentação e o código-fonte estão no repositório do projeto."
+
+msgid "The file cannot be read"
+msgstr "Não foi possível ler o arquivo"
+
+msgid "The file is too big (10 MB max)"
+msgstr "O arquivo é grande demais (máximo de 10 MB)"
+
+msgid "The integrations below are provided by separate plugins that, when installed and active, are detected automatically. This list is static and is not synchronized with any remote service."
+msgstr "As integrações abaixo são fornecidas por plugins separados que, quando instalados e ativos, são detectados automaticamente. Esta lista é estática e não é sincronizada com nenhum serviço remoto."
+
+msgid "Welcome to Open Newsletter and thank you for choosing a free and open mail management system for WordPress!"
+msgstr "Bem-vindo ao Open Newsletter e obrigado por escolher um sistema livre e aberto de gerenciamento de e-mails para WordPress!"
+
+msgid "Who clicked..."
+msgstr "Quem clicou..."
+
+msgid "remove"
+msgstr "remover"
+
+msgid "subscribers"
+msgstr "assinantes"
+
+msgid "Imported: %1$d. Already existing: %2$d. Invalid rows: %3$d."
+msgstr "Importados: %1$d. Já existentes: %2$d. Linhas inválidas: %3$d."
+
+msgid "%d confirmed subscriber added to the list."
+msgid_plural "%d confirmed subscribers added to the list."
+msgstr[0] "%d assinante confirmado adicionado à lista."
+msgstr[1] "%d assinantes confirmados adicionados à lista."

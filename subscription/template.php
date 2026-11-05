@@ -28,17 +28,17 @@ if (!$controls->is_action()) {
 
         $users = $this->get_test_users();
         if (count($users) == 0) {
-            $controls->errors = __('No test subscribers found.', 'newsletter') . ' <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank"><i class="fas fa-info-circle"></i></a>';
+            $controls->errors = __('No test subscribers found.', 'newsletter') . ' <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><i class="fas fa-info-circle"></i></a>';
         } else {
             $template = $controls->data['template'];
 
             $message = '<p>This is a generic example of message embedded inside the template.</p>';
-            $message .= '<p>Subscriber data can be referenced using tags. See the <a href="https://www.thenewsletterplugin.com/documentation">plugin documentation</a>.</p>';
+            $message .= '<p>Subscriber data can be referenced using tags. See the <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme">plugin documentation</a>.</p>';
             $message .= '<p>First name: {name}</p>';
             $message .= '<p>Last name: {surname}</p>';
             $message .= '<p>Email: {email}</p>';
             $message .= '<p>Here an image as well. Make them styled with the CSS rule "max-width: 100%"</p>';
-            $message .= '<p><img src="' . plugins_url('newsletter') . '/images/test.jpg" style="max-width: 100%"></p>';
+            $message .= '<p><img src="' . NEWSLETTER_URL . '/images/test.jpg" style="max-width: 100%"></p>';
 
             $message = str_replace('{message}', $message, $template);
             $addresses = array();
@@ -47,7 +47,7 @@ if (!$controls->is_action()) {
                 Newsletter::instance()->mail($user->email, 'Newsletter Messages Template Test', Newsletter::instance()->replace_for_email($message, $user));
             }
             $controls->messages .= 'Test emails sent to ' . count($users) . ' test subscribers: ' .
-                    implode(', ', $addresses) . '.' . ' <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank"><i class="fas fa-info-circle"></i></a>';
+                    implode(', ', $addresses) . '.' . ' <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><i class="fas fa-info-circle"></i></a>';
         }
     }
 }

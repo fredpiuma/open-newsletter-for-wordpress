@@ -119,7 +119,7 @@ class NewsletterEmailsAdmin extends NewsletterModuleAdmin {
         $users = NewsletterUsersAdmin::instance()->get_test_users();
         if (count($users) == 0) {
             $controls->errors = '' . __('There are no test subscribers to send to', 'newsletter') .
-                    '. <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank"><strong>' .
+                    '. <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><strong>' .
                     __('Read more', 'newsletter') . '</strong></a>.';
         } else {
             $r = Newsletter::instance()->send($email, $users, true);
@@ -133,7 +133,7 @@ class NewsletterEmailsAdmin extends NewsletterModuleAdmin {
                 $controls->errors .= ' ' . implode(', ', $emails);
                 $controls->errors .= '<br>';
                 $controls->errors .= '<strong>' . esc_html($r->get_error_message()) . '</strong><br>';
-                $controls->errors .= '<a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank"><strong>' . __('Read more about delivery issues', 'newsletter') . '</strong></a>.';
+                $controls->errors .= '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><strong>' . __('Read more about delivery issues', 'newsletter') . '</strong></a>.';
             } else {
                 $controls->messages = __('Test sent to:', 'newsletter');
                 //$controls->messages .= __('Test subscribers:', 'newsletter');
@@ -143,9 +143,9 @@ class NewsletterEmailsAdmin extends NewsletterModuleAdmin {
                 $controls->messages .= 'If the message does not shows up on the mailbox, check the spam folder and run a test from the '
                         . '<a href="?page=newsletter_system_delivery" target="_blank"><strong>System/Delivery panel</strong></a>.<br>';
 
-                $controls->messages .= '<a href="https://www.thenewsletterplugin.com/documentation/subscribers#test" target="_blank"><strong>' .
+                $controls->messages .= '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><strong>' .
                         __('Read more about test subscribers', 'newsletter') . '</strong></a>.<br>';
-                $controls->messages .= '<a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank"><strong>' . __('Read more about delivery issues', 'newsletter') . '</strong></a>.';
+                $controls->messages .= '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><strong>' . __('Read more about delivery issues', 'newsletter') . '</strong></a>.';
             }
         }
         $email->subject = $original_subject;
@@ -180,7 +180,7 @@ class NewsletterEmailsAdmin extends NewsletterModuleAdmin {
             $error_message = 'Something went wrong. Check the error logs on the System/Logs page.<br>';
             $error_message .= '<br>';
             $error_message .= '<strong>' . esc_html($result->get_error_message()) . '</strong><br>';
-            $error_message .= '<a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank"><' . __('Read more about delivery issues', 'newsletter') . '</a>.';
+            $error_message .= '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><' . __('Read more about delivery issues', 'newsletter') . '</a>.';
             throw new Exception($error_message);
         }
 
@@ -190,7 +190,7 @@ class NewsletterEmailsAdmin extends NewsletterModuleAdmin {
         $messages .= '.<br>';
         $messages .= 'If the message does not shows up on the mailbox, check the spam folder and run a test from the '
                 . '<a href="?page=newsletter_system_delivery" target="_blank"><strong>System/Delivery panel</strong></a>.<br>';
-        $messages .= '<a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank">' . __('Read more about delivery issues', 'newsletter') . '</a>.';
+        $messages .= '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">' . __('Read more about delivery issues', 'newsletter') . '</a>.';
 
         return $messages;
     }

@@ -29,13 +29,13 @@ defined('ABSPATH') || exit;
         </p>
         <h2>There is more for you!</h2>
 
-        <p>Still not secure to sign up for our premium service? Even with a standard service plan you'll receive our t-shirt!</p>
+        <p>Still not sure about signing up for our service? Even with a standard plan you'll receive our t-shirt!</p>
 
         <p>
             Goodbye!
         </p>
 
-        <?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/social_main.php'; ?>
+        <?php include NEWSLETTER_DIR . '/emails/themes/default/social_main.php'; ?>
 
         <hr>
         <p>

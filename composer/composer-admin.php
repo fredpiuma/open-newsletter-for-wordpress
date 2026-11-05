@@ -350,7 +350,7 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
 
             foreach ($user_preset_list as $user_preset) {
 
-                $default_icon_url = plugins_url('newsletter') . "/emails/presets/default-icon.png?ver=2";
+                $default_icon_url = NEWSLETTER_URL . "/emails/presets/default-icon.png?ver=2";
                 $preset_name = $user_preset->subject;
 
                 // esc_js() assumes the string will be in single quote (arghhh!!!)
@@ -409,13 +409,12 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
     }
 
     private function get_automated_spot_element() {
-        $result = "<div class='tnpc-preset'>";
-        if (class_exists('NewsletterAutomated')) {
-            $result .= "<a href='?page=newsletter_automated_index'>";
-        } else {
-            $result .= "<a href='https://www.thenewsletterplugin.com/automated?utm_source=composer&utm_campaign=plugin&utm_medium=automated'>";
+        if (!class_exists('NewsletterAutomated')) {
+            return '';
         }
-        $result .= "<img src='" . plugins_url('newsletter') . "/emails/images/automated.png' title='Automated addon' alt='Automated'/>";
+        $result = "<div class='tnpc-preset'>";
+        $result .= "<a href='?page=newsletter_automated_index'>";
+        $result .= "<img src='" . NEWSLETTER_URL . "/emails/images/automated.png' title='Automated addon' alt='Automated'/>";
         $result .= "<span class='tnpc-preset-label'>Daily, weekly and monthly newsletters</span></a>";
         $result .= "</div>";
 
@@ -423,13 +422,12 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
     }
 
     private function get_autoresponder_spot_element() {
-        $result = "<div class='tnpc-preset'>";
-        if (class_exists('NewsletterAutoresponder')) {
-            $result .= "<a href='?page=newsletter_autoresponder_index'>";
-        } else {
-            $result .= "<a href='https://www.thenewsletterplugin.com/autoresponder?utm_source=composer&utm_campaign=plugin&utm_medium=autoresponder' target='_blank'>";
+        if (!class_exists('NewsletterAutoresponder')) {
+            return '';
         }
-        $result .= "<img src='" . plugins_url('newsletter') . "/emails/images/autoresponder.png' title='Autoresponder addon' alt='Autoresponder'/>";
+        $result = "<div class='tnpc-preset'>";
+        $result .= "<a href='?page=newsletter_autoresponder_index'>";
+        $result .= "<img src='" . NEWSLETTER_URL . "/emails/images/autoresponder.png' title='Autoresponder addon' alt='Autoresponder'/>";
         $result .= "<span class='tnpc-preset-label'>Autoresponders</span></a>";
         $result .= "</div>";
 
@@ -439,7 +437,7 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
     private function get_raw_html_preset_element() {
 
         $result = "<div class='tnpc-preset tnpc-preset-html' onclick='location.href=\"" . wp_nonce_url('admin.php?page=newsletter_emails_new&id=rawhtml', 'newsletter-new') . "\"'>";
-        $result .= "<img src='" . plugins_url('newsletter') . "/emails/images/rawhtml.png' title='RAW HTML' alt='RAW'/>";
+        $result .= "<img src='" . NEWSLETTER_URL . "/emails/images/rawhtml.png' title='RAW HTML' alt='RAW'/>";
         $result .= "<span class='tnpc-preset-label'>Raw HTML</span>";
         $result .= "</div>";
 

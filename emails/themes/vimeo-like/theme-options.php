@@ -66,6 +66,6 @@ defined('ABSPATH') || exit;
         </table>
     </div>
     <div id="tabs-b">
-        <?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/social-options.php'; ?>
+        <?php include NEWSLETTER_DIR . '/emails/themes/default/social-options.php'; ?>
     </div>
 </div>

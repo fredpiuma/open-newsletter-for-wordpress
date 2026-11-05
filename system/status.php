@@ -332,7 +332,7 @@ function tnp_describe_table($table) {
                 <div id="tabs-filters">
                     <p>
                         Filters can be used by 3rd party plugins to change the standard behavior of Newsletters.
-                        <a href="https://www.thenewsletterplugin.com/documentation/developers/dev-newsletter-hooks/" target="_blank">Read more</a>.
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">Read more</a>.
                     </p>
                     <table class="widefat" id="tnp-status-table">
                         <thead>
@@ -747,7 +747,7 @@ function tnp_describe_table($table) {
                                 <td>
                                     Your PHP version is <?php echo phpversion() ?><br>
                                     <?php if (version_compare(phpversion(), '5.3', '<')) { ?>
-                                        Newsletter plugin works correctly with PHP version 5.6 or greater. Ask your provider to upgrade your PHP. Your version is
+                                        Open Newsletter works correctly with PHP version 5.6 or greater. Ask your provider to upgrade your PHP. Your version is
                                         unsupported even by the PHP community.
                                     <?php } ?>
                                 </td>
@@ -775,7 +775,7 @@ function tnp_describe_table($table) {
                                     <?php if (!$res) { ?>
                                         Your PHP execution time limit is <?php echo $value ?> seconds. It cannot be changed and it is too lower to grant the maximum delivery rate of Newsletter.
                                     <?php } else { ?>
-                                        Your PHP execution time limit is <?php echo $value ?> seconds and can be changed by the Newsletter plugin.<br>
+                                        Your PHP execution time limit is <?php echo $value ?> seconds and can be changed by Open Newsletter.<br>
                                     <?php } ?>
 
                                 </td>

@@ -35,7 +35,7 @@ if ($controls->is_action('test')) {
             $controls->messages .= 'Mailer: ' . esc_html($mailer->get_description()) . '<br>';
             $controls->messages .= 'If you did not receive the message in your mailbox within 5 minutes '
                     . '(check also the spam folder), please contact your hosting provider.<br>'
-                    . '<a href="https://www.thenewsletterplugin.com/documentation/?p=15170" target="_blank"><strong>Read more here</strong></a>.';
+                    . '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><strong>Read more here</strong></a>.';
 
             NewsletterMainAdmin::instance()->set_completed_step('test-email');
         } else {
@@ -50,7 +50,7 @@ if ($controls->is_action('test')) {
                 $controls->errors .= '- Try to remove the return path on main settings.<br>';
             }
 
-            $controls->errors .= '<a href="https://www.thenewsletterplugin.com/documentation/?p=15170" target="_blank"><strong>' . __('Read more', 'newsletter') . '</strong></a>.<br>';
+            $controls->errors .= '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><strong>' . __('Read more', 'newsletter') . '</strong></a>.<br>';
             $controls->errors .= 'PLEASE REPORT ALL THE DATA ON THIS PAGE WHEN ASKING FOR SUPPORT, THANK YOU' .
                     $parts = explode('@', $newsletter->get_sender_email());
             $sitename = strtolower($_SERVER['SERVER_NAME']);
@@ -278,7 +278,7 @@ if ($mailer->get_name() === 'default') {
                             <li>If previous points do not apply to you, ask for support to your provider reporting the emails from your blog are not delivered</li>
                         </ol>
 
-                        <p><a href="https://www.thenewsletterplugin.com/documentation/email-sending-issues" target="_blank">Read more to solve your issues, if any</a></p>
+                        <p><a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">Read more to solve your issues, if any</a></p>
 
                     </div>
                     <div class="tnp-card">
@@ -404,7 +404,7 @@ if ($mailer->get_name() === 'default') {
                             <?php if ($condition == 2) { ?>
                                 <p>
                                     <strong>Sending a single email is taking more than 3 seconds (by mean), too slow.</strong>
-                                    <a href="https://www.thenewsletterplugin.com/documentation/installation/status-panel/#email-speed" target="_blank">Read more</a>.
+                                    <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">Read more</a>.
                                 </p>
                             <?php } ?>
 

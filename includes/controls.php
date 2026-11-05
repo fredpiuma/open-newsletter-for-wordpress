@@ -1321,7 +1321,7 @@ class NewsletterControls {
         wp_editor($value, $name, array_merge(
                         [
                             'tinymce' => [
-                                'content_css' => plugins_url('newsletter') . '/admin/css/wp-editor.css?ver=' . NEWSLETTER_VERSION,
+                                'content_css' => NEWSLETTER_URL . '/admin/css/wp-editor.css?ver=' . NEWSLETTER_VERSION,
                                 'content_style' => $content_style,
                             ],
                             'textarea_name' => 'options[' . esc_attr($name) . ']',
@@ -1712,7 +1712,7 @@ class NewsletterControls {
         foreach ($lists as $list) {
             $this->checkbox_group($name, $list->id, '<span>' . $list->id . '</span> ' . esc_html($list->name));
         }
-        echo '<a href="https://www.thenewsletterplugin.com/documentation/newsletter-lists" target="_blank">'
+        echo '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">'
         . 'Click here to read more about lists.'
         . '</a>';
         echo '</div>';
@@ -1740,7 +1740,7 @@ class NewsletterControls {
             echo '</div>';
         }
         echo '<div style="clear: both"></div>';
-        echo '<a href="https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-preferences" target="_blank">Click here know more about preferences.</a> They can be configured on Subscription/Form field panel.';
+        echo '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">Click here know more about preferences.</a> They can be configured on Subscription/Form field panel.';
         echo '</div>';
     }
 
@@ -2229,7 +2229,7 @@ class NewsletterControls {
             $media = array('', '', '');
             $media_full = array('', '', '');
             $media_id = 0;
-            echo '<img style="max-width: 200px; max-height: 150px; width: 100px;" id="' . esc_attr($name) . '_img" src="' . esc_attr(plugins_url('newsletter')) . '/admin/images/nomedia.png" onclick="newsletter_media(\'' . esc_attr($name) . '\')">';
+            echo '<img style="max-width: 200px; max-height: 150px; width: 100px;" id="' . esc_attr($name) . '_img" src="' . esc_attr(NEWSLETTER_URL) . '/admin/images/nomedia.png" onclick="newsletter_media(\'' . esc_attr($name) . '\')">';
         } else {
             echo '<img style="max-width: 200px; max-height: 150px;" id="' . esc_attr($name) . '_img" src="' . esc_attr($media[0]) . '" onclick="newsletter_media(\'' . esc_attr($name) . '\')">';
         }
@@ -2253,7 +2253,7 @@ class NewsletterControls {
     function language($name = 'language', $empty_label = 'All') {
         if (!$this->is_multilanguage()) {
             echo esc_html__('Install a multilanguage plugin.', 'newsletter');
-            echo ' <a href="https://www.thenewsletterplugin.com/documentation/multilanguage" target="_blank">', esc_html__('Read more', 'newsletter'), '</a>';
+            echo ' <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">', esc_html__('Read more', 'newsletter'), '</a>';
             return;
         }
 
@@ -2353,7 +2353,7 @@ class NewsletterControls {
 
     static function field_help($url, $text = '') {
         if (strpos($url, 'http') !== 0) {
-            $url = 'https://www.thenewsletterplugin.com/documentation' . $url;
+            $url = NEWSLETTER_DOCS_URL;
         }
         echo '<a href="', esc_attr($url), '" class="tnpc-field-help" target="_blank" style="text-decoration: none" title="' . esc_attr(__('Read more', 'newsletter')) . '"><i class="fas fa-question-circle"></i>';
         if ($text) {
@@ -2378,7 +2378,7 @@ class NewsletterControls {
      */
     static function panel_help($url, $text = '') {
         if (substr($url, 0, 4) !== 'http') {
-            $url = 'https://www.thenewsletterplugin.com/documentation' . $url;
+            $url = NEWSLETTER_DOCS_URL;
         }
         if (empty($text)) {
             $text = __('Need help?', 'newsletter');
@@ -2400,7 +2400,7 @@ class NewsletterControls {
 
     static function title_help($url, $text = '') {
         if (substr($url, 0, 4) !== 'http') {
-            $url = 'https://www.thenewsletterplugin.com/documentation' . $url;
+            $url = NEWSLETTER_DOCS_URL;
         }
         if (empty($text)) {
             $text = __('Get help', 'newsletter');
@@ -2411,7 +2411,7 @@ class NewsletterControls {
     static function label($text, $url = '') {
         if ($url) {
             if (substr($url, 0, 4) !== 'http') {
-                $url = 'https://www.thenewsletterplugin.com/documentation' . $url;
+                $url = NEWSLETTER_DOCS_URL;
             }
             echo wp_kses_post($text);
             self::field_help($url);
@@ -2462,7 +2462,7 @@ class NewsletterControls {
         $tnpc_show_subject = $show_subject;
 
         // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
-        echo "<link href='", esc_attr(plugins_url('newsletter')), "/emails/tnp-composer/_css/newsletter-builder-v2.css?ver=", rawurlencode(NEWSLETTER_VERSION), "' rel='stylesheet' type='text/css'>";
+        echo "<link href='", esc_attr(NEWSLETTER_URL), "/emails/tnp-composer/_css/newsletter-builder-v2.css?ver=", rawurlencode(NEWSLETTER_VERSION), "' rel='stylesheet' type='text/css'>";
 
         $controls = $this;
         include NEWSLETTER_DIR . '/emails/tnp-composer/index-v2.php';
@@ -2477,15 +2477,15 @@ class NewsletterControls {
         echo '&nbsp;<a href="#subject-ideas-modal" rel="modal:open"><i class="far fa-lightbulb tnp-suggest-subject"></i></a>';
         do_action('newsletter_composer_subject');
 
-        echo '<img src="', esc_attr(plugins_url('newsletter')), '/admin/images/subject/android.png" style="position: absolute; width: 16px; left: 330px; top: 25px; display: block; opacity: 0">';
-        echo '<img src="', esc_attr(plugins_url('newsletter')), '/admin/images/subject/iphone.png" style="position: absolute; width: 16px; left: 380px; top: 25px; display: block; opacity: 0">';
+        echo '<img src="', esc_attr(NEWSLETTER_URL), '/admin/images/subject/android.png" style="position: absolute; width: 16px; left: 330px; top: 25px; display: block; opacity: 0">';
+        echo '<img src="', esc_attr(NEWSLETTER_URL), '/admin/images/subject/iphone.png" style="position: absolute; width: 16px; left: 380px; top: 25px; display: block; opacity: 0">';
         echo '</div>';
     }
 
     function composer_v3($show_subject = false, $show_test = true, $context_type = '') {
 
         // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
-        echo "<link href='", esc_attr(plugins_url('newsletter')), "/composer/css/composer.css?ver=", rawurlencode(NEWSLETTER_VERSION), "' rel='stylesheet' type='text/css'>";
+        echo "<link href='", esc_attr(NEWSLETTER_URL), "/composer/css/composer.css?ver=", rawurlencode(NEWSLETTER_VERSION), "' rel='stylesheet' type='text/css'>";
 
         include NEWSLETTER_DIR . '/composer/index.php';
     }
@@ -2495,8 +2495,8 @@ class NewsletterControls {
         echo '<div style="position: relative"><input size="80" id="options-', esc_attr($name), '" name="options[' . esc_attr($name) . ']" type="text" placeholder="" value="';
         echo esc_attr($value);
         echo '">';
-        echo '<img src="', esc_attr(plugins_url('newsletter')), '/admin/images/subject/android.png" style="position: absolute; width: 16px; left: 330px; top: 25px; display: block; opacity: 0">';
-        echo '<img src="', esc_attr(plugins_url('newsletter')), '/admin/images/subject/iphone.png" style="position: absolute; width: 16px; left: 380px; top: 25px; display: block; opacity: 0">';
+        echo '<img src="', esc_attr(NEWSLETTER_URL), '/admin/images/subject/android.png" style="position: absolute; width: 16px; left: 330px; top: 25px; display: block; opacity: 0">';
+        echo '<img src="', esc_attr(NEWSLETTER_URL), '/admin/images/subject/iphone.png" style="position: absolute; width: 16px; left: 380px; top: 25px; display: block; opacity: 0">';
         echo '</div>';
     }
 

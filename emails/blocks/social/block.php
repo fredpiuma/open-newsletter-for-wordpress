@@ -21,7 +21,7 @@ $options = array_merge($defaults, $options);
 
 $type = (int) $options['type'];
 $width = (int) $options['width'];
-$social_icon_url = plugins_url('newsletter') . '/images/social-' . $type;
+$social_icon_url = NEWSLETTER_URL . '/images/social-' . $type;
 
 $socials = ['facebook', 'twitter', 'pinterest', 'linkedin', 'tumblr', 'youtube',
     'soundcloud', 'instagram', 'vimeo', 'telegram', 'vk', 'discord', 'tiktok',

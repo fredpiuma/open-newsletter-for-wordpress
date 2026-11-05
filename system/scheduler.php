@@ -84,7 +84,7 @@ if (isset($_GET['debug']) || !defined('Crontrol\WP_CRONTROL_VERSION')) {
                         <ul>
                             <li>Check the <a href="<?php echo admin_url('/site-health.php') ?>">site health panel</a> and try to solve the issues identified by WordPress in your site</li>
                             <li>Install the <a href="https://wordpress.org/plugins/wp-crontrol/" target="_blank">WP Crontrol</a> plugin which shows all the scheduled jobs and delays</li>
-                            <li>Configure an <a href="https://www.thenewsletterplugin.com/documentation/delivery-and-spam/newsletter-delivery-engine/" target="_blank">external cron service</a></li>
+                            <li>Configure an <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">external cron service</a></li>
                         </ul>
                     </div>
 
@@ -120,7 +120,7 @@ if (isset($_GET['debug']) || !defined('Crontrol\WP_CRONTROL_VERSION')) {
                                     <td>
                                         <?php if ($condition == 0) { ?>
                                             The cron system is NOT triggered enough often.<br>
-                                            <?php $controls->btn_link('https://www.thenewsletterplugin.com/documentation/delivery-and-spam/newsletter-delivery-engine/', 'How to solve'); ?>
+                                            <?php $controls->btn_link('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme', 'How to solve'); ?>
                                         <?php } ?>
                                     </td>
                                 </tr>
@@ -134,16 +134,16 @@ if (isset($_GET['debug']) || !defined('Crontrol\WP_CRONTROL_VERSION')) {
                             <tr>
                                 <td>Delivery job</td>
                                 <td class="status">
-                                    <?php $this->condition_flag($condition, 'https://www.thenewsletterplugin.com/documentation/delivery-and-spam/newsletter-delivery-engine/') ?>
+                                    <?php $this->condition_flag($condition, 'https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?>
                                 </td>
                                 <td>
                                     <?php
                                     switch ($status) {
                                         case NewsletterSystemAdmin::JOB_MISSING:
-                                            echo 'The job is missing! Try to deactivate and reactivate the Newsletter plugin.';
+                                            echo 'The job is missing! Try to deactivate and reactivate Open Newsletter.';
                                             break;
                                         case NewsletterSystemAdmin::JOB_LATE:
-                                            echo 'The job is late. You probably need and <a href="https://www.thenewsletterplugin.com/documentation/troubleshooting/newsletter-delivery-engine/">external scheduler trigger</a>.';
+                                            echo 'The job is late. You probably need and <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme">external scheduler trigger</a>.';
                                             break;
                                         case NewsletterSystemAdmin::JOB_SKIPPED:
                                             echo 'The job has been skipped! The scheduler is overloaded or a job has fatal error and blocks the scheduler: check the server error logs with the help of your provider.';

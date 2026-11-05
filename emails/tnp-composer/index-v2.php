@@ -76,7 +76,7 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                         <th dir="<?php echo $dir ?>">
                             <?php esc_html_e('Subject', 'newsletter') ?>
                             <?php if ($context_type === 'automated') { ?>
-                                <?php $this->field_help('https://www.thenewsletterplugin.com/documentation/addons/extended-features/automated-extension/#subject') ?>
+                                <?php $this->field_help('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?>
                             <?php } ?>
                         </th>
                         <td dir="<?php echo $dir ?>">
@@ -88,7 +88,7 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                     </tr>
                     <tr>
                         <th dir="<?php echo $dir ?>"><span title="<?php esc_attr_e('Shown by some email clients as excerpt', 'newsletter') ?>"><?php _e('Snippet', 'newsletter') ?></span>
-                            <?php $this->field_help('https://www.thenewsletterplugin.com/documentation/newsletters/composer/#subject') ?>
+                            <?php $this->field_help('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?>
                         </th>
                         <td dir="<?php echo $dir ?>"><?php $this->text('preheader') ?></td>
                     </tr>
@@ -218,7 +218,7 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
         tnp_preset_show = true;
 </script>
 <?php
-wp_enqueue_script('tnp-composer', plugins_url('newsletter') . '/emails/tnp-composer/_scripts/newsletter-builder-v2.js', [], NEWSLETTER_VERSION);
+wp_enqueue_script('tnp-composer', NEWSLETTER_URL . '/emails/tnp-composer/_scripts/newsletter-builder-v2.js', [], NEWSLETTER_VERSION);
 ?>
 
 <?php include NEWSLETTER_DIR . '/emails/subjects.php'; ?>
@@ -232,7 +232,7 @@ wp_enqueue_script('tnp-composer', plugins_url('newsletter') . '/emails/tnp-compo
         <li>{email_url} - <?php esc_html_e('Email online view', 'newsletter') ?></li>
     </ul>
     <p>
-        <a href="https://www.thenewsletterplugin.com/documentation/newsletters/newsletter-tags/" target="_blank">See the documentation</a>
+        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">See the documentation</a>
     </p>
 </div>
 

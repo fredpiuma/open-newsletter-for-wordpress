@@ -223,7 +223,7 @@ $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(statu
                     </table>
                 <?php } else { ?>
                     <p>
-                        This panel is active when a <a href="https://www.thenewsletterplugin.com/documentation/newsletters/multilanguage/" target="_blank">supported multilanguage plugin</a> is installed.
+                        This panel is active when a <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">supported multilanguage plugin</a> is installed.
                     </p>
                 <?php } ?>
 

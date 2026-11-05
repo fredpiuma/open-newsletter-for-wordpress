@@ -15,7 +15,7 @@ $templates = NewsletterComposer::instance()->get_templates();
                 <?php
                 foreach ($user_preset_list as $user_preset) {
 
-                    $default_icon_url = plugins_url('newsletter') . "/admin/images/template-icon.png?ver=" . NEWSLETTER_VERSION;
+                    $default_icon_url = NEWSLETTER_URL . "/admin/images/template-icon.png?ver=" . NEWSLETTER_VERSION;
                     $preset_name = $user_preset->subject;
 
                     // esc_js() assumes the string will be in single quote (arghhh!!!)

@@ -209,7 +209,7 @@ if (isset($theme_options['theme_posts'])) {
                         </table>
                     <?php } ?>
 
-                    <?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/footer.php'; ?>
+                    <?php include NEWSLETTER_DIR . '/emails/themes/default/footer.php'; ?>
 
                 </div>
 

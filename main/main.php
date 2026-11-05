@@ -143,7 +143,7 @@ if (!$language) {
     <?php include NEWSLETTER_ADMIN_HEADER; ?>
 
     <div id="tnp-heading">
-        <?php $controls->title_help('https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-configuration') ?>
+        <?php $controls->title_help('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?>
 
 <!--        <h2><?php esc_html_e('Settings', 'newsletter'); ?></h2>-->
         <?php include __DIR__ . '/nav.php' ?>
@@ -176,12 +176,12 @@ if (!$language) {
                             <tr>
                                 <th>
                                     <?php esc_html_e('Sender email', 'newsletter') ?>
-                                    <?php $controls->field_help('https://www.thenewsletterplugin.com/documentation/installation/newsletter-configuration/#sender') ?>
+                                    <?php $controls->field_help('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?>
                                 </th>
                                 <td>
                                     <?php $controls->text_email('sender_email', 40); ?>
                                     <span class="description">
-                                        Emails delivered with a <a href="https://www.thenewsletterplugin.com/documentation/installation/newsletter-configuration/#sender" target="_blank">different address</a>?
+                                        Emails delivered with a <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">different address</a>?
                                     </span>
                                 </td>
                             </tr>

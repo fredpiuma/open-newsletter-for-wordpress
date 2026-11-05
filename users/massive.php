@@ -234,7 +234,7 @@ if ($controls->is_action('change_status')) {
                         <tr>
                             <td>
                                 <?php esc_html_e('Inactive since', 'newsletter') ?>
-                                <?php $controls->field_help('https://www.thenewsletterplugin.com/documentation/subscribers-and-management/subscribers/#inactive') ?>
+                                <?php $controls->field_help('https://github.com/fredpiuma/open-newsletter-for-wordpress#readme') ?>
                             </td>
                             <td>
                                 <?php

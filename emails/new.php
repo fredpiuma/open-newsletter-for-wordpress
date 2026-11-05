@@ -153,7 +153,7 @@ if ($controls->is_action('create')) {
                     </td>
                     <td style="text-align: left; vertical-align: top; border-bottom: 1px solid #ddd; padding-bottom: 10px">
                         <div style="float: right"><?php $controls->button_primary('create', 'Proceed to edit &raquo;', 'this.form.action=\'' . home_url('/', is_ssl() ? 'https' : 'http') . '?na=emails-create\';this.form.submit()'); ?></div>
-                        <img style="position: relative; left: 5px; top: 10px;"src="<?php echo plugins_url('newsletter') ?>/emails/images/arrow.png" height="35">
+                        <img style="position: relative; left: 5px; top: 10px;"src="<?php echo NEWSLETTER_URL ?>/emails/images/arrow.png" height="35">
                     </td>
                 </tr>
                 <tr>

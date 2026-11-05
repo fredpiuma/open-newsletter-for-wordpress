@@ -28,7 +28,7 @@ $system_warnings = NewsletterSystemAdmin::instance()->get_warnings_count();
 <div id="tnp-menu">
     <ul>
         <li>
-            <a href="?page=newsletter_main_index"><img src="<?php echo plugins_url('newsletter'); ?>/admin/images/logo.png" class="tnp-header-logo" style="vertical-align: bottom;"></a>
+            <a href="?page=newsletter_main_index"><img src="<?php echo NEWSLETTER_URL; ?>/admin/images/logo.png" class="tnp-header-logo" style="vertical-align: bottom;"></a>
 
         </li>
         <li><a href="#"><i class="fas fa-users"></i> <?php esc_html_e('Subscribers', 'newsletter') ?></a>
@@ -196,7 +196,7 @@ $system_warnings = NewsletterSystemAdmin::instance()->get_warnings_count();
 
                     <li><a href="?page=newsletter_system_logs"><?php esc_html_e('Logs', 'newsletter') ?></a></li>
                     <li>
-                        <a href="https://www.thenewsletterplugin.com/documentation/developers/backup-recovery/" target="_blank"><?php _e('Backup', 'newsletter') ?></a>
+                        <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><?php _e('Backup', 'newsletter') ?></a>
                     </li>
                 </ul>
             </li>

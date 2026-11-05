@@ -1,5 +1,5 @@
 <?php
-$codemirror_url = plugins_url('newsletter') . '/vendor/codemirror';
+$codemirror_url = NEWSLETTER_URL . '/vendor/codemirror';
 ?>
 <link href="<?php echo $codemirror_url ?>/codemirror.css" type="text/css" rel="stylesheet">
 <link href="<?php echo $codemirror_url ?>/addon/hint/show-hint.css" type="text/css" rel="stylesheet">

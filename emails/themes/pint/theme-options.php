@@ -16,4 +16,4 @@ if (!defined('ABSPATH'))
         <td><?php $controls->categories_group('theme_categories'); ?></td>
     </tr>
 </table>
-<?php include WP_PLUGIN_DIR . '/newsletter/emails/themes/default/social-options.php'; ?>
+<?php include NEWSLETTER_DIR . '/emails/themes/default/social-options.php'; ?>

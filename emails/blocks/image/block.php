@@ -42,7 +42,7 @@ if (empty($options['image']['id'])) {
             $media->width = $composer['width'];
             $media->height = 250;
         } else {
-            $media->url = plugins_url('newsletter') . '/images/placeholder.png';
+            $media->url = NEWSLETTER_URL . '/images/placeholder.png';
             $media->width = $composer['width'];
             $media->height = 250;
         }

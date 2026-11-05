@@ -144,7 +144,7 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
 
     function hook_admin_enqueue_scripts() {
 
-        $url = plugins_url('newsletter');
+        $url = NEWSLETTER_URL;
 
         // Styles for the left side menu
         wp_enqueue_style('tnp-admin-global', $url . '/admin/css/global.css', [], NEWSLETTER_VERSION);
@@ -163,7 +163,7 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
 
             $data = [];
             $data['site_url'] = site_url('/');
-            $data['newsletter_url'] = plugins_url('newsletter');
+            $data['newsletter_url'] = NEWSLETTER_URL;
             wp_localize_script('tnp-admin', 'NewsletterControls', $data);
 
             wp_enqueue_style('tnp-select2', $url . '/vendor/select2/css/select2.min.css', [], NEWSLETTER_VERSION);
@@ -202,7 +202,7 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             return;
         }
 
-        add_menu_page('Newsletter', 'Newsletter', 'exist', 'newsletter_main_index', '', plugins_url('newsletter') . '/admin/images/menu-icon.png', '40');
+        add_menu_page('Newsletter', 'Newsletter', 'exist', 'newsletter_main_index', '', NEWSLETTER_URL . '/admin/images/menu-icon.png', '40');
 
         NewsletterMainAdmin::instance()->admin_menu();
         NewsletterSubscriptionAdmin::instance()->admin_menu();

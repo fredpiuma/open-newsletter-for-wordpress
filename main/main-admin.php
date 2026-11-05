@@ -37,7 +37,7 @@ class NewsletterMainAdmin extends NewsletterModuleAdmin {
 
     function admin_notices() {
         if ($this->get_option('debug')) {
-            echo '<div class="notice notice-warning"><p>The Newsletter plugin is in <strong>debug mode</strong>. When done change it on Newsletter <a href="admin.php?page=newsletter_main_main"><strong>main settings</strong></a>. Do not keep the debug mode active on production sites.</p></div>';
+            echo '<div class="notice notice-warning"><p>Open Newsletter is in <strong>debug mode</strong>. When done change it on Newsletter <a href="admin.php?page=newsletter_main_main"><strong>main settings</strong></a>. Do not keep the debug mode active on production sites.</p></div>';
         }
 
         $count = $this->get_emails_blocked_count();

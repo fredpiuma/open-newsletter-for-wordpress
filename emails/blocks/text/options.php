@@ -8,7 +8,7 @@
 $background = empty($options['block_background'])?$composer['block_background']:$options['block_background'];
 ?>
 <p>
-    <a href="https://www.thenewsletterplugin.com/documentation/newsletters/newsletter-tags/"
+    <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme"
                        target="_blank">You can use tags to inject subscriber fields</a>.
 </p>
 <?php //$fields->font() ?>

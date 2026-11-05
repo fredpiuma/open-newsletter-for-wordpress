@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['ac
     }
     // Newsletter mail
     $text = [];
-    $text['html'] = '<p>This is an <b>HTML</b> test email sent using the sender data set on Newsletter main setting. <a href="https://www.thenewsletterplugin.com">This is a link to an external site</a>.</p>';
+    $text['html'] = '<p>This is an <b>HTML</b> test email sent using the sender data set on Newsletter main setting. <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress">This is a link to an external site</a>.</p>';
     $text['text'] = 'This is a textual test email part sent using the sender data set on Newsletter main setting.';
     $r = Newsletter::instance()->mail($email, 'Newsletter test email at ' . date(DATE_ISO8601), $text);
 
@@ -101,7 +101,7 @@ if (empty($this->get_option('page'))) {
 <style>
 <?php include __DIR__ . '/css/welcome.css' ?>
 </style>
-<script src="<?php echo esc_attr(plugins_url('newsletter')) ?>/main/js/welcome.js"></script>
+<script src="<?php echo esc_attr(NEWSLETTER_URL) ?>/main/js/welcome.js"></script>
 <script>
     // Email test
     function tnp_welcome_test() {
@@ -111,13 +111,6 @@ if (empty($this->get_option('page'))) {
                     alert(response);
                 });
     }
-
-    function tnp_welcome_subscribe() {
-        var form = document.getElementById("tnp-subscription");
-        form.elements["ne"].value = document.getElementById("tnp-ne").value;
-        form.submit();
-        alert('Thank you!');
-    }
 </script>
 <div class="wrap" id="tnp-wrap">
     <form id="tnp-welcome">
@@ -126,8 +119,8 @@ if (empty($this->get_option('page'))) {
             <ul class="cd-slider">
                 <li class="tnp-first-slide visible">
                     <div>
-                        <img class="tnp-logo-big" src="<?php echo esc_attr(plugins_url('newsletter')); ?>/admin/images/logo-white.png">
-                        <p><?php esc_html_e('Welcome to The Newsletter Plugin and thank you for choosing the best mail management system for Wordpress!', 'newsletter'); ?><br><br>
+                        <img class="tnp-logo-big" src="<?php echo esc_attr(NEWSLETTER_URL); ?>/admin/images/logo-white.png">
+                        <p><?php esc_html_e('Welcome to Open Newsletter and thank you for choosing a free and open mail management system for WordPress!', 'newsletter'); ?><br><br>
                             <?php esc_html_e('In this short tutorial we will guide you through some of the basic settings to get the most out of our plugin. ', 'newsletter'); ?></p>
                     </div>
                 </li>
@@ -202,21 +195,12 @@ if (empty($this->get_option('page'))) {
 
                         <div class="row tnp-row-padded">
                             <div class="tnp-col-3-boxed">
-                                <p><?php esc_html_e('Be always updated with the latest releases and tips from our headquarters', 'newsletter'); ?></p>
-                                <input type="email" placeholder="<?php esc_attr_e('Your email') ?>" value="<?php echo esc_attr(get_option("admin_email")) ?>" id="tnp-ne" name="ne" value="<?php echo esc_attr(get_option('admin_email')); ?>">
-                                <br>
-                                <a href="#" class="tnp-welcome-confirm-button" onclick="tnp_welcome_subscribe(); return false;"><?php esc_html_e('Subscribe', 'newsletter'); ?></a>
+                                <p><?php esc_html_e('Need help or a custom solution? Get in touch with the developer.', 'newsletter'); ?></p>
+                                <a href="<?php echo esc_attr(admin_url('admin.php?page=newsletter_system_support')); ?>" class="tnp-welcome-link-button"><?php esc_html_e('Support', 'newsletter'); ?></a>
                             </div>
                             <div class="tnp-col-3-boxed">
-                                <p><?php esc_html_e('You can also follow us through our social accounts', 'newsletter'); ?> :)</p>
-                                <a href="" target="_blank"><i class="fab fa-facebook-f fa-3x" style="color:#fff;" aria-hidden="true"></i></a>
-                                <a href="" target="_blank"><i class="fab fa-youtube fa-3x" style="color:#fff; margin-left: 40px;" aria-hidden="true"></i></a>
-                                <a href="" target="_blank"><i class="fab fa-twitter fa-3x" style="color:#fff; margin-left: 40px;" aria-hidden="true"></i></a>
-
-                            </div>
-                            <div class="tnp-col-3-boxed">
-                                <p><?php esc_html_e('If you are unsure on how to use some features of Newsletter, reach for our official documentation.', 'newsletter'); ?></p>
-                                <a href="https://www.thenewsletterplugin.com/documentation" class="tnp-welcome-link-button" target="_blank"><?php esc_html_e('Documentation', 'newsletter'); ?></a>
+                                <p><?php esc_html_e('If you are unsure on how to use some features of Newsletter, read the documentation in the project repository.', 'newsletter'); ?></p>
+                                <a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" class="tnp-welcome-link-button" target="_blank"><?php esc_html_e('Documentation', 'newsletter'); ?></a>
                             </div>
                         </div>
 
@@ -240,12 +224,5 @@ if (empty($this->get_option('page'))) {
         </section> <!-- .cd-slider-wrapper -->
     </form>
 
-    <form target="tnp-tunnel" id="tnp-subscription" action="https://www.thenewsletterplugin.com/?na=s" method="post" style="display: none">
-        <input type="email" name="ne" value="">
-        <input type="hidden" value="plugin-welcome" name="nr">
-        <input type="hidden" value="3" name="nl[]">
-        <input type="hidden" value="single" name="optin">
-    </form>
-    <iframe name="tnp-tunnel" style="display: none"></iframe>
 
 </div>

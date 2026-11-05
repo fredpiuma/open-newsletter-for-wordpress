@@ -131,7 +131,7 @@ if ($show_logo) {
 
 $social_width = 32;
 $social_type = (int) $options['social_type'];
-$social_icon_url = plugins_url('newsletter') . '/images/social-' . $social_type;
+$social_icon_url = NEWSLETTER_URL . '/images/social-' . $social_type;
 $socials = ['facebook', 'twitter', 'pinterest', 'linkedin', 'tumblr', 'youtube',
     'soundcloud', 'instagram', 'vimeo', 'telegram', 'vk', 'discord', 'tiktok',
     'twitch', 'whatsapp', 'threads', 'amazon', 'mastodon', 'bluesky', 'kickstarter'];

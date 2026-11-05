@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 if (isset($theme_options['theme_social_disable'])) return;
-$social_icon_url = plugins_url('newsletter') . '/emails/themes/default/images';
+$social_icon_url = NEWSLETTER_URL . '/emails/themes/default/images';
 ?>
 <table cellpadding="5" align="center">
     <tr>

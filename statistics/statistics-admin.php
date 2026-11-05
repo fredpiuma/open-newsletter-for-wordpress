@@ -10,6 +10,8 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
     const SENT_READ = 1;
     const SENT_CLICK = 2;
 
+    const SUBSCRIBERS_PER_PAGE = 50;
+
     /**
      * @return NewsletterStatisticsAdmin
      */
@@ -22,6 +24,7 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
 
     function __construct() {
         parent::__construct('statistics');
+        add_action('admin_init', [$this, 'hook_admin_init']);
     }
 
     function admin_menu() {
@@ -187,6 +190,7 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
             FROM " . NEWSLETTER_SENT_TABLE . " where email_id=%d", $email->id));
 
             $report->total = $data->total;
+            $report->error_count = $data->errors;
             $report->open_count = $data->opens;
             $report->click_count = $data->clicks;
         }
@@ -194,6 +198,176 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
         $report->update();
 
         return $report;
+    }
+
+    /**
+     * Filters available in the per-subscriber report of a newsletter.
+     *
+     * @return array
+     */
+    function get_subscriber_filters() {
+        return [
+            'all' => __('All', 'newsletter'),
+            'opened' => __('Opened', 'newsletter'),
+            'not-opened' => __('Not opened', 'newsletter'),
+            'clicked' => __('Clicked', 'newsletter'),
+            'not-clicked' => __('Not clicked', 'newsletter'),
+            'errors' => __('Errors', 'newsletter'),
+        ];
+    }
+
+    /**
+     * Builds the where clause (prepared) on the sent table (alias "s") for a filter and an optional clicked URL.
+     */
+    private function get_subscribers_where($email_id, $filter, $url = '') {
+        global $wpdb;
+        $where = $wpdb->prepare('s.email_id=%d', (int) $email_id);
+        switch ($filter) {
+            case 'opened':
+                $where .= ' and s.open>=1';
+                break;
+            case 'not-opened':
+                $where .= ' and s.open=0 and s.status=0';
+                break;
+            case 'clicked':
+                $where .= ' and s.open>=2';
+                break;
+            case 'not-clicked':
+                $where .= ' and s.open<2 and s.status=0';
+                break;
+            case 'errors':
+                $where .= ' and s.status>0';
+                break;
+        }
+        if ($url !== '' && $url !== null) {
+            $where .= $wpdb->prepare(' and s.user_id in (select c.user_id from ' . NEWSLETTER_STATS_TABLE . ' c where c.email_id=%s and c.url=%s)', (string) (int) $email_id, $url);
+        }
+        return $where;
+    }
+
+    function count_subscribers($email_id, $filter = 'all', $url = '') {
+        global $wpdb;
+        $where = $this->get_subscribers_where($email_id, $filter, $url);
+        return (int) $wpdb->get_var('select count(*) from ' . NEWSLETTER_SENT_TABLE . ' s where ' . $where);
+    }
+
+    /**
+     * @return array Rows with the sent data and the subscriber data (null if the subscriber was removed).
+     */
+    function get_subscribers($email_id, $filter = 'all', $url = '', $limit = 50, $offset = 0) {
+        global $wpdb;
+        $where = $this->get_subscribers_where($email_id, $filter, $url);
+        $sql = 'select s.user_id, u.email, u.name, u.surname, u.status, s.time as sent_time, s.status as sent_status, s.open as sent_open, s.ip, s.error'
+                . ' from ' . NEWSLETTER_SENT_TABLE . ' s left join ' . NEWSLETTER_USERS_TABLE . ' u on u.id=s.user_id'
+                . ' where ' . $where . ' order by s.time asc, s.user_id asc';
+        if ($limit > 0) {
+            $sql .= $wpdb->prepare(' limit %d offset %d', (int) $limit, (int) $offset);
+        }
+        $rows = $wpdb->get_results($sql);
+        return is_array($rows) ? $rows : [];
+    }
+
+    /**
+     * URLs clicked in a newsletter with the number of clicks and of distinct subscribers.
+     */
+    function get_clicked_urls($email_id) {
+        global $wpdb;
+        $rows = $wpdb->get_results($wpdb->prepare('select url, count(*) as number, count(distinct user_id) as people from ' . NEWSLETTER_STATS_TABLE . ' where email_id=%s group by url order by number desc, url asc limit 500', (string) (int) $email_id));
+        return is_array($rows) ? $rows : [];
+    }
+
+    /**
+     * Adds to a list the confirmed subscribers selected by a filter. Returns the number of subscribers changed.
+     */
+    function add_subscribers_to_list($list, $email_id, $filter = 'all', $url = '') {
+        global $wpdb;
+        $list = (int) $list;
+        if ($list < 1 || $list > NEWSLETTER_LIST_MAX) {
+            return 0;
+        }
+        $column = 'list_' . $list;
+        $where = $this->get_subscribers_where($email_id, $filter, $url);
+        $wpdb->query("update " . NEWSLETTER_USERS_TABLE . " u join " . NEWSLETTER_SENT_TABLE . " s on s.user_id=u.id set u." . $column . "=1 where u.status='C' and u." . $column . "=0 and " . $where);
+        return (int) $wpdb->rows_affected;
+    }
+
+    /**
+     * Newsletters sent to a subscriber with open/click state.
+     */
+    function get_user_history($user_id) {
+        global $wpdb;
+        $rows = $wpdb->get_results($wpdb->prepare('select e.id, e.subject, s.time, s.open, s.error from ' . NEWSLETTER_SENT_TABLE . ' s join ' . NEWSLETTER_EMAILS_TABLE . ' e on e.id=s.email_id where s.user_id=%d order by s.time desc, e.id desc limit 200', (int) $user_id));
+        return is_array($rows) ? $rows : [];
+    }
+
+    /**
+     * Distinct links clicked by a subscriber.
+     */
+    function get_user_clicks($user_id) {
+        global $wpdb;
+        $rows = $wpdb->get_results($wpdb->prepare('select email_id, url from ' . NEWSLETTER_STATS_TABLE . ' where user_id=%d group by email_id, url order by email_id desc limit 1000', (int) $user_id));
+        return is_array($rows) ? $rows : [];
+    }
+
+    function hook_admin_init() {
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
+        if (empty($_GET['export']) || ($_GET['page'] ?? '') !== 'newsletter_statistics_view-users') {
+            return;
+        }
+        if (!Newsletter::instance()->is_allowed()) {
+            wp_die('Forbidden', '', ['response' => 403]);
+        }
+        check_admin_referer('tnp-statistics-export');
+        $this->export_subscribers();
+    }
+
+    private function export_subscribers() {
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
+        $email_id = (int) ($_GET['id'] ?? 0);
+        $filter = sanitize_key($_GET['filter'] ?? 'all');
+        if (!isset($this->get_subscriber_filters()[$filter])) {
+            $filter = 'all';
+        }
+        $url = isset($_GET['url']) && is_string($_GET['url']) ? wp_unslash($_GET['url']) : '';
+
+        nocache_headers();
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="newsletter-' . $email_id . '-' . $filter . '.csv"');
+        $out = fopen('php://output', 'w');
+        fwrite($out, "\xEF\xBB\xBF");
+        fputcsv($out, ['email', 'name', 'surname', 'status', 'sent_on', 'delivered', 'opened', 'clicked', 'ip', 'error']);
+        $offset = 0;
+        do {
+            $rows = $this->get_subscribers($email_id, $filter, $url, 1000, $offset);
+            foreach ($rows as $row) {
+                fputcsv($out, [
+                    $this->csv_cell($row->email),
+                    $this->csv_cell($row->name),
+                    $this->csv_cell($row->surname),
+                    $row->status,
+                    $row->sent_time ? gmdate('Y-m-d H:i:s', (int) $row->sent_time) : '',
+                    $row->sent_status ? 0 : 1,
+                    $row->sent_open >= 1 ? 1 : 0,
+                    $row->sent_open >= 2 ? 1 : 0,
+                    $row->ip,
+                    $this->csv_cell($row->error),
+                ]);
+            }
+            $offset += 1000;
+        } while (count($rows) === 1000);
+        fclose($out);
+        die();
+    }
+
+    /**
+     * Neutralizes spreadsheet formula injection.
+     */
+    private function csv_cell($value) {
+        $value = (string) $value;
+        if ($value !== '' && strpbrk($value[0], "=+-@\t\r") !== false) {
+            return "'" . $value;
+        }
+        return $value;
     }
 
     public function get_date_badge($email) {
@@ -209,6 +383,7 @@ class TNP_Statistics {
 
     var $email_id;
     var $total = 0;
+    var $error_count = 0;
     var $open_count = 0;
     var $open_rate = 0;
     var $click_count = 0;
