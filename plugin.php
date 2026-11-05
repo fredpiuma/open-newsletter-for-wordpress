@@ -38,9 +38,6 @@ global $wpdb, $newsletter;
 if (!defined('NEWSLETTER_DEBUG'))
     define('NEWSLETTER_DEBUG', false);
 
-if (!defined('NEWSLETTER_EXTENSION_UPDATE'))
-    define('NEWSLETTER_EXTENSION_UPDATE', true);
-
 if (!defined('NEWSLETTER_EMAILS_TABLE'))
     define('NEWSLETTER_EMAILS_TABLE', $wpdb->prefix . 'newsletter_emails');
 
@@ -1078,112 +1075,18 @@ class Newsletter extends NewsletterModule {
         return $file2;
     }
 
+    /**
+     * This plugin is distributed from its own repository. WordPress.org hosts a different plugin with the same
+     * folder name ("newsletter") and would offer its update, which would replace this one. Drops that offer.
+     * Local filter only, no connection is made by the plugin.
+     */
     function hook_site_transient_update_plugins($value) {
-        static $extra_response = array();
-
-        //$this->logger->debug('Update plugins transient called');
-
-        if (!$value || !is_object($value)) {
-            //$this->logger->info('Empty object');
-            return $value;
-        }
-
-        if (!isset($value->response) || !is_array($value->response)) {
-            $value->response = array();
-        }
-
-        // Already computed? Use it! (this filter is called many times in a single request)
-        if ($extra_response) {
-            //$this->logger->debug('Already updated');
-            $value->response = array_merge($value->response, $extra_response);
-            return $value;
-        }
-
-        $extensions = Newsletter\Addons::get_addons();
-
-        // Ops...
-        if (!$extensions) {
-            return $value;
-        }
-
-        foreach ($extensions as $extension) {
-            unset($value->response[$extension->wp_slug]);
-            unset($value->no_update[$extension->wp_slug]);
-        }
-
-        // Someone doesn't want our addons updated, let respect it (this constant should be defined in wp-config.php)
-        if (!NEWSLETTER_EXTENSION_UPDATE) {
-            //$this->logger->info('Updates disabled');
-            return $value;
-        }
-
-        include_once(ABSPATH . 'wp-admin/includes/plugin.php');
-
-        // Ok, that is really bad (should we remove it? is there a minimum WP version?)
-        if (!function_exists('get_plugin_data')) {
-            //$this->logger->error('No get_plugin_data function available!');
-            return $value;
-        }
-
-        $license_key = $this->get_license_key();
-
-        // Here we prepare the update information BUT do not add the link to the package which is privided
-        // by our Addons Manager (due to WP policies)
-        foreach ($extensions as $extension) {
-
-            // Patch for names convention
-            $extension->plugin = $extension->wp_slug;
-
-            //$this->logger->debug('Processing ' . $extension->plugin);
-            //$this->logger->debug($extension);
-
-            $plugin_data = false;
-            if (file_exists(WP_PLUGIN_DIR . '/' . $extension->plugin)) {
-                $plugin_data = get_plugin_data(WP_PLUGIN_DIR . '/' . $extension->plugin, false, false);
-            } else if (file_exists(WPMU_PLUGIN_DIR . '/' . $extension->plugin)) {
-                $plugin_data = get_plugin_data(WPMU_PLUGIN_DIR . '/' . $extension->plugin, false, false);
+        if (is_object($value)) {
+            $file = plugin_basename(__FILE__);
+            if (isset($value->response) && is_array($value->response)) {
+                unset($value->response[$file]);
             }
-
-            if (!$plugin_data) {
-                //$this->logger->debug('Seems not installed');
-                continue;
-            }
-
-            $plugin = new stdClass();
-            $plugin->id = $extension->id;
-            $plugin->slug = $extension->slug;
-            $plugin->plugin = $extension->plugin;
-            $plugin->new_version = $extension->version;
-            $plugin->url = $extension->url;
-            if (class_exists('NewsletterExtensions')) {
-                // NO filters here!
-                $plugin->package = NewsletterExtensions::$instance->get_package($extension->id, $license_key);
-            } else {
-                $plugin->package = '';
-            }
-//            [banners] => Array
-//                        (
-//                            [2x] => https://ps.w.org/wp-rss-aggregator/assets/banner-1544x500.png?rev=2040548
-//                            [1x] => https://ps.w.org/wp-rss-aggregator/assets/banner-772x250.png?rev=2040548
-//                        )
-//            [icons] => Array
-//                        (
-//                            [2x] => https://ps.w.org/advanced-custom-fields/assets/icon-256x256.png?rev=1082746
-//                            [1x] => https://ps.w.org/advanced-custom-fields/assets/icon-128x128.png?rev=1082746
-//                        )
-            if (version_compare($extension->version, $plugin_data['Version']) > 0) {
-                //$this->logger->debug('There is a new version');
-                $extra_response[$extension->plugin] = $plugin;
-            } else {
-                // Maybe useless...
-                //$this->logger->debug('There is NOT a new version');
-                $value->no_update[$extension->plugin] = $plugin;
-            }
-            //$this->logger->debug('Added');
         }
-
-        $value->response = array_merge($value->response, $extra_response);
-
         return $value;
     }
 
@@ -1199,18 +1102,6 @@ class Newsletter extends NewsletterModule {
      */
     function set_extension_update_data($value, $extension) {
         return $value;
-    }
-
-    /**
-     * Retrieve the extensions form the tnp site
-     * @return array
-     */
-    function getTnpExtensions() {
-        return Newsletter\Addons::get_addons();
-    }
-
-    function clear_extensions_cache() {
-        delete_transient('tnp_extensions_json');
     }
 
     /**

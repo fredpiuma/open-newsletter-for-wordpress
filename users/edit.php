@@ -96,11 +96,6 @@ function percentValue($value, $total) {
 }
 ?>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load('current', {'packages': ['corechart', 'geomap']});
-</script>
-
 <div class="wrap tnp-users tnp-users-edit" id="tnp-wrap">
 
     <?php include NEWSLETTER_ADMIN_HEADER ?>

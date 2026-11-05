@@ -54,27 +54,6 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
 
         self::$is_admin_page = isset($_GET['page']) && strpos($_GET['page'], 'newsletter_') === 0;
 
-        if (!class_exists('NewsletterExtensions')) {
-
-            add_filter('plugin_row_meta', function ($plugin_meta, $plugin_file) {
-
-                static $slugs = array();
-                if (empty($slugs)) {
-                    $addons = Newsletter::instance()->getTnpExtensions();
-                    if ($addons) {
-                        foreach ($addons as $addon) {
-                            $slugs[] = $addon->wp_slug;
-                        }
-                    }
-                }
-                if (array_search($plugin_file, $slugs) !== false) {
-
-                    $plugin_meta[] = '<a href="admin.php?page=newsletter_main_extensions" style="font-weight: bold">Newsletter Addons Manager required</a>';
-                }
-                return $plugin_meta;
-            }, 10, 2);
-        }
-
         NewsletterMainAdmin::instance()->wp_loaded();
         //NewsletterEmailsAdmin::instance()->wp_loaded();
         NewsletterComposerAdmin::instance()->wp_loaded();
@@ -178,7 +157,7 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
             wp_enqueue_script('jquery-ui-draggable');
             wp_enqueue_media();
 
-            wp_enqueue_style('tnp-admin-font', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+            wp_enqueue_style('tnp-admin-font', $url . '/admin/css/inter.css', [], NEWSLETTER_VERSION);
 
             wp_enqueue_script('tnp-admin', $url . '/admin/js/all.js', ['jquery'], NEWSLETTER_VERSION);
 

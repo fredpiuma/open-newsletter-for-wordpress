@@ -11,11 +11,6 @@ $all_count = $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE);
 $referres = $wpdb->get_results("select referrer, count(*) as total, SUM(if(status='C', 1, 0)) as confirmed, SUM(if(status='S', 1, 0)) as unconfirmed, SUM(if(status='B', 1, 0)) as bounced, SUM(if(status='U', 1, 0)) as unsubscribed, SUM(if(status='P', 1, 0)) as complained from " . NEWSLETTER_USERS_TABLE . " group by referrer order by confirmed desc");
 ?>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-    google.charts.load("current", {packages: ['corechart', 'geochart', 'geomap']});
-</script>
-
 <div class="wrap" id="tnp-wrap">
 
     <?php include NEWSLETTER_ADMIN_HEADER; ?>
