@@ -272,7 +272,7 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
      */
     function get_clicked_urls($email_id) {
         global $wpdb;
-        $rows = $wpdb->get_results($wpdb->prepare('select url, count(*) as number, count(distinct user_id) as people from ' . NEWSLETTER_STATS_TABLE . ' where email_id=%s group by url order by number desc, url asc limit 500', (string) (int) $email_id));
+        $rows = $wpdb->get_results($wpdb->prepare('select url, count(*) as number, count(distinct user_id) as people from ' . NEWSLETTER_STATS_TABLE . ' where email_id=%s and url<>\'\' group by url order by number desc, url asc limit 500', (string) (int) $email_id));
         return is_array($rows) ? $rows : [];
     }
 
@@ -305,7 +305,7 @@ class NewsletterStatisticsAdmin extends NewsletterModuleAdmin {
      */
     function get_user_clicks($user_id) {
         global $wpdb;
-        $rows = $wpdb->get_results($wpdb->prepare('select email_id, url from ' . NEWSLETTER_STATS_TABLE . ' where user_id=%d group by email_id, url order by email_id desc limit 1000', (int) $user_id));
+        $rows = $wpdb->get_results($wpdb->prepare('select email_id, url from ' . NEWSLETTER_STATS_TABLE . ' where user_id=%d and url<>\'\' group by email_id, url order by email_id desc limit 1000', (int) $user_id));
         return is_array($rows) ? $rows : [];
     }
 

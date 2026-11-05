@@ -319,7 +319,7 @@ function tnp_describe_table($table) {
                                 </td>
                                 <td>
                                     The log folder is <?php echo esc_html(NEWSLETTER_LOG_DIR) ?><br>
-                                    <?php if (!$res) { ?>
+                                    <?php if (!$condition) { ?>
                                         Cannot create the folder or it is not writable.
                                     <?php } ?>
                                 </td>
@@ -772,7 +772,7 @@ function tnp_describe_table($table) {
                                     <?php $this->condition_flag($condition) ?>
                                 </td>
                                 <td>
-                                    <?php if (!$res) { ?>
+                                    <?php if (!$condition) { ?>
                                         Your PHP execution time limit is <?php echo $value ?> seconds. It cannot be changed and it is too lower to grant the maximum delivery rate of Newsletter.
                                     <?php } else { ?>
                                         Your PHP execution time limit is <?php echo $value ?> seconds and can be changed by Open Newsletter.<br>
