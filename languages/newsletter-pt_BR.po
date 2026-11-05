@@ -49,9 +49,6 @@ msgstr ""
 msgid "Action links"
 msgstr ""
 
-msgid "The Newsletter Team"
-msgstr ""
-
 msgid "Post featured image"
 msgstr ""
 
@@ -1393,9 +1390,6 @@ msgstr "Remetente"
 msgid "In this short tutorial we will guide you through some of the basic settings to get the most out of our plugin. "
 msgstr "Neste tutorial curto nós iremos lhe guiar através de algumas configurações básicas para aproveitar melhor nosso plugin."
 
-msgid "Welcome to The Newsletter Plugin and thank you for choosing the best mail management system for Wordpress!"
-msgstr ""
-
 msgid "There was an error. Complete the setup and then use the System panels to test again."
 msgstr ""
 
@@ -1695,9 +1689,6 @@ msgstr "Título"
 
 msgid "Cancel"
 msgstr "LINK"
-
-msgid "https://www.thenewsletterplugin.com"
-msgstr "https://www.thenewsletterplugin.com"
 
 msgid "Newsletter"
 msgstr "Newsletter"
