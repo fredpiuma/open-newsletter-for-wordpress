@@ -51,7 +51,7 @@ msgid "Post featured image"
 msgstr ""
 
 msgid "Delay between emails"
-msgstr ""
+msgstr "Intervalo entre e-mails"
 
 msgid "Database error. Check the log files."
 msgstr ""
@@ -2223,3 +2223,36 @@ msgstr "Usar a primeira imagem do conteúdo"
 
 msgid "When the featured image is not set."
 msgstr "Quando a imagem destacada não está definida."
+
+msgid "Automatic recovery on %s"
+msgstr "Recuperação automática em %s"
+
+msgid "For example, when your provider requires you to:"
+msgstr "Por exemplo, quando o seu provedor exige que você:"
+
+msgid "From 0 (default) to 5000 (5 seconds). It is a time delay added after each email to respect specific provider constraints."
+msgstr "De 0 (padrão) a 5000 (5 segundos). É uma pausa adicionada depois de cada e-mail para respeitar limites específicos do provedor."
+
+msgid "Press \"Continue\" to continue the delivery"
+msgstr "Clique em \"Continuar\" para retomar o envio"
+
+msgid "The blog front page has been set as the Newsletter public page, that is not recommended. Please create a dedicated page."
+msgstr "A página inicial do site foi definida como página pública da newsletter, o que não é recomendado. Crie uma página exclusiva."
+
+msgid "The blog post list page has been set as the Newsletter public page, that is not recommended. Please create a dedicated page."
+msgstr "A página de listagem de posts do site foi definida como página pública da newsletter, o que não é recomendado. Crie uma página exclusiva."
+
+msgid "The maximum speed is overridden by the delivery addon \"%s\""
+msgstr "A velocidade máxima é substituída pelo add-on de envio \"%s\""
+
+msgid "This value is set by the constant NEWSLETTER_SEND_DELAY in the site wp-config.php with value"
+msgstr "Este valor é definido pela constante NEWSLETTER_SEND_DELAY no wp-config.php do site, com o valor"
+
+msgid "milliseconds"
+msgstr "milissegundos"
+
+msgid "send no more than 1 email every 2 seconds: set it to 2000."
+msgstr "não envie mais de 1 e-mail a cada 2 segundos: use 2000."
+
+msgid "send no more than 10 emails per second: set it to 100 (1 second / 10 emails = 100 milliseconds)."
+msgstr "não envie mais de 10 e-mails por segundo: use 100 (1 segundo / 10 e-mails = 100 milissegundos)."

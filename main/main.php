@@ -12,9 +12,11 @@ if (!$controls->is_action()) {
 
         if (!$language) {
 
+            $css = $controls->data['css'] ?? '';
+
             if (!$this->is_html_allowed()) {
-                $css = $controls->data['css'];
                 $controls->data = wp_kses_post_deep($controls->data);
+                // CSS must not be filtered!
                 $controls->data['css'] = $css;
             }
 
@@ -39,14 +41,9 @@ if (!$controls->is_action()) {
                 $controls->data['scheduler_max'] = 12;
             }
 
-            if (defined('NEWSLETTER_SEND_DELAY')) {
-                $controls->data['max_per_second'] = (float) $controls->data['max_per_second'];
-            } else {
-                $controls->data['max_per_second'] = (float) $controls->data['max_per_second'];
-                if ($controls->data['max_per_second'] <= 0) {
-                    $controls->data['max_per_second'] = 0;
-                }
-            }
+            $send_delay = intval($controls->data['send_delay'] ?? 0);
+            $send_delay = min(max(0, $send_delay), 5000);
+            $controls->data['send_delay'] = $send_delay;
 
             if (!$this->is_email($controls->data['reply_to'], true)) {
                 $controls->errors .= __('Reply to email is not correct.', 'newsletter') . '<br>';
@@ -61,6 +58,12 @@ if (!$controls->is_action()) {
                 if (!empty($previous_options['contract_key'])) {
                     $controls->data['contract_key'] = $previous_options['contract_key'];
                 }
+            }
+
+            $controls->data['schedule_start'] = (int)$controls->data['schedule_start'];
+            $controls->data['schedule_end'] = (int)$controls->data['schedule_end'];
+            if ($controls->data['schedule_start'] === $controls->data['schedule_end']) {
+                $controls->data['schedule'] = 0;
             }
 
             update_option('newsletter_log_level', $controls->data['log_level']);
@@ -119,6 +122,20 @@ if (!$language) {
     }
 }
 
+$mailer = Newsletter::instance()->get_mailer();
+$mailer_speed = $mailer->get_speed();
+
+// Public page type check
+$front_page_id = (int) get_option('page_on_front');
+$blog_page_id = (int) get_option('page_for_posts');
+
+if (!empty($controls->data['page'])) {
+    if ($controls->data['page'] == $front_page_id) {
+        $controls->warnings[] = __('The blog front page has been set as the Newsletter public page, that is not recommended. Please create a dedicated page.', 'newsletter');
+    } elseif ($controls->data['page'] == $blog_page_id) {
+        $controls->warnings[] = __('The blog post list page has been set as the Newsletter public page, that is not recommended. Please create a dedicated page.', 'newsletter');
+    }
+}
 ?>
 
 <?php include NEWSLETTER_INCLUDES_DIR . '/codemirror.php'; ?>
@@ -234,6 +251,8 @@ if (!$language) {
 
                                 <p class="description">
                                     <?php esc_html_e('The page content must be only the shortcode [newsletter]', 'newsletter') ?>.
+                                    <br>
+                                    <?php esc_html_e('Do not choose the "front page" or "post list page"', 'newsletter') ?>.
                                 </p>
 
                                 <?php if ($this->is_multilanguage()) { ?>
@@ -272,22 +291,38 @@ if (!$language) {
                                             <?php echo $batch_max * 12 * 24; ?> max emails per day
                                         <?php } ?>
 
+                                        <?php if ($mailer_speed && $mailer_speed != $controls->data['scheduler_max']) { ?>
+                                            <br><br>
+                                            <strong><?php echo esc_html(sprintf(__('The maximum speed is overridden by the delivery addon "%s"', 'newsletter'), $mailer->get_description())); ?></strong>
+                                        <?php } ?>
                                     </p>
+
+
                                 </td>
                             </tr>
 
                             <tr>
                                 <th>
-                                    <?php esc_html_e('Max emails per second', 'newsletter') ?>
+                                    <?php esc_html_e('Delay between emails', 'newsletter') ?>
                                     <?php $controls->field_help('/installation/newsletter-configuration/#speed') ?>
                                 </th>
                                 <td>
                                     <?php if (defined('NEWSLETTER_SEND_DELAY')) { ?>
-                                        Delay set to <?php echo esc_html(NEWSLETTER_SEND_DELAY); ?> in <code>wp-config.php</code>
+
+                                            <?php esc_html_e('This value is set by the constant NEWSLETTER_SEND_DELAY in the site wp-config.php with value', 'newsletter') ?>
+                                            <code><?php echo esc_html(NEWSLETTER_SEND_DELAY); ?></code>.
+
                                     <?php } else { ?>
-                                        <?php $controls->text('max_per_second', 5); ?>
-                                        <span class="description"><?php esc_html_e('0 for unlimited', 'newsletter') ?></span>
+                                        <?php $controls->text('send_delay', 5); ?> <?php esc_html_e('milliseconds', 'newsletter') ?>
                                     <?php } ?>
+                                    <p class="description">
+                                        <?php esc_html_e('From 0 (default) to 5000 (5 seconds). It is a time delay added after each email to respect specific provider constraints.', 'newsletter') ?>
+                                        <br>
+                                        <?php esc_html_e('For example, when your provider requires you to:', 'newsletter') ?><br>
+                                        - <?php esc_html_e('send no more than 1 email every 2 seconds: set it to 2000.', 'newsletter') ?>
+                                        <br>
+                                        - <?php esc_html_e('send no more than 10 emails per second: set it to 100 (1 second / 10 emails = 100 milliseconds).', 'newsletter') ?>
+                                    </p>
                                 </td>
                             </tr>
 

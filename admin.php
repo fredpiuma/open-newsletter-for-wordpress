@@ -40,12 +40,18 @@ class NewsletterAdmin extends NewsletterModuleAdmin {
         add_action('in_admin_header', [$this, 'hook_in_admin_header'], 1000);
         add_action('admin_menu', [$this, 'hook_admin_menu']);
 
-        // Protection against strange schedule removal on some installations
-        if (!wp_next_scheduled('newsletter') && (!defined('WP_INSTALLING') || !WP_INSTALLING)) {
-            wp_schedule_event(time() + 30, 'newsletter', 'newsletter');
+        // Protection against strange schedule removal on some installations and
+        // against far in the future scheduled events
+        if (!defined('WP_INSTALLING') || !WP_INSTALLING) {
+            $time = wp_next_scheduled('newsletter');
+            if (!$time) {
+                wp_schedule_event(time() + 30, 'newsletter', 'newsletter');
+            } elseif ($time > time() + NEWSLETTER_REAL_CRON_INTERVAL * 2) {
+                // Someone played with the cron scheduling the event in the far future...
+                wp_clear_scheduled_hook('newsletter');
+                wp_schedule_event(time() + 30, 'newsletter', 'newsletter');
+            }
         }
-
-        //add_action('admin_menu', [$this, 'add_extensions_menu'], 90);
 
         add_action('admin_enqueue_scripts', [$this, 'hook_admin_enqueue_scripts'], 999);
     }

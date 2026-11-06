@@ -44,9 +44,14 @@ class NewsletterUpgrade {
         $this->logger->info('Start upgrade from ' . $this->old_version);
 
         require_once NEWSLETTER_DIR . '/admin.php';
+        // @phpstan-ignore-next-line
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
         wp_cache_flush();
+
+        //update_option('newsletter_engine_heartbeat', 0, false); // to have the autoload set to false once, for optimization
+        delete_option('newsletter_lock_engine');
+        update_option('newsletter_engine_lock', 0, false); // to have the autoload set to false once, for optimization
 
         if (!get_option('newsletter_install_time')) {
             update_option('newsletter_install_time', time(), false);
@@ -549,6 +554,16 @@ class NewsletterUpgrade {
             update_option('newsletter_dismissed', $dismissed, false);
         }
         touch(NEWSLETTER_LOG_DIR . '/index.html');
+
+        $main_options = $this->get_option_array('newsletter_main');
+
+        if (isset($main_options['max_per_second'])) {
+            $max_per_second = intval($main_options['max_per_second']);
+            if ($max_per_second && empty($main_options['send_delay'])) {
+                $main_options['send_delay'] = intval(1000.0 / $max_per_second);
+                update_option('newsletter_main', $main_options);
+            }
+        }
 
         $this->logger->info('End');
     }

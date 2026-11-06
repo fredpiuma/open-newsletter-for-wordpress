@@ -1,6 +1,9 @@
 <?php
-/* @var $this NewsletterEmails */
-/* @var $controls NewsletterControls */
+/** @var NewsletterEmailsAdmin $this */
+/** @var NewsletterControls $controls */
+/** @var NewsletterLogger $logger */
+/** @var wpdb $wpdb */
+
 defined('ABSPATH') || exit;
 
 global $wpdb;
@@ -13,43 +16,46 @@ function tnp_prepare_controls($email, $controls) {
     }
 }
 
-// Always required
-$email = $this->get_email($_GET['id'], ARRAY_A);
+$email_id = (int)$_GET['id'];
 
-if (empty($email)) {
+// Always required
+$email = $this->get_email($email_id, ARRAY_A);
+
+if (!$email) {
     echo 'Newsletter not found';
     return;
 }
 
-$email_id = $email['id'];
-
 /* Satus changes which require a reload */
 if ($controls->is_action('pause')) {
+    $this->log($email_id, 'Paused');
     $this->logger->info('Newsletter ' . $email_id . ' paused');
     $wpdb->update(NEWSLETTER_EMAILS_TABLE, array('status' => 'paused'), array('id' => $email_id));
-    $email = $this->get_email($_GET['id'], ARRAY_A);
+    $email = $this->get_email($email_id, ARRAY_A);
     tnp_prepare_controls($email, $controls);
 }
 
 if ($controls->is_action('continue')) {
+    $this->log($email_id, 'Restarted');
     $this->logger->info('Newsletter ' . $email_id . ' restarted');
     $wpdb->update(NEWSLETTER_EMAILS_TABLE, array('status' => 'sending'), array('id' => $email_id));
-    $email = $this->get_email($_GET['id'], ARRAY_A);
+    $email = $this->get_email($email_id, ARRAY_A);
     tnp_prepare_controls($email, $controls);
 }
 
 if ($controls->is_action('abort')) {
+    $this->log($email_id, 'Stopped');
     $this->logger->info('Newsletter ' . $email_id . ' aborted');
     $wpdb->query("update " . NEWSLETTER_EMAILS_TABLE . " set last_id=0, sent=0, status='new' where id=" . $email_id);
-    $email = $this->get_email($_GET['id'], ARRAY_A);
+    $email = $this->get_email($email_id, ARRAY_A);
     tnp_prepare_controls($email, $controls);
-    $controls->messages = __('Delivery definitively cancelled', 'newsletter');
+    $controls->messages = __('Delivery definitively canceled', 'newsletter');
 }
 
 if ($controls->is_action('change-private')) {
     $data = [];
     $data['private'] = $controls->data['private'];
-    $data['id'] = $email['id'];
+    $data['id'] = $email_id;
     $email = $this->save_email($data, ARRAY_A);
     $controls->add_toast_saved();
 
@@ -234,7 +240,7 @@ if ($controls->is_action('test') || $controls->is_action('save') || $controls->i
             }
         }
 
-        if (!empty($profile_clause)) {
+        if ($profile_clause) {
             $query .= ' and (' . implode(' and ', $profile_clause) . ')';
         }
 
@@ -298,17 +304,20 @@ if (empty($controls->errors) && ($controls->is_action('send') || $controls->is_a
         if ($controls->is_action('send')) {
             $controls->messages = __('Now sending.', 'newsletter');
             $controls->messages .= '<br>' . __('The first batch of emails will be delivered in 5 minutes.', 'newsletter');
+            $this->log($email_id, 'Started');
         } else {
             $controls->messages = __('Scheduled.', 'newsletter');
+            $this->log($email_id, 'Scheduled');
         }
 
         // Immadiate first batch sending since people has no patience
 
-        if ($controls->is_action('send') && $email['total'] < 20 && !Newsletter::instance()->skip_this_run()) {
+        if ($controls->is_action('send') && $email['total'] < 20) {
+
             // Avoid the first batch if there are other newsletters delivering otherwise we can get over the per hour quota
-            $sending_count = $wpdb->get_results("select count(*) from " . NEWSLETTER_EMAILS_TABLE . " where status='sending' and send_on<" . time());
+            $sending_count = $wpdb->get_var("select count(*) from " . NEWSLETTER_EMAILS_TABLE . " where status='sending' and send_on<=" . time());
             if ($sending_count <= 1) { // This newsletter is counted as well
-                Newsletter::instance()->hook_newsletter();
+                NewsletterEngine::instance()->run();
             }
         }
 
@@ -326,14 +335,19 @@ if (isset($email['options']['status']) && $email['options']['status'] === 'S') {
 
 if (TNP_Email::STATUS_ERROR === $email['status'] && isset($email['options']['error_message'])) {
     $controls->errors .= sprintf(__('Stopped by fatal error: %s', 'newsletter'), esc_html($email['options']['error_message']));
+    $recovery_time = wp_next_scheduled('newsletter_send_error_recover', ['id' => (int)$email['id']]);
+    if ($recovery_time) {
+        $controls->errors .= '<br>' . esc_html(sprintf(__('Automatic recovery on %s', 'newsletter'), wp_strip_all_tags(NewsletterControls::print_date($recovery_time, false, true))));
+    }
+    $controls->errors .= '<br>' . esc_html__('Press "Continue" to continue the delivery', 'newsletter');
 }
-
 
 if ($email['status'] != 'sent') {
     $subscriber_count = $wpdb->get_var(str_replace('*', 'count(*)', $email['query']));
 } else {
     $subscriber_count = $email['sent'];
 }
+
 ?>
 <style>
 <?php readfile(__DIR__ . '/assets/edit.css') ?>

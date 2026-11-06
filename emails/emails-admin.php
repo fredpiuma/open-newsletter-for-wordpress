@@ -109,7 +109,7 @@ class NewsletterEmailsAdmin extends NewsletterModuleAdmin {
      */
     function send_test_email($email, $controls) {
         if (!$email) {
-            $controls->errors = __('Newsletter should be saved before send a test', 'newsletter');
+            $controls->errors = __('Newsletter should be saved before sending a test', 'newsletter');
             return;
         }
 
@@ -193,5 +193,18 @@ class NewsletterEmailsAdmin extends NewsletterModuleAdmin {
         $messages .= '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank">' . __('Read more about delivery issues', 'newsletter') . '</a>.';
 
         return $messages;
+    }
+
+    function log($email_id, $description) {
+        global $current_user;
+
+        if (defined('DOING_CRON') && DOING_CRON) {
+            $user = '[cron]';
+        } elseif ($current_user) {
+            $user = $current_user->user_login;
+        } else {
+            $user = '[no user]';
+        }
+        Newsletter\Logs::add('newsletter-' . $email_id, '[' . $user . '] ' . $description);
     }
 }

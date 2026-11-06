@@ -1,14 +1,34 @@
 <?php
-/* @var $wpdb wpdb */
-/* @var $this NewsletterSystemAdmin */
-/* @var $controls NewsletterControls */
-
+/** @var NewsletterSystemAdmin $this */
+/** @var NewsletterControls $controls */
+/** @var wpdb $wpdb */
 defined('ABSPATH') || exit;
+
+global $wpdb;
 
 wp_enqueue_script('tnp-chart');
 
 $newsletter = Newsletter::instance();
 $mailer = $newsletter->get_mailer();
+
+function get_smtp_plugin() {
+    if (is_plugin_active('wp-mail-smtp/wp_mail_smtp.php')) {
+        return 'WP Mail SMTP';
+    }
+    if (is_plugin_active('wp-mail-smtp-pro/wp_mail_smtp.php')) {
+        return 'WP Mail SMTP Pro';
+    }
+    if (is_plugin_active('fluent-smtp/fluent-smtp.php')) {
+        return 'FluentSMTP';
+    }
+    if (is_plugin_active('suremails/suremails.php')) {
+        return 'SureMail';
+    }
+    if (is_plugin_active('gosmtp/gosmtp.php')) {
+        return 'GoSMTP';
+    }
+    return '';
+}
 
 if ($controls->is_action('test')) {
 
@@ -33,6 +53,12 @@ if ($controls->is_action('test')) {
 
             $controls->messages .= 'A test email has been sent.<br>';
             $controls->messages .= 'Mailer: ' . esc_html($mailer->get_description()) . '<br>';
+            if ($mailer instanceof NewsletterDefaultMailer) {
+                $smtp_plugin = get_smtp_plugin();
+                if ($smtp_plugin) {
+                    $controls->messages .= 'SMTP plugin: ' . esc_html($smtp_plugin) . '<br>';
+                }
+            }
             $controls->messages .= 'If you did not receive the message in your mailbox within 5 minutes '
                     . '(check also the spam folder), please contact your hosting provider.<br>'
                     . '<a href="https://github.com/fredpiuma/open-newsletter-for-wordpress#readme" target="_blank"><strong>Read more here</strong></a>.';
@@ -45,6 +71,12 @@ if ($controls->is_action('test')) {
             $controls->errors .= '<strong>FAILED</strong> (' . esc_html($r->get_error_message()) . ')<br>';
 
             $controls->errors .= 'Mailer: ' . esc_html($mailer->get_description()) . '<br>';
+            if ($mailer instanceof NewsletterDefaultMailer) {
+                $smtp_plugin = get_smtp_plugin();
+                if ($smtp_plugin) {
+                    $controls->errors .= 'SMTP plugin: ' . esc_html($smtp_plugin) . '<br>';
+                }
+            }
 
             if (!empty($newsletter->options['return_path'])) {
                 $controls->errors .= '- Try to remove the return path on main settings.<br>';
@@ -342,7 +374,35 @@ if ($mailer->get_name() === 'default') {
                                         &nbsp;
                                     </td>
                                     <td>
-                                        <?php echo esc_html(get_option('newsletter_lock_engine')) ?>
+                                        <?php
+                                        // Always directly from the database!
+                                        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->options WHERE option_name = %s LIMIT 1", 'newsletter_engine_lock'));
+                                        $value = $row ? (int) $row->option_value : 0;
+                                        ?>
+                                        <?php echo esc_html($value) ?>
+                                        - <?php $controls->echo_date($value, false, true) ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Delay between emails
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <?php echo esc_html(NewsletterEngine::instance()->get_send_delay()) ?> ms
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        NEWSLETTER_REAL_CRON_INTERVAL
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <?php echo esc_html(NEWSLETTER_REAL_CRON_INTERVAL) ?> seconds
                                     </td>
                                 </tr>
                                 <tr>
@@ -431,7 +491,7 @@ if ($mailer->get_name() === 'default') {
                                         labels: <?php echo wp_json_encode(range(1, count($stats->means))) ?>,
                                         datasets: [
                                             {
-                                                label: "Seconds to complete a batch",
+                                                label: "Mean time to send an email per batch",
                                                 data: <?php echo wp_json_encode($stats->means) ?>,
                                                 borderColor: '#2980b9',
                                                 fill: false
@@ -544,7 +604,12 @@ if ($mailer->get_name() === 'default') {
                                             </td>
                                             <td style="text-align: right; width: 3rem">
                                                 <?php
-                                                $controls->button_icon_edit('?page=newsletter_emails_edit&id=' . ((int) $email->id), ['tertiary' => true]);
+                                                if (strpos($email->type, 'automated_') === 0) {
+                                                    list($prefix, $channel_id) = explode('_', $email->type);
+                                                    $controls->button_icon_edit('?page=newsletter_automated_newsletters&id=' . ((int) $channel_id), ['tertiary' => true]);
+                                                } else {
+                                                    $controls->button_icon_edit('?page=newsletter_emails_edit&id=' . ((int) $email->id), ['tertiary' => true]);
+                                                }
                                                 ?>
 
                                             </td>
@@ -583,7 +648,12 @@ if ($mailer->get_name() === 'default') {
                                             </td>
                                             <td style="text-align: right; width: 3rem">
                                                 <?php
-                                                $controls->button_icon_edit('?page=newsletter_emails_edit&id=' . ((int) $email->id), ['tertiary' => true]);
+                                                if (strpos($email->type, 'automated_') === 0) {
+                                                    list($prefix, $channel_id) = explode('_', $email->type);
+                                                    $controls->button_icon_edit('?page=newsletter_automated_newsletters&id=' . ((int) $channel_id), ['tertiary' => true]);
+                                                } else {
+                                                    $controls->button_icon_edit('?page=newsletter_emails_edit&id=' . ((int) $email->id), ['tertiary' => true]);
+                                                }
                                                 ?>
 
                                             </td>
@@ -622,10 +692,16 @@ if ($mailer->get_name() === 'default') {
                                             </td>
                                             <td style="text-align: right; width: 3rem">
                                                 <?php
-                                                $controls->button_icon_edit('?page=newsletter_emails_edit&id=' . ((int) $email->id), ['tertiary' => true]);
+                                                if (strpos($email->type, 'automated_') === 0) {
+                                                    list($prefix, $channel_id) = explode('_', $email->type);
+                                                    $controls->button_icon_edit('?page=newsletter_automated_newsletters&id=' . ((int) $channel_id), ['tertiary' => true]);
+                                                } else {
+                                                    $controls->button_icon_edit('?page=newsletter_emails_edit&id=' . ((int) $email->id), ['tertiary' => true]);
+                                                }
                                                 ?>
 
                                             </td>
+
                                         </tr>
                                     <?php } ?>
                                 </tbody>
