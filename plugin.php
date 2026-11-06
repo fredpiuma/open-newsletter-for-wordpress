@@ -4,7 +4,7 @@
   Plugin Name: Open Newsletter
   Plugin URI: https://github.com/fredpiuma/open-newsletter-for-wordpress
   Description: Free and open-source newsletter plugin: subscriber lists, newsletter composer, delivery engine and complete open/click statistics. No license keys, no premium locks, no telemetry, no external connections.
-  Version: 9.0.0
+  Version: 9.2.9
   Author: Frederico de Castro
   Author URI: https://www.fredericodecastro.com.br/links/
   Update URI: https://github.com/fredpiuma/open-newsletter-for-wordpress
@@ -43,7 +43,7 @@ if (defined('NEWSLETTER_VERSION') || class_exists('Newsletter', false)) {
     return;
 }
 
-define('NEWSLETTER_VERSION', '9.0.0');
+define('NEWSLETTER_VERSION', '9.2.9');
 
 global $wpdb, $newsletter;
 

@@ -3,7 +3,7 @@ Tags: newsletter, subscription, email marketing, signup forms, statistics
 Requires at least: 5.6
 Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 9.0.0
+Stable tag: 9.2.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ Source code, documentation and issues: https://github.com/fredpiuma/open-newslet
 2. Activate it. Do not keep the original Newsletter plugin active at the same time.
 
 == Changelog ==
+
+= 9.2.9 =
+Version number aligned with the 9.2+ line expected by the original add-ons (e.g. Import/Export). Per-subscriber report with combinable filters.
 
 = 9.0.0 =
 First release of Open Newsletter. See CHANGELOG.md in the plugin folder.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 9.2.9 — 2026-11-06
+
+### Adicionado
+- Relatório de assinantes por newsletter com filtros combináveis (enviados sem erro, com erro, abriram, clicaram, abriram e não clicaram, não abriram), por lista (qualquer uma ou todas as marcadas), com exportação CSV do filtro aplicado.
+
+### Alterado
+- Versão `9.2.9`. O número acompanha a linha 9.2+ exigida por add-ons do Newsletter original (ex.: Import/Export, que só carrega a partir da 9.2.0). Nenhuma mudança de esquema do banco.
+
 ## 9.0.0 — 2026-11-05
 
 Primeira versão do **Open Newsletter**.
@@ -22,5 +30,5 @@ Primeira versão do **Open Newsletter**.
 
 ### Alterado
 - `strftime()` (obsoleto no PHP 8.1) substituído por `date_i18n()`.
-- Versão `9.0.0`. Slug, text domain, prefixos e esquema do banco permanecem idênticos aos do original.
+- Versão `9.0.0` (na época). Slug, text domain, prefixos e esquema do banco permanecem idênticos aos do original.
 - A limpeza das opções antigas de telemetria/licença roda no upgrade; a opção `contract_key` é preservada para permitir a volta ao original.
