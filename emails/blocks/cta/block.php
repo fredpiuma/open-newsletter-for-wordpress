@@ -6,6 +6,11 @@
  * Description: Call to action button
  */
 
+/** @var array $options */
+/** @var array $composer */
+/** @var array $info */
+/** @var string $context */
+
 $defaults = array(
     'button_label' => 'Call to action',
     'button_url' => home_url(),
@@ -17,10 +22,10 @@ $defaults = array(
     'button_border_color' => '',
     'align' => 'center',
     'block_background' => '',
-    'button_width' => '0',
+    'button_width' => '',
     'button_align' => 'center',
-    'block_padding_top' => 20,
-    'block_padding_bottom' => 20,
+    'block_padding_top' => 16,
+    'block_padding_bottom' => 16,
     'block_style' => '',
 );
 

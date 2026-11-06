@@ -1,14 +1,18 @@
 <?php
-/* @var $this NewsletterEmailsAdmin */
-/* @var $controls NewsletterControls */
-/* @var $logger NewsletterLogger */
+/** @var NewsletterEmailsAdmin $this */
+/** @var NewsletterControls $controls */
+/** @var NewsletterLogger $logger */
 
 defined('ABSPATH') || exit;
 
-$email_id = (int) $_GET['id'];
+$email_id = (int) ($_GET['id'] ?? 0);
+$e = $this->get_email($email_id);
+if (!$e) {
+    die('Invalid email');
+}
 
 if ($controls->is_action('save') || $controls->is_action('next') || $controls->is_action('test')) {
-
+    $email = [];
     $email['id'] = $email_id;
 
     if ($this->is_html_allowed()) {
@@ -18,7 +22,8 @@ if ($controls->is_action('save') || $controls->is_action('next') || $controls->i
     }
 
     $email['subject'] = wp_strip_all_tags($controls->data['subject']);
-    $this->save_email($email);
+    $email_object = $this->save_email($email);
+    Newsletter\Logs::add('newsletter-version-' . $email_object->id, date('Y-m-d H:i:s'), 0, $email_object->message);
     if ($controls->is_action('next')) {
         $controls->js_redirect($this->get_admin_page_url('edit') . '&id=' . $email_id);
         return;
@@ -113,7 +118,7 @@ if (!$this->is_html_allowed()) {
             <?php $controls->init() ?>
 
             <?php $controls->text('subject', 60, 'Newsletter subject') ?>
-            <a href="#" class="button-primary" onclick="tnp_suggest_subject(); return false;"><?php _e('Get ideas', 'newsletter') ?></a>
+            <!-- <a href="#" class="button-primary" onclick="tnp_suggest_subject(); return false;"><?php _e('Get ideas', 'newsletter') ?></a> -->
             <input type="button" class="button-primary" value="Add media" onclick="tnp_media()">
 
             <?php $controls->editor('message', 30); ?>

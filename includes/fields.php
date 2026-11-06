@@ -247,7 +247,7 @@ class NewsletterFields {
         $this->_close();
     }
 
-        public function wp_editor_simple($name, $label = '', $attrs = []) {
+    public function wp_editor_simple($name, $label = '', $attrs = []) {
         global $wp_version;
 
         $attrs = $this->_merge_attrs($attrs);
@@ -308,6 +308,7 @@ class NewsletterFields {
         }
         if ($attrs['reload']) {
             echo ' onchange="tnpc_reload_options(event)"';
+            echo ' data-after-rendering="reload"';
         }
         if (!empty($attrs['after-rendering'])) {
             echo ' data-after-rendering="', esc_attr($attrs['after-rendering']), '"';
@@ -446,7 +447,8 @@ class NewsletterFields {
                     'size_default' => false,
                     'weight_default' => false,
                     'align' => false,
-                    'description' => ''
+                    'description' => '',
+                    'label' => true,
         ]);
 
         $this->_open('tnpf-button');
@@ -454,12 +456,13 @@ class NewsletterFields {
         $value = $this->controls->get_value($name . '_label');
         $name_esc = esc_attr($name);
         echo '<div class="tnp-field-row" style="margin-bottom: 5px">';
-        echo '<div class="tnp-field-col-2">';
-        echo '<input id="', $this->_id($name . '_label'), '" placeholder="', esc_attr($attrs['placeholder']), '" name="options[', $name_esc, '_label]" type="text"';
-        echo ' style="width: 100%"';
-        echo ' value="', esc_attr($value), '">';
-        echo '</div>';
-
+        if ($attrs['label']) {
+            echo '<div class="tnp-field-col-2">';
+            echo '<input id="', $this->_id($name . '_label'), '" placeholder="', esc_attr($attrs['placeholder']), '" name="options[', $name_esc, '_label]" type="text"';
+            echo ' style="width: 100%"';
+            echo ' value="', esc_attr($value), '">';
+            echo '</div>';
+        }
         if ($attrs['url']) {
             $value = $this->controls->get_value($name . '_url');
             echo '<div class="tnp-field-col-2">';
@@ -486,6 +489,7 @@ class NewsletterFields {
         ]);
         $this->controls->color($name . '_background');
         $this->controls->color($name . '_border_color');
+        $this->controls->select($name . '_border_radius', ['' => 'Default', 'squared' => __('Squared'), 'rounded' => __('Rounded'), '5' => '5 px', '10' => '10 px', '15' => '15 px'], null, ['title'=>'Border radius']);
         $this->_description($attrs);
         $this->_close();
     }
@@ -544,7 +548,7 @@ class NewsletterFields {
 
         $value = $this->controls->get_value($name);
 
-        echo '<select id="', $this->_id($name), '" name="options[' . esc_attr($name) . ']" onchange="tnpc_reload_options(event); return false;">';
+        echo '<select id="', $this->_id($name), '" name="options[' . esc_attr($name) . ']" onchange="tnpc_reload_options(event); return false;" data-after-rendering="reload">';
 //        if (!empty($first)) {
 //            echo '<option value="">' . esc_html($first) . '</option>';
 //        }
@@ -702,7 +706,7 @@ class NewsletterFields {
         } else {
             $name = 'tax_' . $taxonomy;
         }
-        if (empty($label)) {
+        if (!$label) {
             $label = __('Terms', 'newsletter');
         }
         $attrs = $this->_merge_attrs($attrs);
@@ -867,7 +871,9 @@ class NewsletterFields {
         $this->_open('tnp-block-commons');
 
         echo '<div class="tnp-field-row">';
-        echo '<div class="tnp-field-col-4">';
+
+        echo '<div class="tnp-field-col-3">';
+
         $this->_label('Background');
         $this->controls->color('block_background');
         echo '&nbsp;&rarr;&nbsp;';
@@ -875,33 +881,42 @@ class NewsletterFields {
 
         echo '</div>';
 
-        echo '<div class="tnp-field-col-4">';
+        echo '<div class="tnp-field-col-3">';
+
         $this->_label('Angle');
-        //$this->controls->checkbox('block_background_gradient');
         $this->controls->select('block_background_angle', ['180' => '180°', '90°' => '90°']);
+
         echo '</div>';
 
+        echo '<div class="tnp-field-col-3">';
 
-        echo '<div class="tnp-field-col-4">';
         $this->_label('Full width');
         $this->yesno('block_background_wide', '');
-        echo '</div>';
 
-        echo '<div class="tnp-field-col-4">';
+        echo '</div>';
+        echo '<div style="clear: both"></div>';
+
+        echo '</div>';
+        echo '<div class="tnpf-description">Borders and gradients are not widely supported</div>';
+
+
         $this->_label('Border');
         $this->controls->color('block_border_color');
         echo $this->controls->text('block_border_radius', ['width' => 40]), '<span style="font-size: 20px">⌀</span>';
-        echo '</div>';
 
-        echo '<div style="clear: both"></div>';
-        echo '<div class="tnpf-description">Borders and gradients are not widely supported</div>';
-        echo '</div>';
+
+
 
         $this->_close();
 
         $this->_open('tnp-block-commons');
         $this->_label('Padding');
         $this->padding('block_padding', '', ['field_only' => true]);
+
+        $this->_close();
+        $this->_open('tnp-block-commons');
+        //$this->_label('CSS class');
+        $this->text('block_class', 'CSS class', ['description' => 'To be used with custom CSS']);
 
         $this->_close();
     }

@@ -114,6 +114,16 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
         $email = new TNP_Email();
         NewsletterComposer::update_email($email, $controls);
 
+        $email->id = (int) ($controls->data['email_id'] ?? 0);
+        $email->track = $controls->data['track'] ?? (int) Newsletter::instance()->get_option('track');
+
+        if (!empty($controls->data['sender_email'])) {
+            $email->options['sender_email'] = $controls->data['sender_email'];
+        }
+        if (!empty($controls->data['sender_name'])) {
+            $email->options['sender_name'] = $controls->data['sender_name'];
+        }
+
         if (isset($_POST['to_email'])) {
             $message = NewsletterEmailsAdmin::instance()->send_test_newsletter_to_email_address($email, $controls->data['test_email']);
             echo $message;
@@ -436,7 +446,7 @@ class NewsletterComposerAdmin extends NewsletterModuleAdmin {
 
     private function get_raw_html_preset_element() {
 
-        $result = "<div class='tnpc-preset tnpc-preset-html' onclick='location.href=\"" . wp_nonce_url('admin.php?page=newsletter_emails_new&id=rawhtml', 'newsletter-new') . "\"'>";
+        $result = "<div class='tnpc-preset tnpc-preset-html' onclick='location.href=\"" . wp_nonce_url('admin.php?page=newsletter_emails_editorhtml', 'newsletter-new') . "\"'>";
         $result .= "<img src='" . NEWSLETTER_URL . "/emails/images/rawhtml.png' title='RAW HTML' alt='RAW'/>";
         $result .= "<span class='tnpc-preset-label'>Raw HTML</span>";
         $result .= "</div>";

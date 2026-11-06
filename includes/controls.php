@@ -499,9 +499,6 @@ class NewsletterControls {
     }
 
     /**
-     *
-     * @return string
-     *
      * @todo Internationalization
      */
     function language_notice() {
@@ -509,8 +506,6 @@ class NewsletterControls {
     }
 
     /**
-     *
-     * @return string
      * @deprecated
      */
     function switch_to_all_languages_notice() {
@@ -519,7 +514,7 @@ class NewsletterControls {
         }
         echo '<div class="tnpc-language-notice">';
 
-        echo 'You are configuring the language <strong>', esc_html(NewsletterAdmin::instance()->get_language_label($current_language)), '</strong>. Switch to "all languages" to see all options.';
+        echo 'Switch to "all languages" to see all options.';
 
         echo '</div>';
     }
@@ -550,7 +545,7 @@ class NewsletterControls {
     function yesno($name) {
         $value = isset($this->data[$name]) ? (int) $this->data[$name] : 0;
 
-        echo '<select style="width: 60px" name="options[', esc_attr($name), ']">';
+        echo '<select style="width: auto" name="options[', esc_attr($name), ']">';
         echo '<option value="0"';
         if ($value == 0) {
             echo ' selected';
@@ -719,28 +714,58 @@ class NewsletterControls {
      * @param bool $show_id Show the page ID near the page title
      */
     function page($name = 'page', $first = null, $language = '', $show_id = false) {
+
+        $front_page_id = (int) get_option('page_on_front');
+        $blog_page_id = (int) get_option('page_for_posts');
         $args = array(
             'post_type' => 'page',
             // phpcs:ignore WordPress.WP.PostsPerPage.posts_per_page_posts_per_page
-            'posts_per_page' => 1500,
-            'offset' => 0,
+            'posts_per_page' => 50,
+            //'offset' => 0,
             'orderby' => 'post_title',
+            'order' => 'ASC',
             'post_status' => 'any',
-            'suppress_filters' => true
+            'suppress_filters' => false,
+            'ignore_sticky_posts' => 1
         );
 
-        $pages = get_posts($args);
+        $paged = 1;
         $options = [];
-        foreach ($pages as $page) {
-            /* @var $page WP_Post */
-            $label = $page->post_title;
-            if ($page->post_status != 'publish') {
-                $label .= ' (' . $page->post_status . ')';
+
+        while (true) {
+            $args['paged'] = $paged;
+            $paged++;
+
+            $pages = get_posts($args);
+
+            if (!$pages) {
+                break;
             }
-            if ($show_id) {
-                $label .= ' [#' . $page->ID . ']';
+
+            if ($paged == 30) {
+                break;
             }
-            $options[$page->ID] = $label;
+
+            foreach ($pages as $page) {
+                /* @var $page WP_Post */
+                $label = $page->post_title;
+                if ($page->post_status != 'publish') {
+                    $label .= ' (' . $page->post_status . ')';
+                }
+                if ($show_id) {
+                    $label .= ' [#' . $page->ID . ']';
+                }
+
+                if ($page->ID == $front_page_id) {
+                    $label .= ' (front page)';
+                } elseif ($page->ID == $blog_page_id) {
+                    $label .= ' (post list page)';
+                }
+
+                $options[$page->ID] = $label;
+            }
+            unset($pages);
+            gc_collect_cycles();
         }
         $this->select($name, $options, $first);
     }
@@ -1029,6 +1054,13 @@ class NewsletterControls {
     function hidden($name) {
         $value = $this->get_value($name);
         echo '<input name="options[', esc_attr($name), ']" id="options-', esc_attr($name), '" type="hidden" value="', esc_attr($value), '">';
+    }
+
+    function hidden_encoded($name) {
+        $value = $this->get_value($name, '');
+        $value = base64_encode(rawurlencode($value));
+        echo '<input name="options[', esc_attr($name), ']" id="options-', esc_attr($name), '" type="hidden" value="', esc_attr($value), '">';
+        echo '<input type="hidden" name="tnp_fields[', esc_attr($name), ']" value="encoded">';
     }
 
     /**
@@ -1348,22 +1380,22 @@ class NewsletterControls {
             <div class = "tnp-tabs">
                 <ul>
                     <li><a href = "#tabs-a">Default</a></li>
-                    <?php foreach ($languages as $key => $value) {
-                        ?>
+            <?php foreach ($languages as $key => $value) {
+                ?>
                         <li><a href="#tabs-a-<?php echo esc_attr($key) ?>"><?php echo esc_html($value) ?></a></li>
                     <?php } ?>
                 </ul>
 
                 <div id="tabs-a">
-                    <?php $this->wp_editor('confirmation_text'); ?>
+            <?php $this->wp_editor('confirmation_text'); ?>
                 </div>
-                <?php foreach ($languages as $key => $value) { ?>
+                    <?php foreach ($languages as $key => $value) { ?>
                     <div id="tabs-a-<?php echo esc_attr($key) ?>">
-                        <?php $this->wp_editor($key . '_confirmation_text', $settings); ?>
+                    <?php $this->wp_editor($key . '_confirmation_text', $settings); ?>
                     </div>
-                <?php } ?>
+                    <?php } ?>
             </div>
-        <?php } else { ?>
+            <?php } else { ?>
             <?php $this->wp_editor('confirmation_text', $settings); ?>
         <?php } ?>
 
@@ -2145,7 +2177,7 @@ class NewsletterControls {
         echo '<select class="tnpf-font-family" id="options-', esc_attr($name), '" name="options[', esc_attr($name), ']">';
 
         if ($show_empty_option) {
-            echo '<option value="">', esc_html('Default', 'newsletter');
+            echo '<option value="">', esc_html__('Default', 'newsletter');
         }
 
         echo '<optgroup label="', esc_attr__('Email safe fonts', 'newsletter'), '">';
@@ -2215,6 +2247,8 @@ class NewsletterControls {
      * @param string $name
      */
     function media($name) {
+        $media_id = 0;
+        $media_full = ['', '', ''];
         if (isset($this->data[$name]['id'])) {
             $media_id = (int) $this->data[$name]['id'];
             $media = wp_get_attachment_image_src($media_id, 'medium');
@@ -2245,7 +2279,7 @@ class NewsletterControls {
         if (!empty($label)) {
             echo '<label class="select" for="tnp_' . esc_attr($name) . '">' . esc_html($label) . ':</label>';
         }
-        echo '<input id="tnp_' . esc_attr($name) . '" type="text" size="36" name="' . esc_attr($option) . '[' . esc_attr($name) . ']" value="' . esc_attr($val) . '" />';
+        echo '<input id="tnp_' . esc_attr($name) . '" type="text" size="36" name="' . esc_attr($option) . '[' . esc_attr($name) . ']" value="" />';
         echo '<input id="tnp_' . esc_attr($name) . '_button" class="button-primary" type="button" value="Select Image" />';
         echo '<br class="clear"/>';
     }
@@ -2306,6 +2340,7 @@ class NewsletterControls {
         if ($time == false) {
             $buffer = 'none';
         } else {
+            $time = intval($time);
             $buffer = date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $time + get_option('gmt_offset') * 3600);
 
             if ($now) {
@@ -2380,7 +2415,7 @@ class NewsletterControls {
         if (substr($url, 0, 4) !== 'http') {
             $url = NEWSLETTER_DOCS_URL;
         }
-        if (empty($text)) {
+        if (!$text) {
             $text = __('Need help?', 'newsletter');
         }
         echo '<p class="tnp-panel-help"><a href="', esc_attr($url), '" target="_blank">', wp_kses_post($text), '</a></p>';
@@ -2392,7 +2427,7 @@ class NewsletterControls {
      * @param type $text
      */
     static function page_help($url, $text = '') {
-        if (empty($text)) {
+        if (!$text) {
             $text = __('Need help?', 'newsletter');
         }
         echo '<div class="tnp-page-help"><a href="', esc_attr($url), '" target="_blank">', wp_kses_post($text), '</a></div>';
@@ -2539,6 +2574,6 @@ class NewsletterControls {
     }
 
     function logs($source, $attrs = []) {
-        include __DIR__ . '/controls-logs.php';
+        include NEWSLETTER_INCLUDES_DIR . '/controls-logs.php';
     }
 }

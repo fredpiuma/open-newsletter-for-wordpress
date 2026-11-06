@@ -2,8 +2,9 @@
 /**
  * This file is included by NewsletterControls to create the composer.
  */
-/* @var $this NewsletterControls */
-/* @var $context_type string */
+
+/** @var string $context_type */
+/** @var NewsletterControls $this */
 
 defined('ABSPATH') || exit;
 
@@ -55,9 +56,13 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
 
 <div id="tnp-builder" dir="ltr">
 
-    <?php $this->hidden('message'); ?>
+    <?php $this->hidden_encoded('message'); ?>
     <?php $this->hidden('updated'); ?>
-    <input type="hidden" name="tnp_fields[message]" value="encoded">
+
+    <?php $this->hidden('sender_email'); ?>
+    <?php $this->hidden('sender_name'); ?>
+    <?php $this->hidden('track'); ?>
+    <?php $this->hidden('email_id'); ?>
 
     <div id="tnpb-main">
 
@@ -100,17 +105,19 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
 
             <div class="tnpb-actions">
 
-                <a class="button-primary" href="#templates-modal" rel="modal:open" title="<?php esc_attr_e('Templates', 'newsletter') ?>"><i class="far fa-file"></i></a>
+                <a href="#templates-modal" rel="modal:open" title="<?php esc_attr_e('Templates', 'newsletter') ?>"><i class="far fa-file"></i></a>
 
-                <a class="button-primary" href="#tnpc-placeholders-modal" rel="modal:open" title="<?php esc_attr_e('Placeholders', 'newsletter') ?>"><i class="fas fa-user"></i></a>
+                <a href="#tnpc-placeholders-modal" rel="modal:open" title="<?php esc_attr_e('Placeholders', 'newsletter') ?>"><i class="fas fa-user"></i></a>
 
-                <a class="button-primary" href="#tnpc-attachment-modal" rel="modal:open" title="<?php esc_attr_e('Attachments', 'newsletter') ?>"><i class="fas fa-paperclip"></i></a>
+                <a href="#tnpc-attachment-modal" rel="modal:open" title="<?php esc_attr_e('Attachments', 'newsletter') ?>"><i class="fas fa-paperclip"></i></a>
 
-                <a class="button-primary" href="#test-newsletter-modal" rel="modal:open" title="<?php esc_attr_e('Test', 'newsletter') ?>"><i class="fas fa-paper-plane"></i></a>
+                <a href="#test-newsletter-modal" rel="modal:open" title="<?php esc_attr_e('Test', 'newsletter') ?>"><i class="fas fa-paper-plane"></i></a>
 
-                <span class="button-primary" id="tnpc-view-mode" title="<?php esc_attr_e('Switch preview mode', 'newsletter') ?>">
+                <span id="tnpc-view-mode" title="<?php esc_attr_e('Switch preview mode', 'newsletter') ?>">
                     <i id="tnpc-view-mode-icon" class="fas fa-desktop"></i>
                 </span>
+
+                <?php do_action('newsletter_composer_actions'); ?>
 
             </div>
 
@@ -151,13 +158,15 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                     <?php $fields->color('options_composer_background', __('Main background', 'newsletter')) ?>
                 </div>
                 <div class="tnp-field-col-2">
-                    <?php $fields->color('options_composer_block_background', 'Blocks background') ?>
+                    <?php $fields->color('options_composer_block_background', __('Blocks background', 'newsletter')) ?>
                 </div>
             </div>
 
             <?php $fields->font('options_composer_title_font', __('Titles font', 'newsletter')) ?>
             <?php $fields->font('options_composer_text_font', __('Text font', 'newsletter')) ?>
-            <?php $fields->button_style('options_composer_button', __('Button style', 'newsletter')); ?>
+
+            <?php $fields->button('options_composer_button', __('Button style', 'newsletter'), ['url'=>false, 'label'=>false]); ?>
+
             <div class="tnp-field-row">
                 <div class="tnp-field-col-2">
                     <?php
@@ -170,6 +179,7 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
                     <?php $fields->text('options_composer_padding', __('Mobile padding', 'newsletter'), ['size' => '40', 'description' => 'For boxed layouts']); ?>
                 </div>
             </div>
+            <p>Custom CSS can be added from the <a href="?page=newsletter_emails_settings" target="_blank">Settings page</a>.</p>
 
             <input id="tnpb-settings-apply" type="button" class="button-secondary" value="<?php esc_attr_e("Apply", 'newsletter') ?>">
 
@@ -203,23 +213,21 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
 </div>
 
 <script type="text/javascript">
-    TNP_PLUGIN_URL = "<?php echo esc_js(Newsletter::plugin_url()) ?>";
-    TNP_HOME_URL = "<?php echo esc_js(home_url('/', is_ssl() ? 'https' : 'http')) ?>";
-    tnp_context_type = "<?php echo esc_js($context_type) ?>";
-    tnp_nonce = '<?php echo esc_js(wp_create_nonce('save')) ?>';
+    var TNP_PLUGIN_URL = '<?php echo esc_js(Newsletter::plugin_url()) ?>';
+    var TNP_HOME_URL = '<?php echo esc_js(home_url('/', is_ssl() ? 'https' : 'http')) ?>';
+    var tnp_context_type = "<?php echo esc_js($context_type) ?>";
+    var tnp_nonce = '<?php echo esc_js(wp_create_nonce('save')) ?>';
 </script>
+
 <?php
+
 wp_enqueue_script('tnp-composer', NEWSLETTER_URL . '/composer/composer.js', ['jquery'], NEWSLETTER_VERSION);
-?>
+include __DIR__ . '/modals/test.php';
+include __DIR__ . '/modals/attachment.php';
+include __DIR__ . '/modals/subjects.php';
+include __DIR__ . '/modals/placeholders.php';
+include __DIR__ . '/modals/templates.php';
 
-<?php include __DIR__ . '/modals/test.php' ?>
-<?php include __DIR__ . '/modals/attachment.php' ?>
-<?php include __DIR__ . '/modals/subjects.php'; ?>
-<?php include __DIR__ . '/modals/placeholders.php'; ?>
-<?php include __DIR__ . '/modals/templates.php'; ?>
+wp_enqueue_editor();
 
-
-<?php if (function_exists('wp_enqueue_editor')) wp_enqueue_editor(); ?>
-
-<?php do_action('newsletter_composer_footer') ?>
-
+do_action('newsletter_composer_footer');

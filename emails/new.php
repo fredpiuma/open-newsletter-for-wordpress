@@ -5,23 +5,6 @@
 
 $theme_id = $_GET['id'];
 
-if ($theme_id === 'rawhtml' && check_admin_referer('newsletter-new')) {
-    $email = array();
-    $email['status'] = 'new';
-    $email['subject'] = __('Here the email subject', 'newsletter');
-    $email['track'] = Newsletter::instance()->get_option('track');
-    $email['token'] = $this->get_token();
-    $email['type'] = 'message';
-    $email['send_on'] = time();
-    $email['editor'] = NewsletterEmails::EDITOR_HTML;
-    $email['message'] = "<!DOCTYPE html>\n<html>\n<head>\n<title>Your email title</title>\n</head>\n<body>\n</body>\n</html>";
-    $email = Newsletter::instance()->save_email($email);
-
-    $controls->js_redirect($this->get_editor_url($email->id, $email->editor));
-    return;
-}
-
-
 $theme = $this->themes->get_theme($theme_id);
 
 // Should never happen

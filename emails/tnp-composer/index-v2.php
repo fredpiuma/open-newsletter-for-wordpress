@@ -106,7 +106,7 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
 
                     <?php if ($show_test) { ?>
                         <span class="button-primary" data-tnp-modal-target="#test-newsletter-modal" title="<?php esc_attr_e('Test', 'newsletter') ?>">
-                            <i class="fas fa-paper-plane"></i> <?php //_e('Test', 'newsletter')          ?>
+                            <i class="fas fa-paper-plane"></i> <?php //_e('Test', 'newsletter')            ?>
                         </span>
                     <?php } ?>
 
@@ -174,7 +174,7 @@ $rev_dir = is_rtl() ? 'ltr' : 'rlt';
 
                     </div>
                     <div class="tnp-field-col-2">
-                        <?php $fields->text('options_composer_padding', __('Mobile padding', 'newsletter'), ['size'=> '40', 'description' => 'For boxed layouts']); ?>
+                        <?php $fields->text('options_composer_padding', __('Mobile padding', 'newsletter'), ['size' => '40', 'description' => 'For boxed layouts']); ?>
                     </div>
                 </div>
 
@@ -228,7 +228,7 @@ wp_enqueue_script('tnp-composer', NEWSLETTER_URL . '/emails/tnp-composer/_script
         <li>{name} - <?php esc_html_e('First name', 'newsletter') ?></li>
         <li>{surname} - <?php esc_html_e('Last name', 'newsletter') ?></li>
         <li>{email} - <?php esc_html_e('Email', 'newsletter') ?></li>
-        <li>{profile_N} - <?php esc_html_e('Profile numner N with N=1, 2, 3, ...', 'newsletter') ?></li>
+        <li>{profile_N} - <?php esc_html_e('Profile number N with N=1, 2, 3, ...', 'newsletter') ?></li>
         <li>{email_url} - <?php esc_html_e('Email online view', 'newsletter') ?></li>
     </ul>
     <p>
@@ -236,7 +236,8 @@ wp_enqueue_script('tnp-composer', NEWSLETTER_URL . '/emails/tnp-composer/_script
     </p>
 </div>
 
-<?php if (function_exists('wp_enqueue_editor')) wp_enqueue_editor(); ?>
-
-<?php do_action('newsletter_composer_footer') ?>
+<?php
+if (function_exists('wp_enqueue_editor'))
+    wp_enqueue_editor();
+do_action('newsletter_composer_footer');
 

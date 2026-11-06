@@ -1,5 +1,29 @@
 # Changelog
 
+## 9.3.0 — 2026-11-06
+
+Portadas as correções e novidades do Newsletter original até a 9.2.9. O recurso de IA do original **não** foi portado, e nada de licença, telemetria, promoções ou conexão externa entrou.
+
+### Segurança
+- Descadastro e reativação passam a exigir nonce (ações `uc` e `rc`); o link do e-mail leva a uma página de confirmação antes de executar a ação. Nova ação `r` para a confirmação de reativação.
+- Nonces nas telas de edição, criação e prévia de newsletters e na ação de manutenção de assinantes.
+- O parâmetro `alert` só é tratado na página de perfil; `na` é sanitizado e ações vazias são ignoradas.
+
+### Adicionado
+- Novo motor de envio (`NewsletterEngine`): lock em `newsletter_engine_lock`, lotes com controle de tempo e recuperação automática uma hora depois de um erro fatal (`newsletter_send_error_recover`).
+- Opção **Intervalo entre e-mails** (`send_delay`, em milissegundos) no lugar de `max_per_second`, com migração automática e aditiva (a opção antiga é mantida). Também pode ser fixada pela constante `NEWSLETTER_SEND_DELAY`.
+- Intervalo real do cron (`NEWSLETTER_REAL_CRON_INTERVAL`, de 60 a 900 s) e diagnóstico em Sistema para jobs agendados no futuro distante.
+- Logs por newsletter (menu **Logs** na edição) e **Versões** com visualização e restauração de qualquer versão salva.
+- Botão **Test** no editor de HTML puro (para um e-mail ou para os assinantes de teste).
+- Compositor: classe CSS própria por bloco, raio e borda dos botões, largura e fundo do botão, imagem destacada configurável (galeria e conteúdo), separador de 1 px, textos alternativos de imagem e outras correções de HTML.
+- Aviso na visualização online de rascunhos; listas de páginas paginadas com marcação da página inicial e da página de posts.
+- Fallback de `{name}` e `full_name` quando o assinante não tem nome; evento `newsletter_user_saved` ao salvar assinante no admin.
+
+### Alterado
+- A edição de newsletters usa o compositor v3 (o v2 continua para presets e automações).
+- Corrigido o aviso de `search_page` indefinido na lista de assinantes.
+- Versão `9.3.0`. Nenhuma mudança destrutiva no banco: tudo é aditivo e compatível com o original.
+
 ## 9.2.9 — 2026-11-06
 
 ### Adicionado

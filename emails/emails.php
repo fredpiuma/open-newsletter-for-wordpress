@@ -134,10 +134,9 @@ class NewsletterEmails extends NewsletterModule {
 
     /**
      *
-     * @param type $action
-     * @param type $user
-     * @param type $email
-     * @return type
+     * @param string $action
+     * @param object $user
+     * @param object $email
      * @global wpdb $wpdb
      */
     function hook_newsletter_action($action, $user, $email) {
@@ -146,18 +145,32 @@ class NewsletterEmails extends NewsletterModule {
         switch ($action) {
             case 'v':
             case 'view':
-                $id = $_GET['id'];
+                $id = $_GET['id'] ?? 0;
                 if ($id == 'last') {
                     $email = $wpdb->get_row("select * from " . NEWSLETTER_EMAILS_TABLE . " where private=0 and type='message' and status='sent' order by send_on desc limit 1");
                 } else {
                     $email = $this->get_email($id);
                 }
+
                 if (empty($email)) {
                     header("HTTP/1.0 404 Not Found");
                     die('Email not found');
                 }
 
+                // Those types of emails DO NOT contain user data, even if shown, they're templates
+                // Anmyway we shoe them only if the subscriber is identified
+                if ($email->type == 'welcome' || $email->type == 'confirmation') {
+                    $email->private = 1;
+                }
+
+                // Request by non logged in users or logged in but not allowed to use the plugin
                 if (!$this->is_allowed()) {
+
+                    // Templates
+                    if (strpos($email->type, 'template') !== false) {
+                        header("HTTP/1.0 404 Not Found");
+                        die();
+                    }
 
                     if ($email->status == 'new') {
                         header("HTTP/1.0 404 Not Found");
@@ -165,11 +178,16 @@ class NewsletterEmails extends NewsletterModule {
                     }
 
                     if ($email->private == 1) {
+
+                        // No subscriber identified (missing, non existant, ...)
                         if (!$user) {
                             header("HTTP/1.0 404 Not Found");
                             die('No available for online view');
                         }
+
+                        // Was the newsletter sent to that subscriber?
                         $sent = $wpdb->get_row($wpdb->prepare("select * from " . NEWSLETTER_SENT_TABLE . " where email_id=%d and user_id=%d limit 1", $email->id, $user->id));
+
                         if (!$sent) {
                             header("HTTP/1.0 404 Not Found");
                             die('No available for online view');
@@ -177,15 +195,19 @@ class NewsletterEmails extends NewsletterModule {
                     }
                 }
 
-
                 header('Content-Type: text/html;charset=UTF-8');
                 header('X-Robots-Tag: noindex,nofollow,noarchive');
                 header('Cache-Control: no-cache,no-store,private');
 
                 $message = $this->replace($email->message, $user, $email);
-                if (Newsletter::instance()->get_option('do_shortcodes')) {
-                    $message = do_shortcode($message);
+                $message = do_shortcode($message);
+
+                if ($email->status === TNP_Email::STATUS_DRAFT) {
+                    $note = '<style>body {margin-top: 3rem !important}</style><div style="position: absolute; top: 0; left: 0; right: 0; background-color: black !important; color: white !important; font-family: sans-serif; text-align: center; font-size: 1rem; padding: 1rem;">' . esc_html__('The online view of draft newsletters could not match the editor content. Save before sending a test.', 'newsletter') . '</div>';
+
+                    $message = str_replace('</body>', $note . '</body>', $message);
                 }
+
                 echo apply_filters('newsletter_view_message', $message);
 
                 die();
@@ -196,9 +218,9 @@ class NewsletterEmails extends NewsletterModule {
                     header("HTTP/1.0 403 Not Found");
                     die('Not allowed');
                 }
-                $email = $this->get_email((int)$_GET['id']);
+                $email = $this->get_email((int) $_GET['id']);
 
-                if (empty($email)) {
+                if (!$email) {
                     header("HTTP/1.0 404 Not Found");
                     die('Email not found');
                 }
@@ -259,6 +281,31 @@ class NewsletterEmails extends NewsletterModule {
                 header('Content-Type: text/html;charset=UTF-8');
 
                 include $theme['dir'] . '/theme.php';
+
+                die();
+                break;
+
+            case 'emails-version-preview':
+                global $wpdb;
+
+                require_once NEWSLETTER_DIR . '/admin.php';
+                if (!$this->is_allowed()) {
+                    die('Not enough privileges');
+                }
+
+                if (!check_admin_referer('preview')) {
+                    die();
+                }
+
+                $log = $wpdb->get_row($wpdb->prepare("select * from {$wpdb->prefix}newsletter_logs where id=%d limit 1", (int) $_GET['id']));
+
+                if (!$log || !str_starts_with($log->source, 'newsletter-version-')) {
+                    die('Invalid version ID');
+                }
+
+                header('Content-Type: text/html;charset=UTF-8');
+
+                echo $log->data;
 
                 die();
                 break;
@@ -326,7 +373,7 @@ class NewsletterEmails extends NewsletterModule {
                 include $theme['dir'] . '/theme.php';
                 $email['message'] = ob_get_clean();
 
-                if (!empty($theme_subject)) {
+                if ($theme_subject) {
                     $email['subject'] = $theme_subject;
                 }
 

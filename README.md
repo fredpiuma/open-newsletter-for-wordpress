@@ -32,7 +32,7 @@ Add-ons escritos para o plugin original continuam sendo detectados pelos mesmos 
 ```bash
 git clone https://github.com/fredpiuma/open-newsletter-for-wordpress.git
 cd open-newsletter-for-wordpress
-tools/build-zip.sh          # gera dist/open-newsletter-9.2.9.zip (com a pasta newsletter/)
+tools/build-zip.sh          # gera dist/open-newsletter-9.3.0.zip (com a pasta newsletter/)
 ```
 
 Envie o ZIP em *Plugins → Adicionar novo → Enviar plugin* e ative.

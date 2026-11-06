@@ -886,9 +886,9 @@ iframe.tnp-editor-preview-desktop {
     display: none;
 }
 
-.sp-replacer, .tnp-sp-replacer {
-    width:  30px!important;
-    height: 30px!important;
+#tnp-body .sp-replacer, #tnp-body .tnp-sp-replacer {
+    width:  32px!important;
+    height: 32px!important;
 }
 
 
@@ -1323,7 +1323,10 @@ span.tnp-user-status {
     text-transform: uppercase;
 }
 
-#tnp-heading h2 span {
+#tnp-heading h2 span,
+#tnp-heading li span,
+#tnp-wrap span.tnp-badge
+{
     background-color: transparent;
     /*border: 1px solid #999;*/
     font-weight: normal;
@@ -1333,12 +1336,14 @@ span.tnp-user-status {
     border-radius: 7px;
     vertical-align: middle;
     color: #444;
-    margin-left: 2em;
+    /*margin-left: 1rem;*/
     box-shadow: 0 0 3px #ccc;
 }
 
 #tnp-heading h2 span.tnp-badge-green,
-#tnp-heading h2 span.tnp-badge-green a
+#tnp-heading h2 span.tnp-badge-green a,
+#tnp-heading li span.tnp-badge-green,
+#tnp-wrap span.tnp-badge-green
 {
     background-color: green;
     /*border: 1px solid #999;*/
@@ -1355,7 +1360,10 @@ span.tnp-user-status {
 }
 
 #tnp-heading h2 span.tnp-badge-orange,
-#tnp-heading h2 span.tnp-badge-orange {
+#tnp-heading h2 span.tnp-badge-orange,
+#tnp-heading li span.tnp-badge-orange,
+#tnp-wrap span.tnp-badge-orange
+{
     background-color: var(--tnp-orange);
     /*border: 1px solid #999;*/
     font-weight: normal;
@@ -1507,7 +1515,7 @@ span.tnp-user-status {
 
 #tnp-heading ul.tnp-nav li.tnp-nav-title a {
     color: #fff !important;
-    font-size: .9rem;
+    font-size: .8rem;
     text-decoration: none;
 }
 
@@ -1815,11 +1823,11 @@ span.tnp-user-status {
 .tnp-flow-fieldset>div>p {
     color: #000 !important;
 }
-.tnp-paginator {
+#tnp-body .tnp-paginator {
     margin: 10px 0px 5px 0px;
 }
 
-.tnp-paginator .button-secondary {
+#tnp-body .tnp-paginator .button-secondary {
     padding: 5px;
     line-height: normal;
     height: auto;
@@ -1830,15 +1838,15 @@ span.tnp-user-status {
     vertical-align: baseline;
 }
 
-.tnp-paginator [value="Go"] {
+#tnp-body .tnp-paginator [value="Go"] {
     background-color: #27AE60 !important;
 }
 
-.tnp-paginator [value="Go"]:hover {
+#tnp-body .tnp-paginator [value="Go"]:hover {
     background-color: #2ECC71 !important;
 }
 
-.tnp-paginator input {
+#tnp-body .tnp-paginator input {
     /*background-color: #2C3E50;*/
     /*border: none;*/
     border-radius: 3px;
@@ -1847,6 +1855,7 @@ span.tnp-user-status {
     line-height: normal;
     font-size: 12px;
     height: 25px;
+    min-height: 30px !important;
 }
 /* Since #tabs has a white background, all elements should be made dark */
 
@@ -2058,7 +2067,7 @@ span.tnp-user-status {
     /*text-align: right;*/
     text-align: left;
     position: relative;
-    font-weight: normal;
+    font-weight: bold;
     max-width: 200px;
     width: 150px;
     color: var(--tnp-text);
@@ -2138,6 +2147,7 @@ span.tnp-user-status {
 
 #tnp-body select {
     vertical-align: baseline;
+    padding-right: 30px;
 }
 
 #tnp-body .form-table input,
@@ -2146,9 +2156,21 @@ span.tnp-user-status {
 #tnp-body .widefat input,
 #tnp-body .widefat textarea,
 #tnp-body .widefat select
-
 {
     border: var(--tnp-input-border);
+}
+
+#tnp-body .form-table input,
+#tnp-body .form-table select,
+#tnp-body .widefat input,
+#tnp-body .widefat select
+{
+    min-height: 30px !important;
+    line-height: normal !important;
+}
+
+#tnp-body input[type=checkbox] {
+    min-height: auto !important;
 }
 
 #tnp-body .form-table input::placeholder,
@@ -2281,10 +2303,10 @@ span.tnp-user-status {
 
 
 /* Hint text after a field */
-.tnpc-hint, p.description {
+#tnp-body .tnpc-hint, #tnp-body p.description {
     margin-top: 15px;
     clear: both;
-    font-size: .9rem !important;
+    font-size: .9em !important;
     color: #666;
     font-style: italic;
 }
@@ -2464,10 +2486,57 @@ html {
 }
 
 /* Single field container */
-.tnpf-field, .tnpf-field {
+.tnpf-field {
     display: block;
     width: 100%;
     margin-bottom: 10px;
+}
+
+#tnp-body .tnpf-field select,
+#tnp-body .tnpf-field input {
+    min-height: 32px;
+    height: 32px;
+    max-height: 32px;
+    line-height: normal;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    display: inline;
+}
+
+#tnp-body .tnpf-field button {
+    min-height: 32px;
+    height: 32px;
+}
+
+#tnp-body .tnpf-field select {
+    padding-right: 25px;
+}
+
+#tnp-body .tnpf-field input[type=checkbox] {
+    /*min-height: auto;*/
+    height: 16px !important;
+    width: 16px !important;
+    /*max-height: auto;*/
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    -webkit-appearance: checkbox !important;
+    margin: 0 5px 0 0 !important;
+    border: var(--tnp-input-border);
+    line-height: normal !important;
+    font-family: var(--tnp-font-family);
+}
+
+/* Color picker button */
+#tnp-body .tnp-sp-replacer {
+    margin-right: 3px;
+    min-height: 32px;
+    height: 32px;
+    max-height: 32px;
+    width: 32px;
+    box-sizing: border-box;
+
 }
 
 .tnpf-field select.tnpf-small,
@@ -2578,11 +2647,11 @@ html {
 
 }
 
-.tnpf-field-block-style input[type=radio] {
-    display: none;
+#tnp-body .tnpf-field-block-style input[type=radio] {
+    display: none !important;
 }
 
-.tnpf-field-block-style label.tnpf-style {
+#tnp-body .tnpf-field-block-style label.tnpf-style {
     display: inline-block;
     background-color: #eee;
     font-size: 12px;
