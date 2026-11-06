@@ -110,6 +110,8 @@ class TNP_Composer {
             return;
         }
 
+        $composer = array_filter($composer);
+
         $defaults = [
             $prefix . '_url' => '#',
             $prefix . '_font_family' => $composer['button_font_family'] ?? 'sans-serif',
@@ -124,18 +126,34 @@ class TNP_Composer {
 
         $options = array_merge($defaults, array_filter($options));
 
+        $width = $options[$prefix . '_width'];
+        if (is_numeric($width)) {
+            $width .= 'px';
+        }
+
+        switch ($options[$prefix . '_border_radius']) {
+            case 'squared':
+                $border_radius = 0;
+                break;
+            case 'rounded':
+                $border_radius = 999;
+                break;
+            default:
+                $border_radius = (int) $options[$prefix . '_border_radius'];
+        }
+
         $a_style = 'display:inline-block;'
                 . 'color:' . $options[$prefix . '_font_color'] . ';font-family:' . $options[$prefix . '_font_family'] . ';'
                 . 'font-size:' . $options[$prefix . '_font_size'] . 'px;font-weight:' . $options[$prefix . '_font_weight'] . ';'
                 . 'line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;';
-        $a_style .= 'border-radius:' . $options[$prefix . '_border_radius'] . 'px;';
+        $a_style .= 'border-radius:' . $border_radius . 'px;';
         $table_style = 'border-collapse:separate !important;line-height:100%;';
 
         $td_style = 'border-collapse:separate !important;cursor:auto;mso-padding-alt:10px 25px;background:' . $options[$prefix . '_background'] . ';';
-        $td_style .= 'border-radius:' . $options[$prefix . '_border_radius'] . 'px;';
-        if (!empty($options[$prefix . '_width'])) {
-            $a_style .= ' width:' . $options[$prefix . '_width'] . 'px;';
-            $table_style .= 'width:' . $options[$prefix . '_width'] . 'px;';
+        $td_style .= 'border-radius:' . $border_radius . 'px;';
+        if ($width) {
+            $a_style .= ' width:' . $width . ';';
+            $table_style .= 'width:' . $width . ';';
         }
 
         if (!empty($options[$prefix . '_border_color'])) {
@@ -232,6 +250,7 @@ class TNP_Composer {
      * The media ID is not checked for real existance of the associated attachment.
      *
      * @param int $post_id
+     * @param array $attrs 'use_gallery' (default: true) to search in the gallery, 'use_content' (default: true) to search into the content
      * @return int
      */
     static function get_post_thumbnail_id($post_id) {
@@ -245,18 +264,24 @@ class TNP_Composer {
             return $media_id;
         }
 
-        $attachments = get_children(array('numberpost' => 1, 'post_parent' => $post_id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order'));
-        if (!empty($attachments)) {
-            foreach ($attachments as $id => &$attachment) {
-                return $id;
+        $emails_options = NewsletterEmails::instance()->get_main_options();
+
+        if (!empty($emails_options['post_image_use_gallery'])) {
+            $attachments = get_children(array('numberpost' => 1, 'post_parent' => $post_id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order'));
+            if (!empty($attachments)) {
+                foreach ($attachments as $id => &$attachment) {
+                    return $id;
+                }
             }
         }
 
-        $post = get_post($post_id);
+        if (!empty($emails_options['post_image_use_content'])) {
+            $post = get_post($post_id);
 
-        $r = preg_match('/wp-image-(\d+)/', $post->post_content, $matches);
-        if ($matches) {
-            return (int) $matches[1];
+            $r = preg_match('/wp-image-(\d+)/', $post->post_content, $matches);
+            if ($matches) {
+                return (int) $matches[1];
+            }
         }
 
         return false;
@@ -269,7 +294,7 @@ class TNP_Composer {
      *
      * @param int $media_id
      * @param array $size
-     * @return \TNP_Media
+     * @return \TNP_Media Returns null if no media can be found
      */
     function get_media($media_id, $size) {
         $src = wp_get_attachment_image_src($media_id, $size);
@@ -291,11 +316,11 @@ class TNP_Composer {
             $content = wpautop($content);
         }
 
-        if (true || $options['enable shortcodes']) {
-            remove_shortcode('gallery');
-            add_shortcode('gallery', 'tnp_gallery_shortcode');
-            $content = do_shortcode($content);
-        }
+
+        remove_shortcode('gallery');
+        add_shortcode('gallery', 'tnp_gallery_shortcode');
+        $content = do_shortcode($content);
+
         $content = str_replace('<p>', '<p inline-class="p">', $content);
         $content = str_replace('<li>', '<li inline-class="li">', $content);
 

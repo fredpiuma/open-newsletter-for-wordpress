@@ -147,14 +147,9 @@ class Newsletter extends NewsletterModule {
 
     function __construct() {
 
-        // Grab it before a plugin decides to remove it.
+        // Do not wait for plugins_loaded, since there are plugins removing parameters...
         if (!is_admin()) {
-            if (isset($_GET['na'])) {
-                $this->action = sanitize_key($_GET['na']);
-            }
-            if (isset($_POST['na'])) {
-                $this->action = sanitize_key($_POST['na']);
-            }
+            $this->action = sanitize_key($_POST['na'] ?? $_GET['na'] ?? '');
         }
 
         $this->time_start = time();
@@ -195,12 +190,10 @@ class Newsletter extends NewsletterModule {
      * Action request via AJAX.
      */
     function ajax_action() {
-        if (isset($_REQUEST['na'])) {
-            $this->action = sanitize_key($_REQUEST['na']);
-            $this->do_action();
-        } else {
-            die('No action specified');
-        }
+
+        $this->action = sanitize_key($_REQUEST['na'] ?? '');
+        $this->do_action();
+
         die();
     }
 
@@ -292,7 +285,7 @@ class Newsletter extends NewsletterModule {
     function do_action() {
 
         if (empty($this->action)) {
-            return;
+            return false;
         }
 
         if ($this->action === 'test') {
@@ -306,9 +299,9 @@ class Newsletter extends NewsletterModule {
         }
 
         $user = $this->get_current_user();
+        $email = $this->get_email_from_request();
 
         if ($user && isset($user->_dummy) && $user->_dummy) {
-            $email = $this->get_email_from_request();
             $this->switch_language($user->language);
             do_action('newsletter_action_dummy', $this->action, $user, $email);
             return;
@@ -318,7 +311,6 @@ class Newsletter extends NewsletterModule {
             $this->switch_language($user->language);
         }
 
-        $email = $this->get_email_from_request();
         do_action('newsletter_action', $this->action, $user, $email);
     }
 
@@ -460,10 +452,6 @@ class Newsletter extends NewsletterModule {
         $email = $this->get_email_from_request();
         $message = $this->replace($message, $user, $email, 'page');
 
-        if (isset($_REQUEST['alert'])) {
-            // slashes are already added by wordpress!
-            $message .= '<script>alert("' . esc_js(strip_tags($_REQUEST['alert'])) . '");</script>';
-        }
         $executing = false;
 
         return $message;
@@ -1135,7 +1123,8 @@ class Newsletter extends NewsletterModule {
     }
 
     function get_sender_email() {
-        return $this->get_main_option('sender_email');
+        $sender_email = $this->get_mailer()->get_sender_email();
+        return $sender_email ?: $this->get_main_option('sender_email');
     }
 
     function get_reply_to() {

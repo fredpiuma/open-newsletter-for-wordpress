@@ -1,9 +1,9 @@
 <?php
 // phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedScript
 
-/* @var $this NewsletterUsersAdmin */
-/* @var $controls NewsletterControls */
-
+/** @var NewsletterUsersAdmin $this */
+/** @var NewsletterControls $controls */
+/** @var NewsletterLogger $logger */
 defined('ABSPATH') || exit;
 
 $user = $this->get_user((int) $_GET['id'] ?? -1);
@@ -57,12 +57,18 @@ if ($controls->is_action('save')) {
             }
         }
 
-        $user = $this->save_user($controls->data);
-        $this->add_user_log($user, 'edit');
+        $new_user = $this->save_user($controls->data);
+
         //$this->save_user_meta($id, 'ip', $controls->data['ip']);
-        if ($user === false) {
-            $controls->errors = esc_html__('Error. Check the log files.', 'newsletter');
+
+        if ($new_user === false) {
+            $controls->errors = esc_html__('Database error. Check the log files.', 'newsletter');
         } else {
+            $this->add_user_log($new_user, 'edit');
+
+            do_action('newsletter_user_saved', $new_user, $user, 'admin');
+            $user = $new_user;
+
             $controls->add_toast_saved();
             $controls->data = (array) $user;
         }
@@ -102,12 +108,12 @@ function percentValue($value, $total) {
 
     <div id="tnp-heading">
         <?php $controls->title_help('/subscribers-and-management/') ?>
-        <h2><?php echo esc_html($user->email) ?></h2>
+
         <?php include __DIR__ . '/edit-nav.php' ?>
     </div>
 
     <div id="tnp-body">
-
+        <h2><?= esc_html($user->email) ?></h2>
         <?php $controls->show(); ?>
 
         <form method="post" action="">
@@ -296,6 +302,20 @@ function percentValue($value, $total) {
                                     <?php $profile_page_url = NewsletterProfile::instance()->get_profile_page_url($user) ?>
                                     <a href='<?php echo esc_attr($profile_page_url) ?>' target="_blank"><?php echo esc_html($profile_page_url) ?></a>
                                 <?php } ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?php esc_html_e('Unsubscribe URL', 'newsletter'); ?></th>
+                            <td>
+                                <?php $unsubscribe_url = NewsletterUnsubscription::instance()->get_unsubscribe_url($user) ?>
+                                <a href='<?php echo esc_attr($unsubscribe_url) ?>' target="_blank"><?php echo esc_html($unsubscribe_url) ?></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?php esc_html_e('Resubscribe URL', 'newsletter'); ?></th>
+                            <td>
+                                <?php $resubscribe_url = NewsletterUnsubscription::instance()->get_reactivate_url($user) ?>
+                                <a href='<?php echo esc_attr($resubscribe_url) ?>' target="_blank"><?php echo esc_html($resubscribe_url) ?></a>
                             </td>
                         </tr>
 

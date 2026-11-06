@@ -126,6 +126,7 @@ class NewsletterSubscription extends NewsletterModule {
 
             // Per message custom URL from configuration (language variants could not be supported)
             $page_id = $this->get_option('confirmation_id');
+            $url = '';
             if (!empty($page_id)) {
                 if ($page_id === 'url') {
                     $url = sanitize_url($this->get_option('confirmation_url'));
@@ -146,6 +147,7 @@ class NewsletterSubscription extends NewsletterModule {
 
             // Per message custom URL from configuration (language variants could not be supported)
             $page_id = $this->get_option('confirmed_id');
+            $url = '';
             if (!empty($page_id)) {
                 if ($page_id === 'url') {
                     $url = sanitize_url($this->get_option('confirmed_url'));
@@ -171,7 +173,7 @@ class NewsletterSubscription extends NewsletterModule {
             case 'profile-change':
                 if ($this->antibot_form_check()) {
 
-                    if (!$user || $user->status != TNP_user::STATUS_CONFIRMED || !$user->_trusted) {
+                    if (!$user || $user->status != TNP_User::STATUS_CONFIRMED || !$user->_trusted) {
                         $this->dienow('Subscriber not found or not confirmed.', 'Even the wrong subscriber token can lead to this error.', 404);
                     }
 
@@ -340,6 +342,8 @@ class NewsletterSubscription extends NewsletterModule {
             $id = $user->id;
         } else if (is_array($user)) {
             $id = $user['id'];
+        } else {
+            $id = 0;
         }
 
         $id = (int) $id;
@@ -419,7 +423,6 @@ class NewsletterSubscription extends NewsletterModule {
             $subscription->data->ip = $this->get_remote_ip();
         }
 
-
         // Spam check before sanitization: we could remove relevant information to evaluate spam
 
         if ($subscription->spamcheck) {
@@ -473,8 +476,6 @@ class NewsletterSubscription extends NewsletterModule {
             if ($user->status == TNP_User::STATUS_COMPLAINED) {
                 return new WP_Error('complained', 'Subscriber blocked since complained. Contact the site administrator.');
             }
-
-
 
             if ($subscription->if_exists === TNP_Subscription::EXISTING_ERROR) {
                 return new WP_Error('exists', 'Email address already registered and Newsletter sets to block repeated registrations. You can change this behavior or the user message above on subscription configuration panel.');
@@ -610,6 +611,12 @@ class NewsletterSubscription extends NewsletterModule {
             delete_transient('newsletter_subscription_' . $user->id);
             $subscription->data->merge_in($user);
             $user = $this->save_user($user);
+        } else {
+            // No confirmation for new data and already confirmed, it's a double call, and we don't send the welcome email
+            // once again. Should be managed at the top.
+            if ($user->status == TNP_User::STATUS_CONFIRMED) {
+                $emails = false;
+            }
         }
 
         $user = $this->set_user_status($user, TNP_User::STATUS_CONFIRMED);
@@ -663,10 +670,10 @@ class NewsletterSubscription extends NewsletterModule {
         $subscription = $this->get_default_subscription($language);
         $data = $subscription->data;
 
-        $data->email = $posted['ne'];
+        $data->email = $posted['ne'] ?? '';
 
         if (isset($posted['nn'])) {
-            $data->name = $posted['nn'];
+            $data->name = $posted['nn'] ?? '';
         }
 
         if (isset($posted['ns'])) {
@@ -1279,6 +1286,7 @@ class NewsletterSubscription extends NewsletterModule {
         if (isset($attrs['autoresponders']) && method_exists('NewsletterAutoresponder', 'get_autoresponder_key')) {
             $ids = wp_parse_id_list($attrs['autoresponders']);
             foreach ($ids as $id) {
+                // @phpstan-ignore-next-line
                 $key = NewsletterAutoresponder::instance()->get_autoresponder_key($id);
                 if ($key) {
                     $b .= '<input type="hidden" name="nar[]" value="' . esc_attr($key) . '">' . "\n";

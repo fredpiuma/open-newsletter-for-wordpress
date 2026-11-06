@@ -217,7 +217,7 @@ $main_options = $this->get_main_options('form');
                         </tr>
                     </table>
                     <p>
-                        <?php esc_html_e('The privacy acceptance checkbox (required in many Europen countries) forces the subscriber to check it before proceeding. If an URL is specified the label becomes a link.', 'newsletter') ?>
+                        <?php esc_html_e('The privacy acceptance checkbox (required in many European countries) forces the subscriber to check it before proceeding. If an URL is specified the label becomes a link.', 'newsletter') ?>
                     </p>
 
                     <h3><?php esc_html_e('Salutation', 'newsletter') ?></h3>
@@ -246,6 +246,18 @@ $main_options = $this->get_main_options('form');
                     <p>
                         <?php esc_html_e('Salutation titles are inserted in emails message when the tag {title} is used. For example "Good morning {title} {surname} {name}".', 'newsletter') ?>
                     </p>
+
+                    <h3><?php esc_html_e('Other', 'newsletter') ?></h3>
+
+                    <table class="form-table">
+                        <tr>
+                            <th><?php esc_html_e('Fall back for empty name', 'newsletter') ?></th>
+                            <td>
+                                <?php $controls->text('name_default', 30); ?>
+                                <p class="description"><?php esc_html_e('Used when the tags {name} or {full_name} are empty.', 'newsletter') ?></p>
+                            </td>
+                        </tr>
+                    </table>
 
                 </div>
 

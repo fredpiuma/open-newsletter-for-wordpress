@@ -6,7 +6,8 @@
  *
  */
 
-/* @var $options array */
+/** @var array $options */
+/** @var array $composer */
 
 $default_options = array(
     'color'=>'#dddddd',
@@ -20,6 +21,9 @@ $default_options = array(
 );
 
 $options = array_merge($default_options, $options);
+$options['block_padding_top'] = max((int)$options['block_padding_top'], 5);
+$options['block_padding_bottom'] = max((int)$options['block_padding_bottom'], 5);
+
 
 ?>
 

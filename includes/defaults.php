@@ -174,6 +174,14 @@ class NewsletterDefaults {
             ];
         }
 
+        if ($sub === 'emails') {
+            return [
+                'css' => '',
+                'post_image_use_gallery' => '1',
+                'post_image_use_content' => '1'
+            ];
+        }
+
         return [];
     }
 
@@ -251,6 +259,7 @@ class NewsletterDefaults {
         if ($sub === 'unsubscription') {
             switch ($key) {
                 case 'unsubscribe_text': return '<p>' . __('Please confirm you want to unsubscribe.', 'newsletter') . '</p><p>[newsletter_unsubscribe_button label="" /]</p>';
+                case 'reactivate_text': return '<p>' . __('Please confirm you want to reactivate the subscription.', 'newsletter') . '</p><p>[newsletter_resubscribe_button label="" /]</p>';
                 case 'error_text': return '<p>' . __("Subscriber not found, it probably has already been removed. No further actions are required.", 'newsletter') . '</p>';
                 case 'unsubscribed_text': return "<p>" . __('Your subscription has been deleted. If that was an error you can subscribe again.', 'newsletter') . '</p><p>[newsletter_resubscribe_button label="" /]</p>';
                 case 'unsubscribed_subject': return __("Goodbye", 'newsletter');

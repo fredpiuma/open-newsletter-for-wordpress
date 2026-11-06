@@ -2208,3 +2208,18 @@ msgstr "todas"
 
 msgid "any of them"
 msgstr "qualquer uma"
+
+msgid "Fall back for empty name"
+msgstr "Texto no lugar de nome vazio"
+
+msgid "Used when the tags {name} or {full_name} are empty."
+msgstr "Usado quando as tags {name} ou {full_name} estão vazias."
+
+msgid "Use the first gallery image"
+msgstr "Usar a primeira imagem da galeria"
+
+msgid "Use the first content image"
+msgstr "Usar a primeira imagem do conteúdo"
+
+msgid "When the featured image is not set."
+msgstr "Quando a imagem destacada não está definida."
